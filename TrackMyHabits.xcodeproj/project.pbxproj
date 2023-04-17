@@ -11,6 +11,27 @@
 		7D21923529ED8EA1007FEEA0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21923429ED8EA1007FEEA0 /* ContentView.swift */; };
 		7D21923729ED8EA3007FEEA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D21923629ED8EA3007FEEA0 /* Assets.xcassets */; };
 		7D21923A29ED8EA3007FEEA0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D21923929ED8EA3007FEEA0 /* Preview Assets.xcassets */; };
+		7D21924329ED9010007FEEA0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7D21924229ED9010007FEEA0 /* FirebaseAuth */; };
+		7D21924529ED9010007FEEA0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7D21924429ED9010007FEEA0 /* FirebaseFirestore */; };
+		7D21924729ED9010007FEEA0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7D21924629ED9010007FEEA0 /* FirebaseStorage */; };
+		7D21924A29ED91A9007FEEA0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D21924929ED91A8007FEEA0 /* GoogleService-Info.plist */; };
+		7D21924D29ED9344007FEEA0 /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21924C29ED9344007FEEA0 /* FirebaseAuth.swift */; };
+		7D21924F29ED93B1007FEEA0 /* PasswordHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */; };
+		7D21925229ED9418007FEEA0 /* CharChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925129ED9418007FEEA0 /* CharChecker.swift */; };
+		7D21925529ED9499007FEEA0 /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925429ED9499007FEEA0 /* OptionalView.swift */; };
+		7D21925729ED9505007FEEA0 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925629ED9505007FEEA0 /* PasswordView.swift */; };
+		7D21925929ED9561007FEEA0 /* GeoReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925829ED9561007FEEA0 /* GeoReaderView.swift */; };
+		7D21925B29ED9628007FEEA0 /* ToggleSecurefieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925A29ED9628007FEEA0 /* ToggleSecurefieldView.swift */; };
+		7D21925E29ED9683007FEEA0 /* LoginModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925D29ED9683007FEEA0 /* LoginModifier.swift */; };
+		7D21926029ED9720007FEEA0 /* PasswordStrengthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925F29ED9720007FEEA0 /* PasswordStrengthView.swift */; };
+		7D21926229ED9747007FEEA0 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926129ED9747007FEEA0 /* SignupView.swift */; };
+		7D21926429ED97DC007FEEA0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926329ED97DC007FEEA0 /* LoginView.swift */; };
+		7D21926829ED9842007FEEA0 /* AppGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926729ED9842007FEEA0 /* AppGlobal.swift */; };
+		7D21926B29ED9872007FEEA0 /* PasswordLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926A29ED9872007FEEA0 /* PasswordLevel.swift */; };
+		7D21926E29ED98AD007FEEA0 /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926D29ED98AD007FEEA0 /* AppExtensions.swift */; };
+		7D21927029ED9917007FEEA0 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926F29ED9917007FEEA0 /* Dummy.swift */; };
+		7D21927229ED99B9007FEEA0 /* DeviceRotationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927129ED99B9007FEEA0 /* DeviceRotationModifier.swift */; };
+		7D21927429EDC640007FEEA0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927329EDC640007FEEA0 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +40,25 @@
 		7D21923429ED8EA1007FEEA0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D21923629ED8EA3007FEEA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D21923929ED8EA3007FEEA0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7D21924029ED8ED0007FEEA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7D21924929ED91A8007FEEA0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7D21924C29ED9344007FEEA0 /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
+		7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordHelper.swift; sourceTree = "<group>"; };
+		7D21925129ED9418007FEEA0 /* CharChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharChecker.swift; sourceTree = "<group>"; };
+		7D21925429ED9499007FEEA0 /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
+		7D21925629ED9505007FEEA0 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		7D21925829ED9561007FEEA0 /* GeoReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoReaderView.swift; sourceTree = "<group>"; };
+		7D21925A29ED9628007FEEA0 /* ToggleSecurefieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSecurefieldView.swift; sourceTree = "<group>"; };
+		7D21925D29ED9683007FEEA0 /* LoginModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModifier.swift; sourceTree = "<group>"; };
+		7D21925F29ED9720007FEEA0 /* PasswordStrengthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrengthView.swift; sourceTree = "<group>"; };
+		7D21926129ED9747007FEEA0 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		7D21926329ED97DC007FEEA0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		7D21926729ED9842007FEEA0 /* AppGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGlobal.swift; sourceTree = "<group>"; };
+		7D21926A29ED9872007FEEA0 /* PasswordLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordLevel.swift; sourceTree = "<group>"; };
+		7D21926D29ED98AD007FEEA0 /* AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExtensions.swift; sourceTree = "<group>"; };
+		7D21926F29ED9917007FEEA0 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		7D21927129ED99B9007FEEA0 /* DeviceRotationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationModifier.swift; sourceTree = "<group>"; };
+		7D21927329EDC640007FEEA0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +66,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D21924329ED9010007FEEA0 /* FirebaseAuth in Frameworks */,
+				7D21924529ED9010007FEEA0 /* FirebaseFirestore in Frameworks */,
+				7D21924729ED9010007FEEA0 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,9 +94,18 @@
 		7D21923129ED8EA1007FEEA0 /* TrackMyHabits */ = {
 			isa = PBXGroup;
 			children = (
+				7D21926C29ED9887007FEEA0 /* Extension */,
+				7D21926929ED985E007FEEA0 /* Enum */,
+				7D21926629ED9833007FEEA0 /* Global */,
+				7D21925C29ED9665007FEEA0 /* ViewModifier */,
+				7D21925329ED9487007FEEA0 /* Protocol */,
+				7D21925029ED93DB007FEEA0 /* Struct */,
+				7D21924B29ED932D007FEEA0 /* Observable */,
+				7D21924829ED9031007FEEA0 /* View */,
 				7D21923229ED8EA1007FEEA0 /* TrackMyHabitsApp.swift */,
-				7D21923429ED8EA1007FEEA0 /* ContentView.swift */,
+				7D21924029ED8ED0007FEEA0 /* Info.plist */,
 				7D21923629ED8EA3007FEEA0 /* Assets.xcassets */,
+				7D21924929ED91A8007FEEA0 /* GoogleService-Info.plist */,
 				7D21923829ED8EA3007FEEA0 /* Preview Content */,
 			);
 			path = TrackMyHabits;
@@ -65,6 +117,80 @@
 				7D21923929ED8EA3007FEEA0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7D21924829ED9031007FEEA0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7D21923429ED8EA1007FEEA0 /* ContentView.swift */,
+				7D21925629ED9505007FEEA0 /* PasswordView.swift */,
+				7D21925829ED9561007FEEA0 /* GeoReaderView.swift */,
+				7D21925A29ED9628007FEEA0 /* ToggleSecurefieldView.swift */,
+				7D21925F29ED9720007FEEA0 /* PasswordStrengthView.swift */,
+				7D21926129ED9747007FEEA0 /* SignupView.swift */,
+				7D21926329ED97DC007FEEA0 /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7D21924B29ED932D007FEEA0 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				7D21924C29ED9344007FEEA0 /* FirebaseAuth.swift */,
+				7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */,
+			);
+			path = Observable;
+			sourceTree = "<group>";
+		};
+		7D21925029ED93DB007FEEA0 /* Struct */ = {
+			isa = PBXGroup;
+			children = (
+				7D21925129ED9418007FEEA0 /* CharChecker.swift */,
+				7D21927329EDC640007FEEA0 /* User.swift */,
+			);
+			path = Struct;
+			sourceTree = "<group>";
+		};
+		7D21925329ED9487007FEEA0 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7D21925429ED9499007FEEA0 /* OptionalView.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		7D21925C29ED9665007FEEA0 /* ViewModifier */ = {
+			isa = PBXGroup;
+			children = (
+				7D21925D29ED9683007FEEA0 /* LoginModifier.swift */,
+				7D21927129ED99B9007FEEA0 /* DeviceRotationModifier.swift */,
+			);
+			path = ViewModifier;
+			sourceTree = "<group>";
+		};
+		7D21926629ED9833007FEEA0 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				7D21926729ED9842007FEEA0 /* AppGlobal.swift */,
+				7D21926F29ED9917007FEEA0 /* Dummy.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		7D21926929ED985E007FEEA0 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				7D21926A29ED9872007FEEA0 /* PasswordLevel.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		7D21926C29ED9887007FEEA0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7D21926D29ED98AD007FEEA0 /* AppExtensions.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +209,11 @@
 			dependencies = (
 			);
 			name = TrackMyHabits;
+			packageProductDependencies = (
+				7D21924229ED9010007FEEA0 /* FirebaseAuth */,
+				7D21924429ED9010007FEEA0 /* FirebaseFirestore */,
+				7D21924629ED9010007FEEA0 /* FirebaseStorage */,
+			);
 			productName = TrackMyHabits;
 			productReference = 7D21922F29ED8EA1007FEEA0 /* TrackMyHabits.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +242,9 @@
 				Base,
 			);
 			mainGroup = 7D21922629ED8EA1007FEEA0;
+			packageReferences = (
+				7D21924129ED9010007FEEA0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 7D21923029ED8EA1007FEEA0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +261,7 @@
 			files = (
 				7D21923A29ED8EA3007FEEA0 /* Preview Assets.xcassets in Resources */,
 				7D21923729ED8EA3007FEEA0 /* Assets.xcassets in Resources */,
+				7D21924A29ED91A9007FEEA0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +272,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D21926229ED9747007FEEA0 /* SignupView.swift in Sources */,
+				7D21927029ED9917007FEEA0 /* Dummy.swift in Sources */,
+				7D21925529ED9499007FEEA0 /* OptionalView.swift in Sources */,
+				7D21925729ED9505007FEEA0 /* PasswordView.swift in Sources */,
+				7D21925E29ED9683007FEEA0 /* LoginModifier.swift in Sources */,
+				7D21926829ED9842007FEEA0 /* AppGlobal.swift in Sources */,
+				7D21924D29ED9344007FEEA0 /* FirebaseAuth.swift in Sources */,
+				7D21925229ED9418007FEEA0 /* CharChecker.swift in Sources */,
+				7D21925B29ED9628007FEEA0 /* ToggleSecurefieldView.swift in Sources */,
+				7D21926029ED9720007FEEA0 /* PasswordStrengthView.swift in Sources */,
+				7D21927229ED99B9007FEEA0 /* DeviceRotationModifier.swift in Sources */,
 				7D21923529ED8EA1007FEEA0 /* ContentView.swift in Sources */,
+				7D21926B29ED9872007FEEA0 /* PasswordLevel.swift in Sources */,
+				7D21924F29ED93B1007FEEA0 /* PasswordHelper.swift in Sources */,
+				7D21926429ED97DC007FEEA0 /* LoginView.swift in Sources */,
 				7D21923329ED8EA1007FEEA0 /* TrackMyHabitsApp.swift in Sources */,
+				7D21925929ED9561007FEEA0 /* GeoReaderView.swift in Sources */,
+				7D21926E29ED98AD007FEEA0 /* AppExtensions.swift in Sources */,
+				7D21927429EDC640007FEEA0 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +422,7 @@
 				DEVELOPMENT_TEAM = 46XS2RD832;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = TrackMyHabits/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -299,7 +451,7 @@
 				DEVELOPMENT_TEAM = 46XS2RD832;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = TrackMyHabits/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -339,6 +491,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7D21924129ED9010007FEEA0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7D21924229ED9010007FEEA0 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D21924129ED9010007FEEA0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		7D21924429ED9010007FEEA0 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D21924129ED9010007FEEA0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		7D21924629ED9010007FEEA0 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D21924129ED9010007FEEA0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7D21922729ED8EA1007FEEA0 /* Project object */;
 }
