@@ -12,8 +12,20 @@ class FirebaseAuth: ObservableObject{
     let auth = Auth.auth()
     @Published var isLoggedIn: Bool
     
-    func isLoggedIn() -> Bool{
+    /*func isLoggedIn() -> Bool{
         return auth.currentUser != nil
+    }*/
+    
+    
+    
+    init(){
+        isLoggedIn = auth.currentUser != nil
+        do{
+            try auth.signOut()
+        }
+        catch{
+            
+        }
     }
     
     func login(email:String,password:String){

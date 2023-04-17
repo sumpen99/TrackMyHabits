@@ -10,7 +10,7 @@ struct ContentView: OptionalView {
 
     @EnvironmentObject var firebaseAuth: FirebaseAuth
     
-    var isPrimaryView: Bool { firebaseAuth.auth.currentUser != nil }
+    var isPrimaryView: Bool { firebaseAuth.isLoggedIn }
     
     let dummy = Dummy(name:"ContentView",printOnDestroy: true)
     
@@ -38,6 +38,12 @@ struct ContentView: OptionalView {
                  */
             }
             .accentColor(.green)
+            .animation(
+              Animation
+                .easeInOut(duration: 1.5)
+                .repeatForever(autoreverses: false),
+              value: UUID()
+            )
         }
         .animation(
           Animation

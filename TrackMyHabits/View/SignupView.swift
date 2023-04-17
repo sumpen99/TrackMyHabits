@@ -63,11 +63,5 @@ struct SignupView : View {
     
     func signUserUp(){
         firebaseAuth.signup(user: user, password: passwordHelper.password)
-        /*printAny(firebaseAuth.isLoggedIn)
-        printAny("\(passwordHelper.password) " +
-                 "\(passwordHelper.confirmedPassword) " +
-                 "\(passwordHelper.passwordsIsAMatch) " +
-                 "\(user.email)" +
-                 "\(user.name)")*/
     }
 }

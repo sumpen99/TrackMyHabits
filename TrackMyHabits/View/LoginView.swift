@@ -25,7 +25,11 @@ struct LoginView: View{
                 ScrollView{
                     VStack() {
                         Text("Sliding Numbers")
-                            .font(.largeTitle).foregroundColor(Color.white)
+                            .font(
+                                .system(
+                                    .largeTitle,design: .rounded
+                                ).weight(.bold))
+                            .foregroundColor(Color.white)
                             .padding([.top, .bottom], 40)
                         
                         Image("HabitClock")
