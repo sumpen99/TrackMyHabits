@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct SignupView : View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.isPresented) private var isPresented
     @EnvironmentObject var firebaseAuth: FirebaseAuth
-    @State var user = User()
+    @State private var user = User()
     @State private var email: String = ""
-    @StateObject var passwordHelper: PasswordHelper = PasswordHelper()
-    
-    init(){
-        printAny("init signupview")
-    }
+    @State private var isSignupResult: Bool = false
+    @StateObject private var passwordHelper: PasswordHelper = PasswordHelper()
     
     var body: some View {
         NavigationView {
@@ -54,14 +53,32 @@ struct SignupView : View {
                 }
             }
             .scrollContentBackground(.hidden)
-            .background(
-              LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all))
+            .background( appLinearGradient() )
             .navigationBarTitle(Text("Registration Form"))
+            .alert(ALERT_TITLE,isPresented: $isSignupResult,actions: {
+                Button("OK", role: .cancel,action: {
+                    if firebaseAuth.isSuccessful { dismiss() }
+                })
+            }, message: {
+                Text(ALERT_MESSAGE)
+            })
         }
     }
     
     func signUserUp(){
-        firebaseAuth.signup(user: user, password: passwordHelper.password)
+        firebaseAuth.signup(user: user, password: passwordHelper.password){ (result,error) in
+            guard let error = error else {
+                ALERT_TITLE = "Signup success"
+                ALERT_MESSAGE = "Proceed to login"
+                firebaseAuth.isSuccessful = true
+                isSignupResult.toggle()
+                return
+            }
+            ALERT_TITLE = "Signup failed"
+            ALERT_MESSAGE = error.localizedDescription
+            firebaseAuth.isSuccessful = false
+            isSignupResult.toggle()
+        }
     }
+    
 }

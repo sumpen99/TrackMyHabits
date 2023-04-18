@@ -41,10 +41,6 @@ class PasswordHelper: ObservableObject {
         }
     }
     
-    init(){
-        printAny("init passwordhelper")
-    }
-    
     deinit{
         printAny("deinit passwordhelper")
     }

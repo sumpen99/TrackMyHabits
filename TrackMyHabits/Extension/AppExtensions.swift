@@ -7,6 +7,25 @@
 
 import SwiftUI
 
+extension Color {
+    init(hex: UInt, alpha: Double = 1) {
+        self.init(
+            .sRGB,
+            red: Double((hex >> 16) & 0xff) / 255,
+            green: Double((hex >> 08) & 0xff) / 255,
+            blue: Double((hex >> 00) & 0xff) / 255,
+            opacity: alpha
+        )
+    }
+}
+
+extension View{
+    func appLinearGradient() -> some View{
+        return LinearGradient(gradient: Gradient(colors: [Color(hex:0x3E5151),Color(hex:0xDECBA4)]), startPoint: .top, endPoint: .bottom)
+            .edgesIgnoringSafeArea(.all)
+    }
+}
+
 extension View {
     func removePredictiveSuggestions() -> some View {
         self.keyboardType(.alphabet)

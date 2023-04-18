@@ -9,29 +9,25 @@ import SwiftUI
 
 struct LoginView: View{
     @EnvironmentObject var firebaseAuth: FirebaseAuth
-    @State var email = ""
-    @State var password = ""
+    @State private var email = ""
+    @State private var password = ""
     @State private var showingSignUpSheet = false
+    @State private var isLoginResult = false
     let dummy = Dummy(name:"LoginView",printOnDestroy: true)
-    
-    var isSignInButtonDisabled: Bool {
-        [email, password].contains(where: \.isEmpty)
-    }
-    
     
     var body: some View {
         GeometryReader { geometry in
             ZStack{
                 ScrollView{
                     VStack() {
-                        Text("Sliding Numbers")
+                        Text("Track..My..Habits\n(please) ")
                             .font(
                                 .system(
                                     .largeTitle,design: .rounded
                                 ).weight(.bold))
                             .foregroundColor(Color.white)
                             .padding([.top, .bottom], 40)
-                        
+                            .multilineTextAlignment(.center)
                         Image("HabitClock")
                             .resizable()
                             .frame(width: 250, height: 250)
@@ -41,6 +37,7 @@ struct LoginView: View{
                             .padding(.bottom, 50)
                         VStack(alignment: .center, spacing: 15) {
                             TextField("Email", text: self.$email)
+                                .removePredictiveSuggestions()
                                 .padding()
                                 .background(.white)
                                 .cornerRadius(20.0)
@@ -70,15 +67,26 @@ struct LoginView: View{
                     }
                 }
             }
-            .background(
-              LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all))
+            .background(appLinearGradient())
             .sheet(isPresented: $showingSignUpSheet,content: SignupView.init)
+            .alert(ALERT_TITLE,isPresented: $isLoginResult,actions: {
+                Button("OK", role: .cancel,action: {})
+            }, message: {
+                Text(ALERT_MESSAGE)
+            })
         }
     }
     
     func loginUser(){
-        firebaseAuth.login(email: email, password: password)
+        firebaseAuth.login(email: email, password: password){(result,error) in
+            guard let error = error else {
+                firebaseAuth.isLoggedIn = true
+                return
+            }
+            ALERT_TITLE = "Login failed"
+            ALERT_MESSAGE = error.localizedDescription
+            isLoginResult.toggle()
+        }
     }
 }
 
