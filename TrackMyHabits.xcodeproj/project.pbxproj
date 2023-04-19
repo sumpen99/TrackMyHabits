@@ -36,6 +36,7 @@
 		7D21927D29F05112007FEEA0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7D21927C29F05112007FEEA0 /* FirebaseFirestoreSwift */; };
 		7D21927F29F053DE007FEEA0 /* ThrowableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */; };
 		7D21928129F057A4007FEEA0 /* FirebaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928029F057A4007FEEA0 /* FirebaseHandler.swift */; };
+		7D21928329F06F60007FEEA0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928229F06F60007FEEA0 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		7D21927929F04D44007FEEA0 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowableResult.swift; sourceTree = "<group>"; };
 		7D21928029F057A4007FEEA0 /* FirebaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHandler.swift; sourceTree = "<group>"; };
+		7D21928229F06F60007FEEA0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				7D21925F29ED9720007FEEA0 /* PasswordStrengthView.swift */,
 				7D21926129ED9747007FEEA0 /* SignupView.swift */,
 				7D21926329ED97DC007FEEA0 /* LoginView.swift */,
+				7D21928229F06F60007FEEA0 /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				7D21923529ED8EA1007FEEA0 /* ContentView.swift in Sources */,
 				7D21926B29ED9872007FEEA0 /* PasswordLevel.swift in Sources */,
 				7D21924F29ED93B1007FEEA0 /* PasswordHelper.swift in Sources */,
+				7D21928329F06F60007FEEA0 /* ProfileView.swift in Sources */,
 				7D21926429ED97DC007FEEA0 /* LoginView.swift in Sources */,
 				7D21923329ED8EA1007FEEA0 /* TrackMyHabitsApp.swift in Sources */,
 				7D21925929ED9561007FEEA0 /* GeoReaderView.swift in Sources */,

@@ -23,19 +23,14 @@ struct ContentView: OptionalView {
     var primaryView: some View {
         ZStack{
             TabView {
-                /*GameMenuView()
+                ProfileView()
                     .tabItem {
-                        Label("Menu", systemImage: "list.dash")
+                        Label("Overview", systemImage: "circle.dashed")
                     }
-                GameMenuView()
+                ProfileView()
                     .tabItem {
-                        Label("HighScore", systemImage: "star.square.fill")
+                        Label("Profile", systemImage: "person.fill")
                     }
-                GameMenuView()
-                    .tabItem {
-                        Label("Person", systemImage: "person.fill")
-                    }
-                 */
             }
             .accentColor(.green)
             .animation(

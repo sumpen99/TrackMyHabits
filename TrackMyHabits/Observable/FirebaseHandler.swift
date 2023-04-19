@@ -20,14 +20,14 @@ class FirebaseHandler: ObservableObject{
     
     
     
-    init(){
+    /*init(){
         do{
             try auth.signOut()
         }
         catch{
             
         }
-    }
+    }*/
     
     func login(email:String,password:String,completion:((AuthDataResult?,Error?)->Void)?){
         auth.signIn(withEmail: email, password: password,completion:completion)
