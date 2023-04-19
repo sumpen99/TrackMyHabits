@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ToggleSecurefieldView : View {
+    var label:String = "Password"
     @Binding var text : String
     @State var isEditing = false
     @State var showPassword = false
-    var label:String = "Password"
     
     func trimTextIfNeeded(newValue:String){
         self.text = newValue.prefix(MAX_PASSWORD_LEN)

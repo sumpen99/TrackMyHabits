@@ -15,7 +15,6 @@
 		7D21924529ED9010007FEEA0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7D21924429ED9010007FEEA0 /* FirebaseFirestore */; };
 		7D21924729ED9010007FEEA0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7D21924629ED9010007FEEA0 /* FirebaseStorage */; };
 		7D21924A29ED91A9007FEEA0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D21924929ED91A8007FEEA0 /* GoogleService-Info.plist */; };
-		7D21924D29ED9344007FEEA0 /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21924C29ED9344007FEEA0 /* FirebaseAuth.swift */; };
 		7D21924F29ED93B1007FEEA0 /* PasswordHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */; };
 		7D21925229ED9418007FEEA0 /* CharChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925129ED9418007FEEA0 /* CharChecker.swift */; };
 		7D21925529ED9499007FEEA0 /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925429ED9499007FEEA0 /* OptionalView.swift */; };
@@ -32,6 +31,11 @@
 		7D21927029ED9917007FEEA0 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926F29ED9917007FEEA0 /* Dummy.swift */; };
 		7D21927229ED99B9007FEEA0 /* DeviceRotationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927129ED99B9007FEEA0 /* DeviceRotationModifier.swift */; };
 		7D21927429EDC640007FEEA0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927329EDC640007FEEA0 /* User.swift */; };
+		7D21927829F04A29007FEEA0 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927729F04A29007FEEA0 /* FirestoreRepository.swift */; };
+		7D21927A29F04D44007FEEA0 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927929F04D44007FEEA0 /* FirestoreManager.swift */; };
+		7D21927D29F05112007FEEA0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7D21927C29F05112007FEEA0 /* FirebaseFirestoreSwift */; };
+		7D21927F29F053DE007FEEA0 /* ThrowableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */; };
+		7D21928129F057A4007FEEA0 /* FirebaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928029F057A4007FEEA0 /* FirebaseHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +46,6 @@
 		7D21923929ED8EA3007FEEA0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7D21924029ED8ED0007FEEA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7D21924929ED91A8007FEEA0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7D21924C29ED9344007FEEA0 /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
 		7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordHelper.swift; sourceTree = "<group>"; };
 		7D21925129ED9418007FEEA0 /* CharChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharChecker.swift; sourceTree = "<group>"; };
 		7D21925429ED9499007FEEA0 /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
@@ -59,6 +62,10 @@
 		7D21926F29ED9917007FEEA0 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		7D21927129ED99B9007FEEA0 /* DeviceRotationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationModifier.swift; sourceTree = "<group>"; };
 		7D21927329EDC640007FEEA0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7D21927729F04A29007FEEA0 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
+		7D21927929F04D44007FEEA0 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowableResult.swift; sourceTree = "<group>"; };
+		7D21928029F057A4007FEEA0 /* FirebaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +76,7 @@
 				7D21924329ED9010007FEEA0 /* FirebaseAuth in Frameworks */,
 				7D21924529ED9010007FEEA0 /* FirebaseFirestore in Frameworks */,
 				7D21924729ED9010007FEEA0 /* FirebaseStorage in Frameworks */,
+				7D21927D29F05112007FEEA0 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +88,7 @@
 			children = (
 				7D21923129ED8EA1007FEEA0 /* TrackMyHabits */,
 				7D21923029ED8EA1007FEEA0 /* Products */,
+				7D21927B29F05112007FEEA0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,8 +145,10 @@
 		7D21924B29ED932D007FEEA0 /* Observable */ = {
 			isa = PBXGroup;
 			children = (
-				7D21924C29ED9344007FEEA0 /* FirebaseAuth.swift */,
 				7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */,
+				7D21927729F04A29007FEEA0 /* FirestoreRepository.swift */,
+				7D21927929F04D44007FEEA0 /* FirestoreManager.swift */,
+				7D21928029F057A4007FEEA0 /* FirebaseHandler.swift */,
 			);
 			path = Observable;
 			sourceTree = "<group>";
@@ -147,6 +158,7 @@
 			children = (
 				7D21925129ED9418007FEEA0 /* CharChecker.swift */,
 				7D21927329EDC640007FEEA0 /* User.swift */,
+				7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */,
 			);
 			path = Struct;
 			sourceTree = "<group>";
@@ -193,6 +205,13 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		7D21927B29F05112007FEEA0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -213,6 +232,7 @@
 				7D21924229ED9010007FEEA0 /* FirebaseAuth */,
 				7D21924429ED9010007FEEA0 /* FirebaseFirestore */,
 				7D21924629ED9010007FEEA0 /* FirebaseStorage */,
+				7D21927C29F05112007FEEA0 /* FirebaseFirestoreSwift */,
 			);
 			productName = TrackMyHabits;
 			productReference = 7D21922F29ED8EA1007FEEA0 /* TrackMyHabits.app */;
@@ -273,16 +293,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D21926229ED9747007FEEA0 /* SignupView.swift in Sources */,
+				7D21927A29F04D44007FEEA0 /* FirestoreManager.swift in Sources */,
 				7D21927029ED9917007FEEA0 /* Dummy.swift in Sources */,
 				7D21925529ED9499007FEEA0 /* OptionalView.swift in Sources */,
 				7D21925729ED9505007FEEA0 /* PasswordView.swift in Sources */,
 				7D21925E29ED9683007FEEA0 /* LoginModifier.swift in Sources */,
 				7D21926829ED9842007FEEA0 /* AppGlobal.swift in Sources */,
-				7D21924D29ED9344007FEEA0 /* FirebaseAuth.swift in Sources */,
+				7D21927F29F053DE007FEEA0 /* ThrowableResult.swift in Sources */,
 				7D21925229ED9418007FEEA0 /* CharChecker.swift in Sources */,
 				7D21925B29ED9628007FEEA0 /* ToggleSecurefieldView.swift in Sources */,
 				7D21926029ED9720007FEEA0 /* PasswordStrengthView.swift in Sources */,
 				7D21927229ED99B9007FEEA0 /* DeviceRotationModifier.swift in Sources */,
+				7D21927829F04A29007FEEA0 /* FirestoreRepository.swift in Sources */,
+				7D21928129F057A4007FEEA0 /* FirebaseHandler.swift in Sources */,
 				7D21923529ED8EA1007FEEA0 /* ContentView.swift in Sources */,
 				7D21926B29ED9872007FEEA0 /* PasswordLevel.swift in Sources */,
 				7D21924F29ED93B1007FEEA0 /* PasswordHelper.swift in Sources */,
@@ -518,6 +541,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7D21924129ED9010007FEEA0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		7D21927C29F05112007FEEA0 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D21924129ED9010007FEEA0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

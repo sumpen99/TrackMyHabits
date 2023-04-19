@@ -9,8 +9,8 @@ import SwiftUI
 
 struct LoginView: View{
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.isPresented) private var isPresented
-    @EnvironmentObject var firebaseAuth: FirebaseAuth
+    //@Environment(\.isPresented) private var isPresented
+    @EnvironmentObject var firebaseHandler: FirebaseHandler
     @State var user = User()
     @State private var password = ""
     @State private var showingSignUpSheet = false
@@ -46,15 +46,20 @@ struct LoginView: View{
     }
     
     func loginUser(){
-        firebaseAuth.login(email: user.email, password: password){(result,error) in
+        firebaseHandler.login(email: user.email, password: password){(result,error) in
             guard let error = error else {
-                firebaseAuth.isLoggedIn = true
+                printAny(firebaseHandler.isLoggedIn)
+                firebaseHandler.refreshLoggedInStatus()
                 return
             }
-            ALERT_TITLE = "Login failed"
-            ALERT_MESSAGE = error.localizedDescription
-            isLoginResult.toggle()
+            activateFailedLoginAlert(error:error)
         }
+    }
+    
+    func activateFailedLoginAlert(error:Error){
+        ALERT_TITLE = "Login failed"
+        ALERT_MESSAGE = error.localizedDescription
+        isLoginResult.toggle()
     }
 }
 

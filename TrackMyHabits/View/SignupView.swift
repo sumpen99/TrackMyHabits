@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SignupView : View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.isPresented) private var isPresented
-    @EnvironmentObject var firebaseAuth: FirebaseAuth
+    //@Environment(\.isPresented) private var isPresented
+    @EnvironmentObject var firebaseHandler: FirebaseHandler
     @Binding var user: User
     @State private var isSignupResult: Bool = false
     @StateObject private var passwordHelper: PasswordHelper = PasswordHelper()
@@ -35,7 +35,7 @@ struct SignupView : View {
             .navigationBarTitle(Text("Registration Form"))
             .alert(isPresented: $isSignupResult, content: {
                 onResultAlert {
-                    if firebaseAuth.isSuccessful {
+                    if firebaseHandler.isSuccessful {
                         dismiss()
                     }
                 }
@@ -44,19 +44,53 @@ struct SignupView : View {
     }
     
     func signUserUp(){
-        firebaseAuth.signup(user: user, password: passwordHelper.password){ (result,error) in
+        // 0
+        if user.name.isEmpty { activateMissingFieldsAlert(); return }
+        firebaseHandler.signup(user: user, password: passwordHelper.password){ (result,error) in
+            // 2
             guard let error = error else {
-                ALERT_TITLE = "Signup success"
-                ALERT_MESSAGE = "Proceed to login"
-                firebaseAuth.isSuccessful = true
-                isSignupResult.toggle()
+                // 3
+                firebaseHandler.manager.initializeUser(user){ result in
+                    // 4
+                    if result.finishedWithoutError{
+                        // 5
+                        activateSuccessAlert()
+                    }
+                    activateFailedCreationOfUserAlert(error:result.asString())
+                }
+                // 6
                 return
             }
-            ALERT_TITLE = "Signup failed"
-            ALERT_MESSAGE = error.localizedDescription
-            firebaseAuth.isSuccessful = false
-            isSignupResult.toggle()
+            activateFailedSignupAlert(error:error)
         }
+        // 1
+    }
+    
+    func activateMissingFieldsAlert(){
+        ALERT_TITLE = "Error"
+        ALERT_MESSAGE = "Missing fields. One of the required field is empty or contains invalid data"
+        isSignupResult.toggle()
+    }
+    
+    func activateSuccessAlert(){
+        ALERT_TITLE = "Signup success"
+        ALERT_MESSAGE = "Proceed to login"
+        firebaseHandler.isSuccessful = true
+        isSignupResult.toggle()
+    }
+    
+    func activateFailedSignupAlert(error:Error){
+        ALERT_TITLE = "Signup failed"
+        ALERT_MESSAGE = error.localizedDescription
+        firebaseHandler.isSuccessful = false
+        isSignupResult.toggle()
+    }
+    
+    func activateFailedCreationOfUserAlert(error:String){
+        ALERT_TITLE = "Signup failed"
+        ALERT_MESSAGE = error
+        firebaseHandler.isSuccessful = false
+        isSignupResult.toggle()
     }
     
 }
@@ -79,7 +113,7 @@ struct ConfirmedPassword : View{
     var action: () -> Void
     var body: some View{
         if self.passwordHelper.level != .none {
-            ToggleSecurefieldView(text: $passwordHelper.confirmedPassword)
+            ToggleSecurefieldView(label:"Confirm password",text: $passwordHelper.confirmedPassword)
             .overlay {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(passwordHelper.passwordsIsAMatch ? .green : .red, lineWidth: 2)

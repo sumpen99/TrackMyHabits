@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+func handleThrowable(_ function: @autoclosure () throws -> Any?,
+                     onFunctionResult : @escaping ((ThrowableResult) -> Void)){
+    var throwableResult = ThrowableResult()
+    do{
+        let result = try function()
+        throwableResult.finishedWithoutError = true
+        throwableResult.value = result
+    }
+    catch {
+        throwableResult.finishedWithoutError = false
+        throwableResult.value = error.localizedDescription
+    }
+    onFunctionResult(throwableResult)
+}
+
 extension Color {
     init(hex: UInt, alpha: Double = 1) {
         self.init(

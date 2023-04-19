@@ -10,6 +10,7 @@ let MAX_PASSWORD_LEN = 12
 let MAX_TEXTFIELD_LEN = 255
 var ALERT_TITLE = ""
 var ALERT_MESSAGE = ""
+let USER_COLLECTION = "users"
 func printAny(_ msg: Any){
     print("\(msg)")
 }

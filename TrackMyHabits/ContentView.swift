@@ -8,9 +8,9 @@
 import SwiftUI
 struct ContentView: OptionalView {
 
-    @EnvironmentObject var firebaseAuth: FirebaseAuth
+    @EnvironmentObject var firebaseHandler: FirebaseHandler
     
-    var isPrimaryView: Bool { firebaseAuth.isLoggedIn }
+    var isPrimaryView: Bool { firebaseHandler.isLoggedIn }
     
     let dummy = Dummy(name:"ContentView",printOnDestroy: true)
     
