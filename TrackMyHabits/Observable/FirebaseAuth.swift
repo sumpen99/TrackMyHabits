@@ -11,16 +11,15 @@ import Firebase
 class FirebaseAuth: ObservableObject{
     let auth = Auth.auth()
     var isSuccessful:Bool = false
-    @Published var isLoggedIn: Bool
+    @Published var isLoggedIn: Bool = false
     
-    /*func isLoggedIn() -> Bool{
-        return auth.currentUser != nil
-    }*/
+    func refreshLoggedInStatus(){
+        isLoggedIn =  auth.currentUser != nil
+    }
     
     
     
     init(){
-        isLoggedIn = auth.currentUser != nil
         do{
             try auth.signOut()
         }

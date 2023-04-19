@@ -24,6 +24,14 @@ extension View{
         return LinearGradient(gradient: Gradient(colors: [Color(hex:0x3E5151),Color(hex:0xDECBA4)]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)
     }
+    
+    func onResultAlert(action:@escaping (()-> Void)) -> Alert{
+        return Alert(
+                title: Text(ALERT_TITLE),
+                message: Text(ALERT_MESSAGE),
+                dismissButton: .cancel(Text("OK"), action: { action() } )
+        )
+    }
 }
 
 extension View {

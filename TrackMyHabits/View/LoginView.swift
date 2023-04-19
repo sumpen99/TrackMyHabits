@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct LoginView: View{
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.isPresented) private var isPresented
     @EnvironmentObject var firebaseAuth: FirebaseAuth
-    @State private var email = ""
+    @State var user = User()
     @State private var password = ""
     @State private var showingSignUpSheet = false
     @State private var isLoginResult = false
@@ -20,65 +22,31 @@ struct LoginView: View{
             ZStack{
                 ScrollView{
                     VStack() {
-                        Text("Track..My..Habits\n(please) ")
-                            .font(
-                                .system(
-                                    .largeTitle,design: .rounded
-                                ).weight(.bold))
-                            .foregroundColor(Color.white)
-                            .padding([.top, .bottom], 40)
-                            .multilineTextAlignment(.center)
-                        Image("HabitClock")
-                            .resizable()
-                            .frame(width: 250, height: 250)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                            .shadow(radius: 10)
-                            .padding(.bottom, 50)
+                        LoginHeader()
                         VStack(alignment: .center, spacing: 15) {
-                            TextField("Email", text: self.$email)
-                                .removePredictiveSuggestions()
-                                .padding()
-                                .background(.white)
-                                .cornerRadius(20.0)
+                            LoginEmailField(user:self.$user)
                             ToggleSecurefieldView(text: self.$password)
                                 .background(.white)
                                 .cornerRadius(20.0)
-                            Button(action: {loginUser()}) {
-                                Text("Sign In")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .frame(width: geometry.size.width*0.8, height: 50)
-                                    .background(Color.green)
-                                    .cornerRadius(15.0)
-                            }
+                            LoginButton(width: geometry.size.width*0.8,action: loginUser)
                             Spacer()
-                            Button(action: {showingSignUpSheet.toggle()}) {
-                                Text("Dont have an account? Sign Up")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .frame(width: geometry.size.width*0.8, height: 50)
-                                    .background(Color.black)
-                                    .cornerRadius(15.0)
-                            }
+                            SignupButton(width: geometry.size.width*0.8,showingSignupSheet: $showingSignUpSheet)
                         }.padding([.leading, .trailing], 27.5)
                     }
                 }
             }
             .background(appLinearGradient())
-            .sheet(isPresented: $showingSignUpSheet,content: SignupView.init)
-            .alert(ALERT_TITLE,isPresented: $isLoginResult,actions: {
-                Button("OK", role: .cancel,action: {})
-            }, message: {
-                Text(ALERT_MESSAGE)
+            .sheet(isPresented: $showingSignUpSheet){
+                SignupView(user: self.$user)
+            }
+            .alert(isPresented: $isLoginResult, content: {
+                onResultAlert{ }
             })
         }
     }
     
     func loginUser(){
-        firebaseAuth.login(email: email, password: password){(result,error) in
+        firebaseAuth.login(email: user.email, password: password){(result,error) in
             guard let error = error else {
                 firebaseAuth.isLoggedIn = true
                 return
@@ -90,3 +58,68 @@ struct LoginView: View{
     }
 }
 
+
+struct LoginHeader: View{
+    var body: some View{
+        Text("Track..My..Habits\n(please) ")
+            .font(
+                .system(
+                    .largeTitle,design: .rounded
+                ).weight(.bold))
+            .foregroundColor(Color.white)
+            .padding([.top, .bottom], 40)
+            .multilineTextAlignment(.center)
+        Image("HabitClock")
+            .resizable()
+            .frame(width: 250, height: 250)
+            .clipShape(Circle())
+            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+            .shadow(radius: 10)
+            .padding(.bottom, 50)
+        
+    }
+}
+
+struct LoginEmailField: View{
+    @Binding var user: User
+    var body: some View{
+        TextField("Email", text: $user.email)
+            .removePredictiveSuggestions()
+            .padding()
+            .background(.white)
+            .cornerRadius(20.0)
+    }
+}
+
+struct LoginButton: View{
+    var width:CGFloat
+    var action: () -> Void
+    var body: some View{
+        Button(action: {action()}) {
+            Text("Sign In")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(width: width, height: 50)
+                .background(Color.green)
+                .cornerRadius(15.0)
+        }
+    }
+}
+
+struct SignupButton: View{
+    var width:CGFloat
+    @Binding var showingSignupSheet : Bool
+    
+    var body: some View{
+        Button(action: {showingSignupSheet.toggle()}) {
+            Text("Dont have an account? Sign Up")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(width: width, height: 50)
+                .background(Color.black)
+                .cornerRadius(15.0)
+        }
+    }
+}
