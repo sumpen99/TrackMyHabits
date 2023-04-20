@@ -102,12 +102,7 @@ struct LoginButton: View{
     var body: some View{
         Button(action: {action()}) {
             Text("Sign In")
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-                .frame(width: width, height: 50)
-                .background(Color.green)
-                .cornerRadius(15.0)
+                .formButtonDesign(width: width, backgroundColor: Color.green)
         }
     }
 }
@@ -119,12 +114,7 @@ struct SignupButton: View{
     var body: some View{
         Button(action: {showingSignupSheet.toggle()}) {
             Text("Dont have an account? Sign Up")
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-                .frame(width: width, height: 50)
-                .background(Color.black)
-                .cornerRadius(15.0)
+                .formButtonDesign(width: width, backgroundColor: Color.black)
         }
     }
 }

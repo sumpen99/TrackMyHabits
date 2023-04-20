@@ -22,6 +22,109 @@ func handleThrowable(_ function: @autoclosure () throws -> Any?,
     onFunctionResult(throwableResult)
 }
 
+/*extension UINavigationController {
+    
+    override open func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.bounds
+        gradient.colors = [UIColor(Color(hex:0x3E5151)).cgColor, UIColor(Color(hex:0xDECBA4)).cgColor]
+        gradient.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 0.0)
+        
+        let standard = UINavigationBarAppearance()
+        standard.backgroundImage = gradient.toImage()
+
+        let compact = UINavigationBarAppearance()
+        compact.backgroundImage = gradient.toImage()
+
+        let scrollEdge = UINavigationBarAppearance()
+        scrollEdge.backgroundImage = gradient.toImage()
+
+        self.navigationBar.standardAppearance = standard
+        self.navigationBar.compactAppearance = compact
+        self.navigationBar.scrollEdgeAppearance = scrollEdge
+        
+    }
+    
+}
+
+extension CALayer {
+
+    func toImage() -> UIImage {
+        UIGraphicsBeginImageContext(self.frame.size)
+        self.render(in: UIGraphicsGetCurrentContext()!)
+        let outputImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return outputImage!
+    }
+    
+}*/
+
+extension UITabBar{
+    static func changeAppearance(){
+        let tabBarAppearance = UITabBarAppearance()
+        //tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = .black
+        tabBarAppearance.shadowColor = .white
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        //UITabBar.appearance().isTranslucent = false
+        //UITabBar.appearance().barTintColor = UIColor(named: "Secondary")
+    }
+}
+
+extension UINavigationBar {
+    static func changeAppearance(clear: Bool) {
+        let appearance = UINavigationBarAppearance()
+        
+        if clear {
+            appearance.configureWithTransparentBackground()
+        } else {
+            appearance.backgroundColor = UIColor(Color.black.opacity(0.9))
+            
+            //appearance.configureWithDefaultBackground()
+        }
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
+    
+    static func changeAppearance(){
+        //UINavigationBar.changeAppearance(clear: false)
+        
+        let appearance = UINavigationBarAppearance()
+        //appearance.configureWithOpaqueBackground()
+        
+        appearance.backgroundColor = .black
+
+        let attrsLarge: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.monospacedSystemFont(ofSize: 25, weight: .black)
+        ]
+        let attrsSmall: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.monospacedSystemFont(ofSize: 15, weight: .black)
+        ]
+        appearance.titleTextAttributes = attrsSmall
+        appearance.largeTitleTextAttributes = attrsLarge
+        //appearance.shadowColor = .white
+        //UINavigationBar.appearance().prefersLargeTitles = false
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+    }
+}
+
+extension View{
+    func formButtonDesign(width:CGFloat,backgroundColor:Color) -> some View{
+        modifier(FormButtonDesign(width: width, backgroundColor: backgroundColor))
+    }
+}
+
 extension Color {
     init(hex: UInt, alpha: Double = 1) {
         self.init(
@@ -95,20 +198,6 @@ extension String {
         return String(self[startIndex..<endIndex])
     }
 }
-
-extension UITabBarController {
-    override open func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let standardAppearance = UITabBarAppearance()
-        standardAppearance.backgroundColor = .red
-        standardAppearance.shadowColor = .green
-        standardAppearance.backgroundImage = UIImage(named: "wood1")
-
-        tabBar.standardAppearance = standardAppearance
-    }
-}
-
-
 
 extension Int {
     static func getUniqueRandomNumbers(min: Int, max: Int, count: Int) -> [Int] {

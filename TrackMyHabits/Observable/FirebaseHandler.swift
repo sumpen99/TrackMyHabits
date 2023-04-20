@@ -15,6 +15,10 @@ class FirebaseHandler: ObservableObject{
     @Published var isLoggedIn: Bool = false
     
     func refreshLoggedInStatus(){
+        isLoggedIn.toggle()
+    }
+    
+    func isUserLoggedIn(){
         isLoggedIn = auth.currentUser != nil
     }
     

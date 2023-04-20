@@ -14,11 +14,13 @@ struct ContentView: OptionalView {
     
     let dummy = Dummy(name:"ContentView",printOnDestroy: true)
     
+    
     init(){
-        UITabBar.appearance().unselectedItemTintColor = UIColor.white
-        //UITabBar.appearance().backgroundColor = UIColor.white
-        //UITabBar.appearance().isTranslucent = false
+        UITabBar.changeAppearance()
+        UINavigationBar.changeAppearance()
     }
+    
+   
     
     var primaryView: some View {
         ZStack{

@@ -1,13 +1,13 @@
 //
-//  ProfileView.swift
+//  HabitView.swift
 //  TrackMyHabits
 //
-//  Created by fredrik sundström on 2023-04-19.
+//  Created by fredrik sundström on 2023-04-20.
 //
 
 import SwiftUI
-//https://www.hackingwithswift.com/forums/swiftui/background-color-of-a-list-make-it-clear-color/3379
-struct ProfileView: View{
+
+struct HabitView: View{
     var body: some View {
         NavigationView {
             Form {
@@ -33,36 +33,10 @@ struct ProfileView: View{
             //.background( appLinearGradient() )
             .background( .black )
             
-            .navigationBarTitle(Text("Fredrik Sundström"),displayMode: .automatic)
-            
-            /*.onAppear(perform: {
-                        setNavigationAppearance()
-                    })*/
+            .navigationBarTitle(Text("Fredrik Sundström"))
         }
     }
     
 }
 
-struct TextFieldsToBeRemoved: View{
-    var body: some View{
-        Text("$user.name")
-            .removePredictiveSuggestions()
-            .textContentType(.name)
-        Text("$user.email")
-            .removePredictiveSuggestions()
-            .textContentType(.emailAddress)
-        
-    }
-}
 
-struct TextFieldsToTest: View{
-    var body: some View{
-        Text("Onsdag 19 April")
-            .removePredictiveSuggestions()
-            .textContentType(.name)
-        Text("Översikt")
-            .removePredictiveSuggestions()
-            .textContentType(.emailAddress)
-        
-    }
-}
