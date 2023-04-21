@@ -63,11 +63,46 @@ extension CALayer {
     
 }*/
 
+extension Date {
+    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+        return calendar.dateComponents(Set(components), from: self)
+    }
+
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+        return calendar.component(component, from: self)
+    }
+    
+    func monthName() -> String{
+        let df = DateFormatter()
+        df.setLocalizedDateFormatFromTemplate("LLLL")
+        return df.string(from: self)
+    }
+    
+    func dayName() -> String{
+        let df = DateFormatter()
+        df.setLocalizedDateFormatFromTemplate("EEEE")
+        return df.string(from: self)
+    }
+    
+    static func dayDateMonth() -> String{
+        let date = Date()
+        let components = date.get(.day, .month, .year)
+        let day = date.dayName()
+        let month = date.monthName()
+        if let c_date = components.day{
+            return "\(day.uppercased()) \(c_date) \(month.uppercased())"
+        }
+        return "\(day.uppercased())  \(month.uppercased())"
+    }
+}
+
+
+
 extension UITabBar{
     static func changeAppearance(){
         let tabBarAppearance = UITabBarAppearance()
         //tabBarAppearance.configureWithOpaqueBackground()
-        tabBarAppearance.backgroundColor = .black
+        tabBarAppearance.backgroundColor = APP_BACKGROUND_UI_COLOR
         tabBarAppearance.shadowColor = .white
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
@@ -91,19 +126,18 @@ extension UINavigationBar {
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
     }
     
     static func changeAppearance(){
-        //UINavigationBar.changeAppearance(clear: false)
-        
         let appearance = UINavigationBarAppearance()
         //appearance.configureWithOpaqueBackground()
         
-        appearance.backgroundColor = .black
+        appearance.backgroundColor = APP_BACKGROUND_UI_COLOR
 
         let attrsLarge: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white,
-            .font: UIFont.monospacedSystemFont(ofSize: 25, weight: .black)
+            .font: UIFont.monospacedDigitSystemFont(ofSize: 30, weight: .black)
         ]
         let attrsSmall: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white,
@@ -111,7 +145,7 @@ extension UINavigationBar {
         ]
         appearance.titleTextAttributes = attrsSmall
         appearance.largeTitleTextAttributes = attrsLarge
-        //appearance.shadowColor = .white
+        appearance.shadowColor = APP_BACKGROUND_UI_COLOR
         //UINavigationBar.appearance().prefersLargeTitles = false
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
@@ -121,23 +155,14 @@ extension UINavigationBar {
 
 extension View{
     func formButtonDesign(width:CGFloat,backgroundColor:Color) -> some View{
-        modifier(FormButtonDesign(width: width, backgroundColor: backgroundColor))
+        modifier(FormButtonModifier(width: width, backgroundColor: backgroundColor))
     }
-}
-
-extension Color {
-    init(hex: UInt, alpha: Double = 1) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xff) / 255,
-            green: Double((hex >> 08) & 0xff) / 255,
-            blue: Double((hex >> 00) & 0xff) / 255,
-            opacity: alpha
-        )
+    func sectionHeader() -> some View{
+        modifier(SectionHeaderModifier())
     }
-}
-
-extension View{
+    func fillSection() -> some View{
+        self.modifier(FillFormModifier())
+    }
     func appLinearGradient() -> some View{
         return LinearGradient(gradient: Gradient(colors: [Color(hex:0x3E5151),Color(hex:0xDECBA4)]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)
@@ -150,14 +175,15 @@ extension View{
                 dismissButton: .cancel(Text("OK"), action: { action() } )
         )
     }
-}
-
-extension View {
     func removePredictiveSuggestions() -> some View {
         self.keyboardType(.alphabet)
             .disableAutocorrection(true)
             .autocapitalization(.none)
     }
+    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
+        self.modifier(DeviceRotationViewModifier(action: action))
+    }
+    
 }
 
 extension Binding where Value == String {
@@ -171,11 +197,7 @@ extension Binding where Value == String {
     }
 }
 
-extension View{
-    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
-        self.modifier(DeviceRotationViewModifier(action: action))
-    }
-}
+
 
 extension String {
     func index(from: Int) -> Index {
@@ -281,4 +303,35 @@ extension UIScreen{
     static let screenWidth = UIScreen.main.bounds.size.width
     static let screenHeight = UIScreen.main.bounds.size.height
     static let screenSize = UIScreen.main.bounds.size
+}
+
+extension UIColor{
+    static let darkBackground = UIColor(red:36,green:36,blue:36)
+    static let darkCardBackground = UIColor(red:46,green:46,blue:46)
+    
+    convenience init(red:Int,green:Int,blue:Int,a:CGFloat = 1.0) {
+        self.init(red:CGFloat(red)/255.0,
+                  green:CGFloat(green)/255.0,
+                  blue:CGFloat(blue)/255.0,
+                  alpha:CGFloat(a))
+    }
+}
+
+extension Color {
+    init(hex: UInt, alpha: Double = 1) {
+        self.init(
+            .sRGB,
+            red: Double((hex >> 16) & 0xff) / 255,
+            green: Double((hex >> 08) & 0xff) / 255,
+            blue: Double((hex >> 00) & 0xff) / 255,
+            opacity: alpha
+        )
+    }
+    
+    init(dRed red:Double,dGreen green:Double,dBlue blue:Double){
+        self.init(red: red/255.0,green: green/255.0,blue: blue/255.0)
+    }
+    
+    static var darkBackground:Color { return Color(dRed: 36, dGreen: 36, dBlue: 36) }
+    static var dDarkCardBackground:Color { return Color(dRed: 46, dGreen: 46, dBlue: 46) }
 }

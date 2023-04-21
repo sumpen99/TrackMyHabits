@@ -37,8 +37,13 @@
 		7D21927F29F053DE007FEEA0 /* ThrowableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */; };
 		7D21928129F057A4007FEEA0 /* FirebaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928029F057A4007FEEA0 /* FirebaseHandler.swift */; };
 		7D21928329F06F60007FEEA0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928229F06F60007FEEA0 /* ProfileView.swift */; };
-		7D21928729F1ADCB007FEEA0 /* FormButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928629F1ADCB007FEEA0 /* FormButtonDesign.swift */; };
 		7D21928929F1BE58007FEEA0 /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928829F1BE58007FEEA0 /* HabitView.swift */; };
+		7D21928B29F2CBE6007FEEA0 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928A29F2CBE6007FEEA0 /* ItemRow.swift */; };
+		7D21928D29F2D130007FEEA0 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928C29F2D130007FEEA0 /* DateTime.swift */; };
+		7D47740129F2F7DC00FD1756 /* StatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740029F2F7DC00FD1756 /* StatusCardView.swift */; };
+		7D47740329F2FC0E00FD1756 /* FillFormModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740229F2FC0E00FD1756 /* FillFormModifier.swift */; };
+		7D47740529F2FC5C00FD1756 /* FormButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */; };
+		7D47740729F2FC7500FD1756 /* SectionHeaderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740629F2FC7500FD1756 /* SectionHeaderModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,8 +75,13 @@
 		7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowableResult.swift; sourceTree = "<group>"; };
 		7D21928029F057A4007FEEA0 /* FirebaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHandler.swift; sourceTree = "<group>"; };
 		7D21928229F06F60007FEEA0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		7D21928629F1ADCB007FEEA0 /* FormButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonDesign.swift; sourceTree = "<group>"; };
 		7D21928829F1BE58007FEEA0 /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
+		7D21928A29F2CBE6007FEEA0 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
+		7D21928C29F2D130007FEEA0 /* DateTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
+		7D47740029F2F7DC00FD1756 /* StatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCardView.swift; sourceTree = "<group>"; };
+		7D47740229F2FC0E00FD1756 /* FillFormModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillFormModifier.swift; sourceTree = "<group>"; };
+		7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonModifier.swift; sourceTree = "<group>"; };
+		7D47740629F2FC7500FD1756 /* SectionHeaderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +156,8 @@
 				7D21926329ED97DC007FEEA0 /* LoginView.swift */,
 				7D21928229F06F60007FEEA0 /* ProfileView.swift */,
 				7D21928829F1BE58007FEEA0 /* HabitView.swift */,
+				7D21928A29F2CBE6007FEEA0 /* ItemRow.swift */,
+				7D47740029F2F7DC00FD1756 /* StatusCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,6 +179,7 @@
 				7D21925129ED9418007FEEA0 /* CharChecker.swift */,
 				7D21927329EDC640007FEEA0 /* User.swift */,
 				7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */,
+				7D21928C29F2D130007FEEA0 /* DateTime.swift */,
 			);
 			path = Struct;
 			sourceTree = "<group>";
@@ -184,7 +197,9 @@
 			children = (
 				7D21925D29ED9683007FEEA0 /* LoginModifier.swift */,
 				7D21927129ED99B9007FEEA0 /* DeviceRotationModifier.swift */,
-				7D21928629F1ADCB007FEEA0 /* FormButtonDesign.swift */,
+				7D47740229F2FC0E00FD1756 /* FillFormModifier.swift */,
+				7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */,
+				7D47740629F2FC7500FD1756 /* SectionHeaderModifier.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -304,18 +319,22 @@
 				7D21926229ED9747007FEEA0 /* SignupView.swift in Sources */,
 				7D21927A29F04D44007FEEA0 /* FirestoreManager.swift in Sources */,
 				7D21927029ED9917007FEEA0 /* Dummy.swift in Sources */,
+				7D47740729F2FC7500FD1756 /* SectionHeaderModifier.swift in Sources */,
 				7D21925529ED9499007FEEA0 /* OptionalView.swift in Sources */,
 				7D21928929F1BE58007FEEA0 /* HabitView.swift in Sources */,
 				7D21925729ED9505007FEEA0 /* PasswordView.swift in Sources */,
 				7D21925E29ED9683007FEEA0 /* LoginModifier.swift in Sources */,
 				7D21926829ED9842007FEEA0 /* AppGlobal.swift in Sources */,
 				7D21927F29F053DE007FEEA0 /* ThrowableResult.swift in Sources */,
-				7D21928729F1ADCB007FEEA0 /* FormButtonDesign.swift in Sources */,
+				7D47740529F2FC5C00FD1756 /* FormButtonModifier.swift in Sources */,
 				7D21925229ED9418007FEEA0 /* CharChecker.swift in Sources */,
 				7D21925B29ED9628007FEEA0 /* ToggleSecurefieldView.swift in Sources */,
 				7D21926029ED9720007FEEA0 /* PasswordStrengthView.swift in Sources */,
+				7D47740329F2FC0E00FD1756 /* FillFormModifier.swift in Sources */,
 				7D21927229ED99B9007FEEA0 /* DeviceRotationModifier.swift in Sources */,
 				7D21927829F04A29007FEEA0 /* FirestoreRepository.swift in Sources */,
+				7D21928B29F2CBE6007FEEA0 /* ItemRow.swift in Sources */,
+				7D21928D29F2D130007FEEA0 /* DateTime.swift in Sources */,
 				7D21928129F057A4007FEEA0 /* FirebaseHandler.swift in Sources */,
 				7D21923529ED8EA1007FEEA0 /* ContentView.swift in Sources */,
 				7D21926B29ED9872007FEEA0 /* PasswordLevel.swift in Sources */,
@@ -324,6 +343,7 @@
 				7D21926429ED97DC007FEEA0 /* LoginView.swift in Sources */,
 				7D21923329ED8EA1007FEEA0 /* TrackMyHabitsApp.swift in Sources */,
 				7D21925929ED9561007FEEA0 /* GeoReaderView.swift in Sources */,
+				7D47740129F2F7DC00FD1756 /* StatusCardView.swift in Sources */,
 				7D21926E29ED98AD007FEEA0 /* AppExtensions.swift in Sources */,
 				7D21927429EDC640007FEEA0 /* User.swift in Sources */,
 			);
@@ -382,6 +402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -436,6 +457,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -460,6 +482,8 @@
 				INFOPLIST_FILE = TrackMyHabits/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -489,6 +513,8 @@
 				INFOPLIST_FILE = TrackMyHabits/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

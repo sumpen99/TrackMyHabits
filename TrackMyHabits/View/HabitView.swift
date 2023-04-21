@@ -10,13 +10,27 @@ import SwiftUI
 struct HabitView: View{
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("ONSDAG 19 APRIL")) {
-                    Text("Översikt").bold().font(.largeTitle)
-                        .listRowBackground(Color.green)
+            List {
+                ItemRow(Date.dayDateMonth())
+                Section(header: Text("Status").sectionHeader()) {
+                    StatusCardView()
+                        .fillSection()
                 }
-                Section(header: Text("Your Info 1")) {
-                    TextFieldsToTest()
+                Section(header: HStack{
+                    Text("Vanor").sectionHeader()
+                    Spacer()
+                    Text("Lägg till").sectionHeader()
+                    
+                }) {
+                    NavigationLink(destination: Text("aaa")) {
+                        Label("Buttons", systemImage: "capsule")
+                    }
+                    NavigationLink(destination: Text("aaa")) {
+                        Label("Colors", systemImage: "paintpalette")
+                    }
+                    NavigationLink(destination: Text("aaa")) {
+                        Label("Controls", systemImage: "slider.horizontal.3")
+                    }
                 }
                 Section(header: Text("Your Info 1")) {
                     TextFieldsToBeRemoved()
@@ -28,12 +42,16 @@ struct HabitView: View{
                     TextFieldsToBeRemoved()
                 }
             }
-            .listRowBackground(Color(.systemGroupedBackground))
+            //.listStyle(GroupedListStyle())
+            //.listRowBackground(Color(.systemGroupedBackground))
             .scrollContentBackground(.hidden)
-            //.background( appLinearGradient() )
-            .background( .black )
-            
-            .navigationBarTitle(Text("Fredrik Sundström"))
+            .background( APP_BACKGROUND_COLOR )
+            .navigationBarTitle(Text("Översikt"))
+            /*.navigationBarItems(leading:
+                VStack {
+                    
+                }
+             )*/
         }
     }
     

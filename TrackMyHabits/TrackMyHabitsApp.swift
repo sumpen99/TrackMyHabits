@@ -35,9 +35,9 @@ struct TrackMyHabitsApp: App {
         .onChange(of: phase) { newPhase in
             switch newPhase {
                 case .active:
-                firebaseHandler.isUserLoggedIn()
                     printAny("Active")
                 case .inactive:
+                    firebaseHandler.isUserLoggedIn()
                     printAny("InActive")
                 case .background:
                     printAny("Background")

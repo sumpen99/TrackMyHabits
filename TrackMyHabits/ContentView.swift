@@ -25,29 +25,17 @@ struct ContentView: OptionalView {
     var primaryView: some View {
         ZStack{
             TabView {
-                ProfileView()
+                HabitView()
                     .tabItem {
-                        Label("Overview", systemImage: "circle.dashed")
+                        Label("Översikt", systemImage: "circle.dashed")
                     }
                 ProfileView()
                     .tabItem {
-                        Label("Profile", systemImage: "person.fill")
+                        Label("Profil", systemImage: "person.fill")
                     }
             }
             .accentColor(.green)
-            .animation(
-              Animation
-                .easeInOut(duration: 1.5)
-                .repeatForever(autoreverses: false),
-              value: UUID()
-            )
         }
-        .animation(
-          Animation
-            .easeInOut(duration: 1.5)
-            .repeatForever(autoreverses: false),
-          value: UUID()
-        )
     }
     
     var optionalView: some View {

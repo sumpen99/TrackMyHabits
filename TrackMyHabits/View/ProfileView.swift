@@ -31,7 +31,7 @@ struct ProfileView: View{
             .listRowBackground(Color(.systemGroupedBackground))
             .scrollContentBackground(.hidden)
             //.background( appLinearGradient() )
-            .background( .black )
+            .background( APP_BACKGROUND_COLOR )
             
             .navigationBarTitle(Text("Fredrik Sundström"),displayMode: .automatic)
             

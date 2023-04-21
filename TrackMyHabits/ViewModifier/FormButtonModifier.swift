@@ -1,13 +1,13 @@
 //
-//  FormButtonDesign.swift
+//  FormButtonModifier.swift
 //  TrackMyHabits
 //
-//  Created by fredrik sundström on 2023-04-20.
+//  Created by fredrik sundström on 2023-04-21.
 //
 
 import SwiftUI
 
-struct FormButtonDesign: ViewModifier{
+struct FormButtonModifier: ViewModifier{
     var width:CGFloat
     var backgroundColor: Color
     func body(content: Content) -> some View{
