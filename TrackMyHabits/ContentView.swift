@@ -34,7 +34,7 @@ struct ContentView: OptionalView {
                         Label("Profil", systemImage: "person.fill")
                     }
             }
-            .accentColor(.green)
+            //.accentColor(.green)
         }
     }
     

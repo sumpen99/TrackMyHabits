@@ -16,7 +16,7 @@ struct SignupView : View {
     @StateObject private var passwordHelper: PasswordHelper = PasswordHelper()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("Your Info")) {
                     TextFieldsUser(user: self.$user)

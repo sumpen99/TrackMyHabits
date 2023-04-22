@@ -44,6 +44,7 @@
 		7D47740329F2FC0E00FD1756 /* FillFormModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740229F2FC0E00FD1756 /* FillFormModifier.swift */; };
 		7D47740529F2FC5C00FD1756 /* FormButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */; };
 		7D47740729F2FC7500FD1756 /* SectionHeaderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740629F2FC7500FD1756 /* SectionHeaderModifier.swift */; };
+		7D47740929F3D52400FD1756 /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740829F3D52400FD1756 /* NavigationButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		7D47740229F2FC0E00FD1756 /* FillFormModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillFormModifier.swift; sourceTree = "<group>"; };
 		7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonModifier.swift; sourceTree = "<group>"; };
 		7D47740629F2FC7500FD1756 /* SectionHeaderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderModifier.swift; sourceTree = "<group>"; };
+		7D47740829F3D52400FD1756 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				7D21928829F1BE58007FEEA0 /* HabitView.swift */,
 				7D21928A29F2CBE6007FEEA0 /* ItemRow.swift */,
 				7D47740029F2F7DC00FD1756 /* StatusCardView.swift */,
+				7D47740829F3D52400FD1756 /* NavigationButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D47740929F3D52400FD1756 /* NavigationButton.swift in Sources */,
 				7D21926229ED9747007FEEA0 /* SignupView.swift in Sources */,
 				7D21927A29F04D44007FEEA0 /* FirestoreManager.swift in Sources */,
 				7D21927029ED9917007FEEA0 /* Dummy.swift in Sources */,

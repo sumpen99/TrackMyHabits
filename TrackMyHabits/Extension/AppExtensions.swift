@@ -63,6 +63,12 @@ extension CALayer {
     
 }*/
 
+extension Float{
+    func remapValue(min1:Float,max1:Float,min2:Float,max2:Float) -> CGFloat{
+        return CGFloat((max2-min2) * (self-min1) / (max1-min1) + min2)
+    }
+}
+
 extension Date {
     func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)
@@ -152,6 +158,34 @@ extension UINavigationBar {
         UINavigationBar.appearance().compactAppearance = appearance
     }
 }
+
+/*extension Circle{
+    
+    func gradientSemi(){
+        let center = CGPoint(x: circleView.bounds.size.width / 2, y: bounds.size.height / 2)
+        let circleRadius = bounds.size.width / 2
+        let circlePath = UIBezierPath(arcCenter: center, radius: circleRadius, startAngle: CGFloat.pi, endAngle: CGFloat.pi * 2, clockwise: true)
+
+        let semiCircleLayer = CAShapeLayer()
+        semiCircleLayer.path = circlePath.cgPath
+        semiCircleLayer.lineCap = .round
+        semiCircleLayer.strokeColor = UIColor.white.cgColor
+        semiCircleLayer.fillColor = UIColor.clear.cgColor
+        semiCircleLayer.lineWidth = 6
+        semiCircleLayer.strokeStart = 0
+        semiCircleLayer.strokeEnd  = 1
+
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.red.cgColor, UIColor.yellow.cgColor, UIColor.green.cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+
+        gradient.frame = circleView.bounds
+        gradient.mask = semiCircleLayer
+
+        circleView.layer.addSublayer(gradient)
+    }
+}*/
 
 extension View{
     func formButtonDesign(width:CGFloat,backgroundColor:Color) -> some View{
@@ -318,6 +352,7 @@ extension UIColor{
 }
 
 extension Color {
+    
     init(hex: UInt, alpha: Double = 1) {
         self.init(
             .sRGB,
@@ -333,5 +368,5 @@ extension Color {
     }
     
     static var darkBackground:Color { return Color(dRed: 36, dGreen: 36, dBlue: 36) }
-    static var dDarkCardBackground:Color { return Color(dRed: 46, dGreen: 46, dBlue: 46) }
+    static var darkCardBackground:Color { return Color(dRed: 46, dGreen: 46, dBlue: 46) }
 }

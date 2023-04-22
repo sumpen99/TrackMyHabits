@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-
 struct HabitView: View{
+    @State private var selection: String? = nil
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ItemRow(Date.dayDateMonth())
                 Section(header: Text("Status").sectionHeader()) {
@@ -19,8 +19,9 @@ struct HabitView: View{
                 Section(header: HStack{
                     Text("Vanor").sectionHeader()
                     Spacer()
-                    Text("Lägg till").sectionHeader()
-                    
+                    NavigationLink(destination: Text("aaa")) {
+                        Label("", systemImage: "plus").sectionHeader()
+                    }
                 }) {
                     NavigationLink(destination: Text("aaa")) {
                         Label("Buttons", systemImage: "capsule")
@@ -32,29 +33,21 @@ struct HabitView: View{
                         Label("Controls", systemImage: "slider.horizontal.3")
                     }
                 }
-                Section(header: Text("Your Info 1")) {
-                    TextFieldsToBeRemoved()
-                }
-                Section(header: Text("Your Info 2")) {
-                    TextFieldsToBeRemoved()
-                }
-                Section(header: Text("Your Info 3")) {
-                    TextFieldsToBeRemoved()
-                }
-            }
+                NavigationButton(label:"Redigera min dag",
+                                 viewMoveTo: AnyView(Text("aaa")))
+               
+           }
             //.listStyle(GroupedListStyle())
             //.listRowBackground(Color(.systemGroupedBackground))
+            
             .scrollContentBackground(.hidden)
             .background( APP_BACKGROUND_COLOR )
             .navigationBarTitle(Text("Översikt"))
             /*.navigationBarItems(leading:
-                VStack {
-                    
-                }
+             VStack {
+             
+             }
              )*/
         }
     }
-    
 }
-
-
