@@ -143,7 +143,7 @@ extension UINavigationBar {
 
         let attrsLarge: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white,
-            .font: UIFont.monospacedDigitSystemFont(ofSize: 30, weight: .black)
+            .font: UIFont.monospacedDigitSystemFont(ofSize: 20, weight: .black)
         ]
         let attrsSmall: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white,
@@ -151,11 +151,15 @@ extension UINavigationBar {
         ]
         appearance.titleTextAttributes = attrsSmall
         appearance.largeTitleTextAttributes = attrsLarge
-        appearance.shadowColor = APP_BACKGROUND_UI_COLOR
+        //appearance.shadowColor = APP_BACKGROUND_UI_COLOR
         //UINavigationBar.appearance().prefersLargeTitles = false
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance
+        
+        //UINavigationBar.appearance().standardAppearance = appearance
+        //UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        //UINavigationBar.appearance().compactAppearance = appearance
+        
+        UINavigationBar.appearance().titleTextAttributes = attrsLarge
+        UINavigationBar.appearance().largeTitleTextAttributes = attrsLarge
     }
 }
 

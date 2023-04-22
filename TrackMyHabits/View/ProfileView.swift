@@ -8,6 +8,7 @@
 import SwiftUI
 //https://www.hackingwithswift.com/forums/swiftui/background-color-of-a-list-make-it-clear-color/3379
 struct ProfileView: View{
+    @EnvironmentObject var firebaseHandler: FirebaseHandler
     var body: some View {
         NavigationStack {
             Form {
@@ -52,13 +53,17 @@ struct ProfileView: View{
                   }
                   .foregroundColor(.purple) //Optional: Apply color on all inner elements
                 }
+                
+                Button("Logga ut") {
+                    firebaseHandler.signOut()
+                }
             }
             .listRowBackground(Color(.systemGroupedBackground))
             .scrollContentBackground(.hidden)
-            //.background( appLinearGradient() )
-            .background( APP_BACKGROUND_COLOR )
+            .background( appLinearGradient() )
+            //.background( APP_BACKGROUND_COLOR )
             
-            .navigationBarTitle(Text("Fredrik Sundström"),displayMode: .automatic)
+            .navigationBarTitle(Text("Fredrik Sundström"),displayMode: .inline)
             
             /*.onAppear(perform: {
                         setNavigationAppearance()

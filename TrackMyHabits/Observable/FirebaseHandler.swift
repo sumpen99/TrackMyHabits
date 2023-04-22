@@ -22,6 +22,15 @@ class FirebaseHandler: ObservableObject{
         isLoggedIn = auth.currentUser != nil
     }
     
+    func signOut(){
+        refreshLoggedInStatus()
+        /*handleThrowable(try auth.signOut()){ result in
+            if result.finishedWithoutError{
+                
+            }
+        }*/
+    }
+    
     
     
     /*init(){

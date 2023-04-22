@@ -18,6 +18,12 @@ struct SignupView : View {
     var body: some View {
         NavigationStack {
             Form {
+                ItemRow("Registrera",
+                        color: .white,
+                        font:.system(
+                            .largeTitle,design: .rounded
+                        ).weight(.bold),
+                        edgeInset: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 Section(header: Text("Your Info")) {
                     TextFieldsUser(user: self.$user)
                 }
@@ -32,7 +38,8 @@ struct SignupView : View {
             }
             .scrollContentBackground(.hidden)
             .background( appLinearGradient() )
-            .navigationBarTitle(Text("Registration Form"))
+            //.background(APP_BACKGROUND_COLOR)
+            //.navigationBarTitle(Text("Registration Form"))
             .alert(isPresented: $isSignupResult, content: {
                 onResultAlert {
                     if firebaseHandler.isSuccessful {

@@ -16,7 +16,7 @@ struct ContentView: OptionalView {
     
     
     init(){
-        UITabBar.changeAppearance()
+        //UITabBar.changeAppearance()
         UINavigationBar.changeAppearance()
     }
     

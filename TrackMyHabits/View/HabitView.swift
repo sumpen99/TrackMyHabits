@@ -11,9 +11,13 @@ struct HabitView: View{
     var body: some View {
         NavigationStack {
             List {
-                ItemRow(Date.dayDateMonth())
-                Section(header: Text("Status").sectionHeader()) {
-                    StatusCardView()
+                Section(header:
+                            VStack(alignment: .leading) {
+                                Text("Status").sectionHeader()
+                                Text(Date.dayDateMonth()).fontWeight(.regular)
+                            }
+                ){
+                    StatusCardView(habits: 3, habitsDone: 1, viewMoveTo: AnyView(Text("Hepp")))
                         .fillSection()
                 }
                 Section(header: HStack{
@@ -41,13 +45,11 @@ struct HabitView: View{
             //.listRowBackground(Color(.systemGroupedBackground))
             
             .scrollContentBackground(.hidden)
-            .background( APP_BACKGROUND_COLOR )
-            .navigationBarTitle(Text("Översikt"))
-            /*.navigationBarItems(leading:
-             VStack {
-             
-             }
-             )*/
+            //.background( APP_BACKGROUND_COLOR )
+            //.edgesIgnoringSafeArea(.all)
+            .background( appLinearGradient())
+            .navigationBarTitle(Text("Översikt"),displayMode: .inline)
+            //.navigationBarHidden(true)
         }
     }
 }

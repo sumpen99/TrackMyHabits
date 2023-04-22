@@ -36,6 +36,7 @@ struct LoginView: View{
                 }
             }
             .background(appLinearGradient())
+            //.background(APP_BACKGROUND_COLOR)
             .sheet(isPresented: $showingSignUpSheet){
                 SignupView(user: self.$user)
             }

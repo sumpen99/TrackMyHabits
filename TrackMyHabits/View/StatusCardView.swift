@@ -8,15 +8,31 @@
 import SwiftUI
 
 struct StatusCardView: View{
-    var progressValue: Float = 1.0
+    let habits:Int
+    let habitsDone:Int
+    var viewMoveTo: AnyView
     var body: some View {
         
         ZStack(alignment: .center) {
+            NavigationLink(destination: viewMoveTo) {
+              EmptyView()
+            }
             Color.darkBackground
             ZStack{
-                HalfCircleGradient(progress: self.progressValue)
+                HalfCircleGradient(habits: habits, habitsDone: habitsDone)
                 .frame(width: 200.0, height: 200.0)
             }.padding(.top,60)
+            VStack(alignment:.trailing) {
+                Spacer()
+                HStack(alignment:.bottom) {
+                    Spacer()
+                    Rectangle()
+                        .fill(.gray)
+                        .frame(width: 40, height: 80)
+                        .rotationEffect(.degrees(45.0)).padding(.trailing,-10)
+                }
+                
+            }
         }
         .frame(height: 200.0)
         .clipShape(RoundedRectangle(cornerRadius: 15))
@@ -24,8 +40,9 @@ struct StatusCardView: View{
 }
 
 struct HalfCircleGradient: View {
-    var progress: Float
-  
+    let habits:Int
+    let habitsDone:Int
+    var progress:CGFloat { Float(Float(habitsDone)/Float(habits)).remapValue(min1: 0.0, max1: 1.0, min2: 0.3, max2: 0.9) }
     var body: some View {
         ZStack {
             Circle()
@@ -36,8 +53,7 @@ struct HalfCircleGradient: View {
                 .rotationEffect(.degrees(54.5))
             
             Circle()
-                .trim(from: 0.3, to:
-                        CGFloat(self.progress.remapValue(min1: 0.0, max1: 1.0, min2: 0.3, max2: 0.9)))
+                .trim(from: 0.3, to: progress)
                 .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
                 .fill(AngularGradient(gradient: Gradient(stops: [
                     .init(color: Color(hex: 0xED4D4D), location: 0.39000002),
@@ -48,10 +64,19 @@ struct HalfCircleGradient: View {
                 .rotationEffect(.degrees(54.5))
             
             VStack{
-                Text("3/3").font(Font.system(size: 44)).bold().foregroundColor(Color(hex: 0x314058))
-                Text("Vanor avklarade").bold().foregroundColor(Color(hex: 0x314058))
+                Text("\(habitsDone)/\(habits)").font(Font.system(size: 44)).bold().foregroundColor(Color(hex: 0x314058))
+                Text(progressText()).bold().foregroundColor(Color(hex: 0x314058))
             }
         }
+    }
+    
+    func progressText() -> String{
+        let progressRaw = Float(habitsDone) / Float(habits)
+        if progressRaw == 1.0{ return "Bra jobbat idag"}
+        else if progressRaw < 0.5 { return "Fortsätt kämpa"}
+        else if progressRaw < 0.75{ return "Snart så"}
+        return "Nästa klar"
+        
     }
 }
 
