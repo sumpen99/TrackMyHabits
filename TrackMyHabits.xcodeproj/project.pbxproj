@@ -18,7 +18,6 @@
 		7D21924F29ED93B1007FEEA0 /* PasswordHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */; };
 		7D21925229ED9418007FEEA0 /* CharChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925129ED9418007FEEA0 /* CharChecker.swift */; };
 		7D21925529ED9499007FEEA0 /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925429ED9499007FEEA0 /* OptionalView.swift */; };
-		7D21925729ED9505007FEEA0 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925629ED9505007FEEA0 /* PasswordView.swift */; };
 		7D21925929ED9561007FEEA0 /* GeoReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925829ED9561007FEEA0 /* GeoReaderView.swift */; };
 		7D21925B29ED9628007FEEA0 /* ToggleSecurefieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925A29ED9628007FEEA0 /* ToggleSecurefieldView.swift */; };
 		7D21925E29ED9683007FEEA0 /* LoginModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925D29ED9683007FEEA0 /* LoginModifier.swift */; };
@@ -45,6 +44,9 @@
 		7D47740529F2FC5C00FD1756 /* FormButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */; };
 		7D47740729F2FC7500FD1756 /* SectionHeaderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740629F2FC7500FD1756 /* SectionHeaderModifier.swift */; };
 		7D47740929F3D52400FD1756 /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740829F3D52400FD1756 /* NavigationButton.swift */; };
+		7D47740B29F5010000FD1756 /* HeaderSubHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740A29F5010000FD1756 /* HeaderSubHeaderView.swift */; };
+		7D47740F29F5030500FD1756 /* NavigationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740E29F5030500FD1756 /* NavigationViewModifier.swift */; };
+		7D47741429F50F2B00FD1756 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741329F50F2B00FD1756 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +60,6 @@
 		7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordHelper.swift; sourceTree = "<group>"; };
 		7D21925129ED9418007FEEA0 /* CharChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharChecker.swift; sourceTree = "<group>"; };
 		7D21925429ED9499007FEEA0 /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
-		7D21925629ED9505007FEEA0 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		7D21925829ED9561007FEEA0 /* GeoReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoReaderView.swift; sourceTree = "<group>"; };
 		7D21925A29ED9628007FEEA0 /* ToggleSecurefieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSecurefieldView.swift; sourceTree = "<group>"; };
 		7D21925D29ED9683007FEEA0 /* LoginModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModifier.swift; sourceTree = "<group>"; };
@@ -84,6 +85,9 @@
 		7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonModifier.swift; sourceTree = "<group>"; };
 		7D47740629F2FC7500FD1756 /* SectionHeaderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderModifier.swift; sourceTree = "<group>"; };
 		7D47740829F3D52400FD1756 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
+		7D47740A29F5010000FD1756 /* HeaderSubHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSubHeaderView.swift; sourceTree = "<group>"; };
+		7D47740E29F5030500FD1756 /* NavigationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModifier.swift; sourceTree = "<group>"; };
+		7D47741329F50F2B00FD1756 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,9 @@
 		7D21923129ED8EA1007FEEA0 /* TrackMyHabits */ = {
 			isa = PBXGroup;
 			children = (
+				7D47741229F50F1800FD1756 /* Controller */,
+				7D47741129F5061E00FD1756 /* CardView */,
+				7D47741029F504CD00FD1756 /* PageView */,
 				7D21926C29ED9887007FEEA0 /* Extension */,
 				7D21926929ED985E007FEEA0 /* Enum */,
 				7D21926629ED9833007FEEA0 /* Global */,
@@ -150,17 +157,12 @@
 		7D21924829ED9031007FEEA0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7D21925629ED9505007FEEA0 /* PasswordView.swift */,
 				7D21925829ED9561007FEEA0 /* GeoReaderView.swift */,
 				7D21925A29ED9628007FEEA0 /* ToggleSecurefieldView.swift */,
 				7D21925F29ED9720007FEEA0 /* PasswordStrengthView.swift */,
-				7D21926129ED9747007FEEA0 /* SignupView.swift */,
-				7D21926329ED97DC007FEEA0 /* LoginView.swift */,
-				7D21928229F06F60007FEEA0 /* ProfileView.swift */,
-				7D21928829F1BE58007FEEA0 /* HabitView.swift */,
 				7D21928A29F2CBE6007FEEA0 /* ItemRow.swift */,
-				7D47740029F2F7DC00FD1756 /* StatusCardView.swift */,
 				7D47740829F3D52400FD1756 /* NavigationButton.swift */,
+				7D47740A29F5010000FD1756 /* HeaderSubHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,6 +205,7 @@
 				7D47740229F2FC0E00FD1756 /* FillFormModifier.swift */,
 				7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */,
 				7D47740629F2FC7500FD1756 /* SectionHeaderModifier.swift */,
+				7D47740E29F5030500FD1756 /* NavigationViewModifier.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -237,6 +240,33 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7D47741029F504CD00FD1756 /* PageView */ = {
+			isa = PBXGroup;
+			children = (
+				7D21928229F06F60007FEEA0 /* ProfileView.swift */,
+				7D21928829F1BE58007FEEA0 /* HabitView.swift */,
+				7D21926329ED97DC007FEEA0 /* LoginView.swift */,
+				7D21926129ED9747007FEEA0 /* SignupView.swift */,
+			);
+			path = PageView;
+			sourceTree = "<group>";
+		};
+		7D47741129F5061E00FD1756 /* CardView */ = {
+			isa = PBXGroup;
+			children = (
+				7D47740029F2F7DC00FD1756 /* StatusCardView.swift */,
+			);
+			path = CardView;
+			sourceTree = "<group>";
+		};
+		7D47741229F50F1800FD1756 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7D47741329F50F2B00FD1756 /* ImagePicker.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,10 +356,10 @@
 				7D47740729F2FC7500FD1756 /* SectionHeaderModifier.swift in Sources */,
 				7D21925529ED9499007FEEA0 /* OptionalView.swift in Sources */,
 				7D21928929F1BE58007FEEA0 /* HabitView.swift in Sources */,
-				7D21925729ED9505007FEEA0 /* PasswordView.swift in Sources */,
 				7D21925E29ED9683007FEEA0 /* LoginModifier.swift in Sources */,
 				7D21926829ED9842007FEEA0 /* AppGlobal.swift in Sources */,
 				7D21927F29F053DE007FEEA0 /* ThrowableResult.swift in Sources */,
+				7D47740B29F5010000FD1756 /* HeaderSubHeaderView.swift in Sources */,
 				7D47740529F2FC5C00FD1756 /* FormButtonModifier.swift in Sources */,
 				7D21925229ED9418007FEEA0 /* CharChecker.swift in Sources */,
 				7D21925B29ED9628007FEEA0 /* ToggleSecurefieldView.swift in Sources */,
@@ -337,6 +367,7 @@
 				7D47740329F2FC0E00FD1756 /* FillFormModifier.swift in Sources */,
 				7D21927229ED99B9007FEEA0 /* DeviceRotationModifier.swift in Sources */,
 				7D21927829F04A29007FEEA0 /* FirestoreRepository.swift in Sources */,
+				7D47741429F50F2B00FD1756 /* ImagePicker.swift in Sources */,
 				7D21928B29F2CBE6007FEEA0 /* ItemRow.swift in Sources */,
 				7D21928D29F2D130007FEEA0 /* DateTime.swift in Sources */,
 				7D21928129F057A4007FEEA0 /* FirebaseHandler.swift in Sources */,
@@ -344,6 +375,7 @@
 				7D21926B29ED9872007FEEA0 /* PasswordLevel.swift in Sources */,
 				7D21924F29ED93B1007FEEA0 /* PasswordHelper.swift in Sources */,
 				7D21928329F06F60007FEEA0 /* ProfileView.swift in Sources */,
+				7D47740F29F5030500FD1756 /* NavigationViewModifier.swift in Sources */,
 				7D21926429ED97DC007FEEA0 /* LoginView.swift in Sources */,
 				7D21923329ED8EA1007FEEA0 /* TrackMyHabitsApp.swift in Sources */,
 				7D21925929ED9561007FEEA0 /* GeoReaderView.swift in Sources */,

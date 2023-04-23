@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SignupView : View {
     @Environment(\.dismiss) private var dismiss
-    //@Environment(\.isPresented) private var isPresented
     @EnvironmentObject var firebaseHandler: FirebaseHandler
     @Binding var user: User
     @State private var isSignupResult: Bool = false
@@ -29,17 +28,13 @@ struct SignupView : View {
                 }
                 Section(header: Text("Password"),footer: Text("Password must be between \(MIN_PASSWORD_LEN) - \(MAX_PASSWORD_LEN) characters long")) {
                     PasswordView()
-                    .environmentObject(passwordHelper)
                 }
                 Section {
                     ConfirmedPassword(action:signUserUp)
-                        .environmentObject(passwordHelper)
                 }
             }
-            .scrollContentBackground(.hidden)
-            .background( appLinearGradient() )
-            //.background(APP_BACKGROUND_COLOR)
-            //.navigationBarTitle(Text("Registration Form"))
+            .environmentObject(passwordHelper)
+            .modifier(NavigationViewModifier(title: ""))
             .alert(isPresented: $isSignupResult, content: {
                 onResultAlert {
                     if firebaseHandler.isSuccessful {
@@ -137,5 +132,22 @@ struct ConfirmedPassword : View{
             }
             
         }
+    }
+}
+
+struct PasswordView : View {
+    @EnvironmentObject var passwordHelper: PasswordHelper
+    @State private var showPassword: Bool = true
+    
+    var body: some View {
+        if self.passwordHelper.level != .none {
+            SecureLevelView(level: self.passwordHelper.level)
+        }
+        ToggleSecurefieldView(text: $passwordHelper.password)
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color(UIColor.opaqueSeparator), lineWidth: 2)
+        }
+        
     }
 }

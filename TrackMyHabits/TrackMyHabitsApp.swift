@@ -20,7 +20,7 @@ struct TrackMyHabitsApp: App {
     //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @Environment(\.scenePhase) private var phase
     @StateObject var firebaseHandler = FirebaseHandler()
-    
+  
     init(){
         FirebaseApp.configure()
     }

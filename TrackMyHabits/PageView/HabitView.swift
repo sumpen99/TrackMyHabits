@@ -7,16 +7,12 @@
 
 import SwiftUI
 struct HabitView: View{
-    @State private var selection: String? = nil
+   
+    
     var body: some View {
         NavigationStack {
             List {
-                Section(header:
-                            VStack(alignment: .leading) {
-                                Text("Status").sectionHeader()
-                                Text(Date.dayDateMonth()).fontWeight(.regular)
-                            }
-                ){
+                Section(header:HeaderSubHeaderView(header:"Status",subHeader: Date.dayDateMonth())){
                     StatusCardView(habits: 3, habitsDone: 1, viewMoveTo: AnyView(Text("Hepp")))
                         .fillSection()
                 }
@@ -41,15 +37,7 @@ struct HabitView: View{
                                  viewMoveTo: AnyView(Text("aaa")))
                
            }
-            //.listStyle(GroupedListStyle())
-            //.listRowBackground(Color(.systemGroupedBackground))
-            
-            .scrollContentBackground(.hidden)
-            //.background( APP_BACKGROUND_COLOR )
-            //.edgesIgnoringSafeArea(.all)
-            .background( appLinearGradient())
-            .navigationBarTitle(Text("Översikt"),displayMode: .inline)
-            //.navigationBarHidden(true)
+            .modifier(NavigationViewModifier(title: "Översikt"))
         }
     }
 }

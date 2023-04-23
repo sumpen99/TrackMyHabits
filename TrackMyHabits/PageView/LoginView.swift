@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LoginView: View{
     @Environment(\.dismiss) private var dismiss
-    //@Environment(\.isPresented) private var isPresented
     @EnvironmentObject var firebaseHandler: FirebaseHandler
     @State var user = User()
     @State private var password = ""
@@ -36,7 +35,6 @@ struct LoginView: View{
                 }
             }
             .background(appLinearGradient())
-            //.background(APP_BACKGROUND_COLOR)
             .sheet(isPresented: $showingSignUpSheet){
                 SignupView(user: self.$user)
             }
