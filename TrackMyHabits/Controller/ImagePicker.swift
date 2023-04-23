@@ -49,14 +49,12 @@ struct ImagePicker: UIViewControllerRepresentable {
                 presentationMode.dismiss()
                 return
             }
-            printAny("we have image")
             image = Image(uiImage: uiImage)
             presentationMode.dismiss()
 
         }
 
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            printAny("dismiss")
             presentationMode.dismiss()
         }
 

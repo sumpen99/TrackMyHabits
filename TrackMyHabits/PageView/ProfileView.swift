@@ -10,26 +10,20 @@ import Photos
 //https://www.hackingwithswift.com/forums/swiftui/background-color-of-a-list-make-it-clear-color/3379
 struct ProfileView: View{
     @EnvironmentObject var firebaseHandler: FirebaseHandler
+    @EnvironmentObject var userModel: UserModel
     @State var isShowPicker: Bool = false
     @State var image: Image? = Image(systemName:"photo.fill")
     @State private var isPrivacyResult = false
+    
     var body: some View {
         NavigationStack {
             Form {
                 UserImage(profilePicture:$image,
-                    isShowPicker:$isShowPicker,
+                          isShowPicker:$isShowPicker,
                           isPrivacyResult: $isPrivacyResult)
-                Section(header: Text("Your Info 1")) {
-                    TextFieldsToTest()
-                }
-                Section(header: Text("Your Info 1")) {
-                    TextFieldsToBeRemoved()
-                }
-                Section(header: Text("Your Info 2")) {
-                    TextFieldsToBeRemoved()
-                }
-                Section(header: Text("Your Info 3")) {
-                    TextFieldsToBeRemoved()
+                Section(header: Text("Personuppgifter")) {
+                    Text(userModel.user?.name ?? "")
+                    Text(userModel.user?.email ?? "")
                 }
                 Section(header: Text("Your Info 1")) {
                     NavigationLink(destination: Text("aaa")) {
@@ -69,7 +63,7 @@ struct ProfileView: View{
                     openPrivacySettings()
                 }
             })
-            .modifier(NavigationViewModifier(title: "Fredrik Sundström"))
+            .modifier(NavigationViewModifier(title: userModel.user?.name ?? ""))
         }
     }
     
@@ -79,35 +73,16 @@ struct ProfileView: View{
                     assertionFailure("Not able to open App privacy settings")
                     return
             }
-
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
      
 }
 
-class PhotoGalleryManager : ObservableObject {
-    @Published var authorizationStatus:PHAuthorizationStatus = .notDetermined
-    
-    func checkPermission(){
-        authorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-    }
-    
-    func requestPermission() {
-        PHPhotoLibrary.requestAuthorization({ [weak self] status in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                strongSelf.authorizationStatus = status
-            }
-        })
-    }
-}
-
-
 struct UserImage: View{
     @Binding var profilePicture:Image?
     @Binding var isShowPicker:Bool
     @Binding var isPrivacyResult:Bool
-    @StateObject var photoGalleryManager = PhotoGalleryManager()
+    @StateObject var photoGalleryPermissionHandler = PhotoGalleryPermissionHandler()
     
     var body: some View{
         HStack(alignment: .center){
@@ -118,10 +93,10 @@ struct UserImage: View{
                 .clipShape(Circle())
                 .foregroundColor(.darkCardBackground)
                 .onTapGesture {
-                    photoGalleryManager.checkPermission()
-                    switch photoGalleryManager.authorizationStatus {
+                    photoGalleryPermissionHandler.checkPermission()
+                    switch photoGalleryPermissionHandler.authorizationStatus {
                       case .notDetermined:
-                            photoGalleryManager.requestPermission()
+                            photoGalleryPermissionHandler.requestPermission()
                       case .denied, .restricted:
                             activateAccessDeniedAlert()
                             isPrivacyResult.toggle()
@@ -136,9 +111,7 @@ struct UserImage: View{
                 }
             Spacer()
         }
-        .onAppear(perform: activateNotImplementedAlert)
         .listRowBackground(Color.clear)
-        
     }
     
     func activateNotImplementedAlert(){
@@ -152,29 +125,7 @@ struct UserImage: View{
     }
 }
 
-struct TextFieldsToBeRemoved: View{
-    var body: some View{
-        Text("$user.name")
-            .removePredictiveSuggestions()
-            .textContentType(.name)
-        Text("$user.email")
-            .removePredictiveSuggestions()
-            .textContentType(.emailAddress)
-        
-    }
-}
 
-struct TextFieldsToTest: View{
-    var body: some View{
-        Text("Onsdag 19 April")
-            .removePredictiveSuggestions()
-            .textContentType(.name)
-        Text("Översikt")
-            .removePredictiveSuggestions()
-            .textContentType(.emailAddress)
-        
-    }
-}
 
 struct MenuInformationDetailView: View {
     var title: String = "title"

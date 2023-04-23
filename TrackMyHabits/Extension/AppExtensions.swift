@@ -22,6 +22,21 @@ func handleThrowable(_ function: @autoclosure () throws -> Any?,
     onFunctionResult(throwableResult)
 }
 
+func handleAsyncThrowable(_ function: @autoclosure () async throws -> Any?,
+                          onFunctionResult : @escaping ((ThrowableResult) -> Void)) async{
+    var throwableResult = ThrowableResult()
+    do{
+        let result = try await function()
+        throwableResult.finishedWithoutError = true
+        throwableResult.value = result
+    }
+    catch {
+        throwableResult.finishedWithoutError = false
+        throwableResult.value = error.localizedDescription
+    }
+    onFunctionResult(throwableResult)
+}
+
 /*extension UINavigationController {
     
     override open func viewDidLoad() {

@@ -24,23 +24,12 @@ class FirebaseHandler: ObservableObject{
     
     func signOut(){
         refreshLoggedInStatus()
-        /*handleThrowable(try auth.signOut()){ result in
-            if result.finishedWithoutError{
-                
-            }
-        }*/
     }
     
-    
-    
-    /*init(){
-        do{
-            try auth.signOut()
-        }
-        catch{
-            
-        }
-    }*/
+    func getUserEmail() ->String {
+        guard let user = auth.currentUser else { return ""}
+        return user.email ?? ""
+    }
     
     func login(email:String,password:String,completion:((AuthDataResult?,Error?)->Void)?){
         auth.signIn(withEmail: email, password: password,completion:completion)
@@ -49,6 +38,5 @@ class FirebaseHandler: ObservableObject{
     func signup(user:User,password:String,completion:((AuthDataResult?,Error?)->Void)?){
         auth.createUser(withEmail: user.email, password: password,completion: completion)
     }
-    
     
 }

@@ -14,7 +14,7 @@ class FirestoreRepository{
     private let firestoreDB = Firestore.firestore()
     private let firestoreStorage = Storage.storage()
     
-    func getUserDocument(_ user:User) -> DocumentReference {
-        return firestoreDB.collection(USER_COLLECTION).document(user.email)
+    func getUserDocument(_ email:String) -> DocumentReference {
+        return firestoreDB.collection(USER_COLLECTION).document(email)
     }
 }
