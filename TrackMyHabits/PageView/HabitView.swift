@@ -13,9 +13,8 @@ struct HabitView: View{
     var body: some View {
         NavigationStack {
             List {
-                Section(header:HeaderSubHeaderView(header:"Status",subHeader: Date.dayDateMonth())){
+                Section(header:HeaderSubHeaderView(header:"Status",subHeader: Date.now.dayDateMonth())){
                     StatusCardView(habits: 3, habitsDone: 1, viewMoveTo: AnyView(Text("Hepp")))
-                        .fillSection()
                 }
                 Section(header: HStack{
                     Text("Vanor").sectionHeader()
@@ -23,15 +22,9 @@ struct HabitView: View{
                     NavigationLink(destination: Text("aaa")) {
                         Label("", systemImage: "plus").sectionHeader()
                     }
-                }) {
-                    NavigationLink(destination: Text("aaa")) {
-                        Label("Buttons", systemImage: "capsule")
-                    }
-                    NavigationLink(destination: Text("aaa")) {
-                        Label("Colors", systemImage: "paintpalette")
-                    }
-                    NavigationLink(destination: Text("aaa")) {
-                        Label("Controls", systemImage: "slider.horizontal.3")
+                }){
+                    ForEach(0..<5, id: \.self){ _ in
+                        HabitCardView()
                     }
                 }
                 NavigationButton(label:"Redigera min dag",
@@ -43,6 +36,7 @@ struct HabitView: View{
         .onAppear(perform:{
             firebaseHandler.manager.getUser(email:firebaseHandler.getUserEmail()){ user in
                 self.userModel.user = user
+                USER_PROFILE_PIC_PATH = user.email
             }
         })
     }

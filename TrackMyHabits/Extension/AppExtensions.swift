@@ -7,36 +7,6 @@
 
 import SwiftUI
 
-func handleThrowable(_ function: @autoclosure () throws -> Any?,
-                     onFunctionResult : @escaping ((ThrowableResult) -> Void)){
-    var throwableResult = ThrowableResult()
-    do{
-        let result = try function()
-        throwableResult.finishedWithoutError = true
-        throwableResult.value = result
-    }
-    catch {
-        throwableResult.finishedWithoutError = false
-        throwableResult.value = error.localizedDescription
-    }
-    onFunctionResult(throwableResult)
-}
-
-func handleAsyncThrowable(_ function: @autoclosure () async throws -> Any?,
-                          onFunctionResult : @escaping ((ThrowableResult) -> Void)) async{
-    var throwableResult = ThrowableResult()
-    do{
-        let result = try await function()
-        throwableResult.finishedWithoutError = true
-        throwableResult.value = result
-    }
-    catch {
-        throwableResult.finishedWithoutError = false
-        throwableResult.value = error.localizedDescription
-    }
-    onFunctionResult(throwableResult)
-}
-
 /*extension UINavigationController {
     
     override open func viewDidLoad() {
@@ -105,15 +75,27 @@ extension Date {
         return df.string(from: self)
     }
     
-    static func dayDateMonth() -> String{
-        let date = Date()
-        let components = date.get(.day, .month, .year)
-        let day = date.dayName()
-        let month = date.monthName()
+    func dayDateMonth() -> String{
+        let components = self.get(.day, .month, .year)
+        let day = self.dayName()
+        let month = self.monthName()
         if let c_date = components.day{
             return "\(day.uppercased()) \(c_date) \(month.uppercased())"
         }
         return "\(day.uppercased())  \(month.uppercased())"
+    }
+    
+    static func fromISO8601StringToDate(_ dateToProcess:String) -> Date?{
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+        return formatter.date(from: dateToProcess)
+    }
+    
+    func toISO8601String() -> String{
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+
+        return formatter.string(from: self)
     }
 }
 

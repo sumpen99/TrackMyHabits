@@ -11,11 +11,18 @@ import SwiftUI
 class FirestoreManager: ObservableObject{
     let repo = FirestoreRepository()
     var listenerUser: ListenerRegistration?
-    func initializeUser(_ user:User,completion: @escaping ((ThrowableResult) -> Void )){
-        handleThrowable(try repo.getUserDocument(user.email).setData(from:user)){ result in
-            completion(result)
+    
+    func initializeUser(_ user:User,completion: ((ThrowableResult) -> Void )){
+        var throwableResult = ThrowableResult()
+        do{
+            try repo.getUserDocument(user.email).setData(from:user)
+            throwableResult.finishedWithoutError = true
         }
-        
+        catch {
+            throwableResult.finishedWithoutError = false
+            throwableResult.value = error.localizedDescription
+        }
+        completion(throwableResult)
     }
      
     deinit{

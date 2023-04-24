@@ -49,9 +49,18 @@ struct ImagePicker: UIViewControllerRepresentable {
                 presentationMode.dismiss()
                 return
             }
-            image = Image(uiImage: uiImage)
+            
+            let fileName = USER_PROFILE_PIC_PATH + ".png"
+            
+            FileHandler.removeFileFromDocuments(fileName)
+            
+            FileHandler.writeImageToDocuments(uiImage, fileName: fileName){ [weak self] result in
+                guard let strongSelf = self else { return }
+                if result.finishedWithoutError{
+                    strongSelf.image = Image(uiImage: uiImage)
+                }
+            }
             presentationMode.dismiss()
-
         }
 
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -59,5 +68,5 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
 
     }
-
+    
 }

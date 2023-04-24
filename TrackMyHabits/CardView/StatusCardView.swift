@@ -36,6 +36,7 @@ struct StatusCardView: View{
         }
         .frame(height: 200.0)
         .clipShape(RoundedRectangle(cornerRadius: 15))
+        .fillSection()
     }
 }
 

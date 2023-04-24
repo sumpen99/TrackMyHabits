@@ -49,6 +49,10 @@
 		7D47741429F50F2B00FD1756 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741329F50F2B00FD1756 /* ImagePicker.swift */; };
 		7D47741629F539D400FD1756 /* PhotoGalleryPermissionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741529F539D400FD1756 /* PhotoGalleryPermissionHandler.swift */; };
 		7D47741829F55C7100FD1756 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741729F55C7100FD1756 /* UserModel.swift */; };
+		7D47741A29F5B04900FD1756 /* SettingsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741929F5B04900FD1756 /* SettingsCardView.swift */; };
+		7D47741C29F6C64F00FD1756 /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741B29F6C64F00FD1756 /* FileHandler.swift */; };
+		7D47741E29F6CDD900FD1756 /* ImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741D29F6CDD900FD1756 /* ImageExt.swift */; };
+		7D47742029F6E27400FD1756 /* HabitCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741F29F6E27400FD1756 /* HabitCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +96,10 @@
 		7D47741329F50F2B00FD1756 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7D47741529F539D400FD1756 /* PhotoGalleryPermissionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryPermissionHandler.swift; sourceTree = "<group>"; };
 		7D47741729F55C7100FD1756 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		7D47741929F5B04900FD1756 /* SettingsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardView.swift; sourceTree = "<group>"; };
+		7D47741B29F6C64F00FD1756 /* FileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
+		7D47741D29F6CDD900FD1756 /* ImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExt.swift; sourceTree = "<group>"; };
+		7D47741F29F6E27400FD1756 /* HabitCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +229,7 @@
 			children = (
 				7D21926729ED9842007FEEA0 /* AppGlobal.swift */,
 				7D21926F29ED9917007FEEA0 /* Dummy.swift */,
+				7D47741B29F6C64F00FD1756 /* FileHandler.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -229,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				7D21926A29ED9872007FEEA0 /* PasswordLevel.swift */,
+				7D47741D29F6CDD900FD1756 /* ImageExt.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -263,6 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				7D47740029F2F7DC00FD1756 /* StatusCardView.swift */,
+				7D47741929F5B04900FD1756 /* SettingsCardView.swift */,
+				7D47741F29F6E27400FD1756 /* HabitCardView.swift */,
 			);
 			path = CardView;
 			sourceTree = "<group>";
@@ -368,6 +380,7 @@
 				7D21927F29F053DE007FEEA0 /* ThrowableResult.swift in Sources */,
 				7D47740B29F5010000FD1756 /* HeaderSubHeaderView.swift in Sources */,
 				7D47740529F2FC5C00FD1756 /* FormButtonModifier.swift in Sources */,
+				7D47741E29F6CDD900FD1756 /* ImageExt.swift in Sources */,
 				7D21925229ED9418007FEEA0 /* CharChecker.swift in Sources */,
 				7D21925B29ED9628007FEEA0 /* ToggleSecurefieldView.swift in Sources */,
 				7D21926029ED9720007FEEA0 /* PasswordStrengthView.swift in Sources */,
@@ -378,15 +391,18 @@
 				7D47741629F539D400FD1756 /* PhotoGalleryPermissionHandler.swift in Sources */,
 				7D21928B29F2CBE6007FEEA0 /* ItemRow.swift in Sources */,
 				7D21928D29F2D130007FEEA0 /* DateTime.swift in Sources */,
+				7D47741A29F5B04900FD1756 /* SettingsCardView.swift in Sources */,
 				7D21928129F057A4007FEEA0 /* FirebaseHandler.swift in Sources */,
 				7D21923529ED8EA1007FEEA0 /* ContentView.swift in Sources */,
 				7D21926B29ED9872007FEEA0 /* PasswordLevel.swift in Sources */,
 				7D21924F29ED93B1007FEEA0 /* PasswordHelper.swift in Sources */,
+				7D47741C29F6C64F00FD1756 /* FileHandler.swift in Sources */,
 				7D21928329F06F60007FEEA0 /* ProfileView.swift in Sources */,
 				7D47740F29F5030500FD1756 /* NavigationViewModifier.swift in Sources */,
 				7D21926429ED97DC007FEEA0 /* LoginView.swift in Sources */,
 				7D21923329ED8EA1007FEEA0 /* TrackMyHabitsApp.swift in Sources */,
 				7D21925929ED9561007FEEA0 /* GeoReaderView.swift in Sources */,
+				7D47742029F6E27400FD1756 /* HabitCardView.swift in Sources */,
 				7D47740129F2F7DC00FD1756 /* StatusCardView.swift in Sources */,
 				7D21926E29ED98AD007FEEA0 /* AppExtensions.swift in Sources */,
 				7D21927429EDC640007FEEA0 /* User.swift in Sources */,

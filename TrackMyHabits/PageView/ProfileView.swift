@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Photos
-//https://www.hackingwithswift.com/forums/swiftui/background-color-of-a-list-make-it-clear-color/3379
+
 struct ProfileView: View{
     @EnvironmentObject var firebaseHandler: FirebaseHandler
     @EnvironmentObject var userModel: UserModel
@@ -22,15 +22,16 @@ struct ProfileView: View{
                           isShowPicker:$isShowPicker,
                           isPrivacyResult: $isPrivacyResult)
                 Section(header: Text("Personuppgifter")) {
-                    Text(userModel.user?.name ?? "")
-                    Text(userModel.user?.email ?? "")
+                    Text(userModel.user?.name ?? "").foregroundColor(.gray)
+                    Text(userModel.user?.email ?? "").foregroundColor(.gray)
                 }
-                Section(header: Text("Your Info 1")) {
-                    NavigationLink(destination: Text("aaa")) {
-                    MenuInformationDetailView(title: "Changing behaviour", subTitle: "How to use the behavioural experiments feature", imageName: "questionmark.circle.fill")
-                        //.background( NavigationLink("", destination: Text("The detail view")) )
-                        
-                    }
+                Section(header: Text("Inställningar")) {
+                    SettingsCardView(title: "Notifikationer", subTitle: "Ställ in tid och få en påminnelse om utföra dina vanor", imageName: "bell")
+                    
+                }
+                Section(header: Text("Inställningar")) {
+                    HabitCardView()
+                    
                 }
                 ZStack {
                   //Create a NavigationLink without the disclosure indicator
@@ -53,6 +54,15 @@ struct ProfileView: View{
                 
                 Button("Logga ut") {
                     firebaseHandler.signOut()
+                }
+            }
+            .onAppear(){
+                FileHandler.getSavedImage(USER_PROFILE_PIC_PATH){ result in
+                    if result.finishedWithoutError{
+                        guard let uimage = result.value as? UIImage else { return }
+                        self.image = Image(uiImage: uimage)
+                    }
+                    
                 }
             }
             .sheet(isPresented: $isShowPicker) {
@@ -123,37 +133,4 @@ struct UserImage: View{
         ALERT_PRIVACY_TITLE = "Missing Permission"
         ALERT_PRIVACY_MESSAGE = "Please go to settings to set permission"
     }
-}
-
-
-
-struct MenuInformationDetailView: View {
-    var title: String = "title"
-    var subTitle: String = "subTitle"
-    var imageName: String = "exclamationmark.circle.fill"
-    
-    var body: some View {
-        HStack(alignment: .center) {
-            Image(systemName: imageName)
-                .font(.largeTitle)
-                .foregroundColor(.blue)
-                .padding()
-                .accessibility(hidden: true)
-            
-            VStack(alignment: .leading) {
-                Text(title)
-                    .font(.headline)
-                    .foregroundColor(.blue)
-                    .accessibility(addTraits: .isHeader)
-                
-                Text(subTitle)
-                    .font(.body)
-                    .foregroundColor(.blue)
-                    .opacity(0.8)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        
-    }
-    
 }
