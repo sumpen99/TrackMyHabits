@@ -19,8 +19,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct TrackMyHabitsApp: App {
     //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @Environment(\.scenePhase) private var phase
-    @StateObject var firebaseHandler = FirebaseHandler()
-    @StateObject var userModel = UserModel()
+    @StateObject var firebaseHandler = FirestoreViewModel()
+    //@StateObject var userModel = UserModel()
   
     init(){
         FirebaseApp.configure()
@@ -31,12 +31,12 @@ struct TrackMyHabitsApp: App {
           NavigationView {
             ContentView()
             .environmentObject(firebaseHandler)
-            .environmentObject(userModel)
           }
         }
         .onChange(of: phase) { newPhase in
             switch newPhase {
                 case .active:
+                    firebaseHandler.isUserLoggedIn()
                     printAny("Active")
                 case .inactive:
                     firebaseHandler.isUserLoggedIn()

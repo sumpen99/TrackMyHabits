@@ -9,8 +9,7 @@ import SwiftUI
 import Photos
 
 struct ProfileView: View{
-    @EnvironmentObject var firebaseHandler: FirebaseHandler
-    @EnvironmentObject var userModel: UserModel
+    @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @State var isShowPicker: Bool = false
     @State var image: Image? = Image(systemName:"photo.fill")
     @State private var isPrivacyResult = false
@@ -22,8 +21,8 @@ struct ProfileView: View{
                           isShowPicker:$isShowPicker,
                           isPrivacyResult: $isPrivacyResult)
                 Section(header: Text("Personuppgifter")) {
-                    Text(userModel.user?.name ?? "").foregroundColor(.gray)
-                    Text(userModel.user?.email ?? "").foregroundColor(.gray)
+                    Text(firestoreViewModel.user?.name ?? "").foregroundColor(.gray)
+                    Text(firestoreViewModel.user?.email ?? "").foregroundColor(.gray)
                 }
                 Section(header: Text("Inställningar")) {
                     SettingsCardView(title: "Notifikationer", subTitle: "Ställ in tid och få en påminnelse om utföra dina vanor", imageName: "bell")
@@ -53,7 +52,7 @@ struct ProfileView: View{
                 }
                 
                 Button("Logga ut") {
-                    firebaseHandler.signOut()
+                    firestoreViewModel.signOut()
                 }
             }
             .onAppear(){
@@ -73,7 +72,7 @@ struct ProfileView: View{
                     openPrivacySettings()
                 }
             })
-            .modifier(NavigationViewModifier(title: userModel.user?.name ?? ""))
+            .modifier(NavigationViewModifier(title: firestoreViewModel.user?.name ?? ""))
         }
     }
     

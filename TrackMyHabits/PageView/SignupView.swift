@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignupView : View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var firebaseHandler: FirebaseHandler
+    @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @Binding var user: User
     @State private var isSignupResult: Bool = false
     @StateObject private var passwordHelper: PasswordHelper = PasswordHelper()
@@ -37,7 +37,7 @@ struct SignupView : View {
             .modifier(NavigationViewModifier(title: ""))
             .alert(isPresented: $isSignupResult, content: {
                 onResultAlert {
-                    if firebaseHandler.isSuccessful {
+                    if ALERT_IS_SUCCESSFUL {
                         dismiss()
                     }
                 }
@@ -48,15 +48,16 @@ struct SignupView : View {
     func signUserUp(){
         // 0
         if user.name.isEmpty { activateMissingFieldsAlert(); return }
-        firebaseHandler.signup(user: user, password: passwordHelper.password){ (result,error) in
+        firestoreViewModel.signup(user: user, password: passwordHelper.password){ (result,error) in
             // 2
             guard let error = error else {
                 // 3
-                firebaseHandler.manager.initializeUser(user){ result in
+                firestoreViewModel.initializeUser(user){ result in
                     // 4
                     if result.finishedWithoutError{
                         // 5
                         activateSuccessAlert()
+                        return
                     }
                     activateFailedCreationOfUserAlert(error:result.asString())
                 }
@@ -71,27 +72,28 @@ struct SignupView : View {
     func activateMissingFieldsAlert(){
         ALERT_TITLE = "Error"
         ALERT_MESSAGE = "Missing fields. One of the required field is empty or contains invalid data"
+        ALERT_IS_SUCCESSFUL = false
         isSignupResult.toggle()
     }
     
     func activateSuccessAlert(){
         ALERT_TITLE = "Signup success"
         ALERT_MESSAGE = "Proceed to login"
-        firebaseHandler.isSuccessful = true
+        ALERT_IS_SUCCESSFUL = true
         isSignupResult.toggle()
     }
     
     func activateFailedSignupAlert(error:Error){
         ALERT_TITLE = "Signup failed"
         ALERT_MESSAGE = error.localizedDescription
-        firebaseHandler.isSuccessful = false
+        ALERT_IS_SUCCESSFUL = false
         isSignupResult.toggle()
     }
     
     func activateFailedCreationOfUserAlert(error:String){
         ALERT_TITLE = "Signup failed"
         ALERT_MESSAGE = error
-        firebaseHandler.isSuccessful = false
+        ALERT_IS_SUCCESSFUL = false
         isSignupResult.toggle()
     }
     

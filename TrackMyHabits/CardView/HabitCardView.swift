@@ -21,8 +21,6 @@ struct HabitCardView: View {
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .padding()
-                    .accessibility(hidden: true)
-               
                 VStack(alignment: .leading) {
                     Text(title)
                         .font(.headline)
@@ -32,7 +30,6 @@ struct HabitCardView: View {
                     Text(subTitle)
                         .font(.caption)
                         .foregroundColor(.white)
-                        //.fixedSize(horizontal: true, vertical: false)
                     HStack(alignment: .bottom){
                         Spacer()
                         .badge(
@@ -49,11 +46,8 @@ struct HabitCardView: View {
             }
             
        }
-        //.border(Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: 15))
-        
-        //.cornerRadius(15) /// make the background rounded
-        .overlay( /// apply a rounded border
+        .overlay(
             RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.gray, lineWidth: 1)
         )

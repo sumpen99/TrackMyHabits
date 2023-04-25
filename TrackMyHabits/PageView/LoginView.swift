@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View{
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var firebaseHandler: FirebaseHandler
+    @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @State var user = User()
     @State private var password = ""
     @State private var showingSignUpSheet = false
@@ -23,13 +23,25 @@ struct LoginView: View{
                     VStack() {
                         LoginHeader()
                         VStack(alignment: .center, spacing: 15) {
-                            LoginEmailField(user:self.$user)
+                            TextField("Email", text: $user.email)
+                                .removePredictiveSuggestions()
+                                .padding()
+                                .background(.white)
+                                .cornerRadius(20.0)
                             ToggleSecurefieldView(text: self.$password)
                                 .background(.white)
                                 .cornerRadius(20.0)
-                            LoginButton(width: geometry.size.width*0.8,action: loginUser)
+                            Button(action: { loginUser() }) {
+                                Text("Sign In")
+                                    .formButtonDesign(
+                                        width: geometry.size.width*0.8, backgroundColor: Color.green)
+                            }
                             Spacer()
-                            SignupButton(width: geometry.size.width*0.8,showingSignupSheet: $showingSignUpSheet)
+                            Button(action: {showingSignUpSheet.toggle()}) {
+                                Text("Dont have an account? Sign Up")
+                                    .formButtonDesign(
+                                        width: geometry.size.width*0.8, backgroundColor: Color.black)
+                            }
                         }.padding([.leading, .trailing], 27.5)
                     }
                 }
@@ -45,10 +57,9 @@ struct LoginView: View{
     }
     
     func loginUser(){
-        firebaseHandler.login(email: user.email, password: password){(result,error) in
+        firestoreViewModel.login(email: user.email, password: password){(result,error) in
             guard let error = error else {
-                printAny(firebaseHandler.isLoggedIn)
-                firebaseHandler.refreshLoggedInStatus()
+                firestoreViewModel.refreshLoggedInStatus()
                 return
             }
             activateFailedLoginAlert(error:error)
@@ -81,39 +92,5 @@ struct LoginHeader: View{
             .shadow(radius: 10)
             .padding(.bottom, 50)
         
-    }
-}
-
-struct LoginEmailField: View{
-    @Binding var user: User
-    var body: some View{
-        TextField("Email", text: $user.email)
-            .removePredictiveSuggestions()
-            .padding()
-            .background(.white)
-            .cornerRadius(20.0)
-    }
-}
-
-struct LoginButton: View{
-    var width:CGFloat
-    var action: () -> Void
-    var body: some View{
-        Button(action: {action()}) {
-            Text("Sign In")
-                .formButtonDesign(width: width, backgroundColor: Color.green)
-        }
-    }
-}
-
-struct SignupButton: View{
-    var width:CGFloat
-    @Binding var showingSignupSheet : Bool
-    
-    var body: some View{
-        Button(action: {showingSignupSheet.toggle()}) {
-            Text("Dont have an account? Sign Up")
-                .formButtonDesign(width: width, backgroundColor: Color.black)
-        }
     }
 }

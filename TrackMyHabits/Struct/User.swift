@@ -8,6 +8,12 @@
 
 import FirebaseFirestoreSwift
 import SwiftUI
+
+struct UserRegistration{
+    var name = ""
+    var email = ""
+}
+
 struct User: Codable,Identifiable{
     @DocumentID var id: String?
     var name = ""

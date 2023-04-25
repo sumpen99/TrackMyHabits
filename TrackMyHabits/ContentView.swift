@@ -8,11 +8,11 @@
 import SwiftUI
 struct ContentView: OptionalView {
 
-    @EnvironmentObject var firebaseHandler: FirebaseHandler
+    @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @State var isMemoryWarning: Bool = false
     private let memoryWarningPublisher = NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification)
     
-    var isPrimaryView: Bool { firebaseHandler.isLoggedIn }
+    var isPrimaryView: Bool { firestoreViewModel.isLoggedIn }
     
     let dummy = Dummy(name:"ContentView",printOnDestroy: true)
     
@@ -48,12 +48,8 @@ struct ContentView: OptionalView {
     
     var optionalView: some View {
         LoginView()
-        .animation(
-          Animation
-            .easeInOut(duration: 1.5)
-            .repeatForever(autoreverses: false),
-          value: UUID()
-        )
+  
+        
     }
     
 }
