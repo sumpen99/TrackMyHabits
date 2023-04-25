@@ -10,6 +10,7 @@ import Photos
 
 struct ProfileView: View{
     @EnvironmentObject var firestoreViewModel: FirestoreViewModel
+    @EnvironmentObject var firebaseAuth: FirebaseAuth
     @State var isShowPicker: Bool = false
     @State var image: Image? = Image(systemName:"photo.fill")
     @State private var isPrivacyResult = false
@@ -52,7 +53,8 @@ struct ProfileView: View{
                 }
                 
                 Button("Logga ut") {
-                    firestoreViewModel.signOut()
+                    firestoreViewModel.closeListenerUser()
+                    firebaseAuth.signOut()
                 }
             }
             .onAppear(){

@@ -8,6 +8,7 @@
 import SwiftUI
 struct HabitView: View{
     @EnvironmentObject var firestoreViewModel: FirestoreViewModel
+    @EnvironmentObject var firebaseAuth: FirebaseAuth
     var body: some View {
         NavigationStack {
             List {
@@ -32,7 +33,7 @@ struct HabitView: View{
             .modifier(NavigationViewModifier(title: "Översikt"))
         }
         .onAppear(perform:{
-            firestoreViewModel.getUser()
+            firestoreViewModel.getUserData(email:firebaseAuth.getUserEmail())
         })
     }
 }

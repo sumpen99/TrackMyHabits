@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SignupView : View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var firebaseAuth: FirebaseAuth
     @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @Binding var user: User
     @State private var isSignupResult: Bool = false
@@ -48,11 +49,11 @@ struct SignupView : View {
     func signUserUp(){
         // 0
         if user.name.isEmpty { activateMissingFieldsAlert(); return }
-        firestoreViewModel.signup(user: user, password: passwordHelper.password){ (result,error) in
+        firebaseAuth.signup(user: user, password: passwordHelper.password){ (result,error) in
             // 2
             guard let error = error else {
                 // 3
-                firestoreViewModel.initializeUser(user){ result in
+                firestoreViewModel.initializeUserData(user){ result in
                     // 4
                     if result.finishedWithoutError{
                         // 5

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View{
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var firestoreViewModel: FirestoreViewModel
+    @EnvironmentObject var firebaseAuth: FirebaseAuth
     @State var user = User()
     @State private var password = ""
     @State private var showingSignUpSheet = false
@@ -57,9 +57,9 @@ struct LoginView: View{
     }
     
     func loginUser(){
-        firestoreViewModel.login(email: user.email, password: password){(result,error) in
+        firebaseAuth.login(email: user.email, password: password){(result,error) in
             guard let error = error else {
-                firestoreViewModel.refreshLoggedInStatus()
+                firebaseAuth.refreshLoggedInStatus()
                 return
             }
             activateFailedLoginAlert(error:error)

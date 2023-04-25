@@ -8,46 +8,11 @@
 import Firebase
 import SwiftUI
 class FirestoreViewModel: ObservableObject{
-    let auth = Auth.auth()
     let repo = FirestoreRepository()
     var listenerUser: ListenerRegistration?
     @Published var user:User?
-    @Published var isLoggedIn: Bool = false
     
-    func refreshLoggedInStatus(){
-        isLoggedIn.toggle()
-    }
-    
-    func isUserLoggedIn(){
-        isLoggedIn = auth.currentUser != nil
-    }
-    
-    func signOut(){
-        do{
-            try auth.signOut()
-            user = nil
-            closeListenerUser()
-            refreshLoggedInStatus()
-        }
-        catch{
-            printAny(error)
-        }
-    }
-    
-    func getUserEmail() ->String {
-        guard let user = auth.currentUser else { return ""}
-        return user.email ?? ""
-    }
-    
-    func login(email:String,password:String,completion:((AuthDataResult?,Error?)->Void)?){
-        auth.signIn(withEmail: email, password: password,completion:completion)
-    }
-    
-    func signup(user:User,password:String,completion:((AuthDataResult?,Error?)->Void)?){
-        auth.createUser(withEmail: user.email, password: password,completion: completion)
-    }
-    
-    func initializeUser(_ user:User,completion: ((ThrowableResult) -> Void )){
+    func initializeUserData(_ user:User,completion: ((ThrowableResult) -> Void )){
         var throwableResult = ThrowableResult()
         do{
             try repo.getUserDocument(user.email).setData(from:user)
@@ -60,9 +25,10 @@ class FirestoreViewModel: ObservableObject{
         completion(throwableResult)
     }
     
-    func getUser(){
+    func getUserData(email:String?){
+        guard let email = email else { return }
         closeListenerUser()
-        listenerUser = repo.getUserDocument(getUserEmail()).addSnapshotListener{ [weak self] snapshot, error in
+        listenerUser = repo.getUserDocument(email).addSnapshotListener{ [weak self] snapshot, error in
             guard let strongSelf = self else { return }
             guard let changes = snapshot else { return }
             do {
