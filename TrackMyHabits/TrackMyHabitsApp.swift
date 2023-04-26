@@ -19,6 +19,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct TrackMyHabitsApp: App {
     //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @Environment(\.scenePhase) private var phase
+    @StateObject var notificationPermissionHandler = NotificationPermissionHandler()
     @StateObject var firestoreViewModel = FirestoreViewModel()
     @StateObject var firebaseAuth = FirebaseAuth()
   
@@ -32,6 +33,7 @@ struct TrackMyHabitsApp: App {
             ContentView()
             .environmentObject(firebaseAuth)
             .environmentObject(firestoreViewModel)
+            .environmentObject(notificationPermissionHandler)
           }
         }
         .onChange(of: phase) { newPhase in

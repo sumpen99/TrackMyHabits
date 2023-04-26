@@ -18,6 +18,21 @@ let USER_COLLECTION = "users"
 var USER_PROFILE_PIC_PATH = "profilepic"
 let APP_BACKGROUND_COLOR: Color = .black
 let APP_BACKGROUND_UI_COLOR: UIColor = UIColor(APP_BACKGROUND_COLOR)
+
+let FOOT_TITLE = "Ändra din hjärnas vanemönster genom att börja med ett nytt beteende, hellre än att försöka sluta med en dålig vana. Det är i allmänhet lättare att lägga till en god vana"
+let FOOT_MOTIVATION = "Skriv ner en enkel och tydlig mening om varför det är viktigt för dig att skapa en ny vana. Se till att läsa formuleringen varje dag så att du påminns om din inre motivation"
+let FOOT_GOALS = "Bestäm ett konkret och mätbart mål för att öka fokus på ditt ändrade beteende. Dokumentera såväl måluppfyllelse som motgångar och fira när du når delmål"
+let FOOT_FREQ = "Upprepa det ändrade beteendet varje dag för att effektivt etablera en ny vana. Det är betydligt svårare att skapa en vana som bara ska upprepas någon gång per vecka."
+
 func printAny(_ msg: Any){
     print("\(msg)")
+}
+
+func openPrivacySettings(){
+    guard let url = URL(string: UIApplication.openSettingsURLString),
+            UIApplication.shared.canOpenURL(url) else {
+                assertionFailure("Not able to open App privacy settings")
+                return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
 }
