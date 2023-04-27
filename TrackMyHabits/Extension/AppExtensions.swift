@@ -75,6 +75,14 @@ extension Date {
         return df.string(from: self)
     }
     
+    func hourMinuteSeconds() -> (hour:Int,minutes:Int,seconds:Int){
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: self)
+        let minutes = calendar.component(.minute, from: self)
+        let seconds = calendar.component(.second, from: self)
+        return (hour:hour,minutes:minutes,seconds:seconds)
+    }
+    
     func dayDateMonth() -> String{
         let components = self.get(.day, .month, .year)
         let day = self.dayName()
@@ -205,12 +213,13 @@ extension View{
                 dismissButton: .cancel(Text("OK"), action: { action() } )
         )
     }
-    func onPrivacyAlert(action:@escaping (()-> Void)) -> Alert{
+    func onPrivacyAlert(actionPrimary:@escaping (()-> Void),
+                        actionSecondary:@escaping (()-> Void)) -> Alert{
         return Alert(
                 title: Text(ALERT_PRIVACY_TITLE),
                 message: Text(ALERT_PRIVACY_MESSAGE),
-                primaryButton: .destructive(Text("OK"), action: { action() }),
-                secondaryButton: .cancel(Text("AVBRYT"))
+                primaryButton: .destructive(Text("OK"), action: { actionPrimary() }),
+                secondaryButton: .cancel(Text("AVBRYT"), action: { actionSecondary() } )
         )
     }
     func removePredictiveSuggestions() -> some View {

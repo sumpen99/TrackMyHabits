@@ -70,9 +70,9 @@ struct ProfileView: View{
                 ImagePicker(image: self.$image,sourceType: .photoLibrary)
             }
             .alert(isPresented: $isPrivacyResult, content: {
-                onPrivacyAlert{
-                    openPrivacySettings()
-                }
+                onPrivacyAlert(actionPrimary: openPrivacySettings,
+                               actionSecondary: {})
+                 
             })
             .modifier(NavigationViewModifier(title: firestoreViewModel.user?.name ?? ""))
         }
