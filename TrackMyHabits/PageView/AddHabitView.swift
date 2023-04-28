@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct AddHabitView: View{
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @EnvironmentObject var notificationPermissionHandler: NotificationPermissionHandler
-    @State var habitTitle:String = ""
-    @State var habitMotivation:String = ""
-    @State var habitGoal:String = ""
-    @State var habitWeekDays:[Bool] = Array(repeating: false, count: 7)
+    @State var habit:Habit = Habit()
+    @State var habitWeekDays:WeekDays = WeekDays()
+    @State var habitNotificationWeekDays:WeekDays = WeekDays()
+    @State var isTryToSave:Bool = false
+    
     
     var body: some View {
         GeometryReader { geometry in
@@ -25,15 +28,15 @@ struct AddHabitView: View{
                             ).weight(.bold),
                             edgeInset: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     SectionTextField(headerText:
-                                    Text("\(Image(systemName: "staroflife.fill")) Titel"),
+                                        Text("\(Image(systemName: "staroflife.fill")) Titel"),
                                      footerText: FOOT_TITLE,
-                                     text: $habitTitle)
+                                     text: $habit.title)
                     SectionTextField(headerText: Text("Motivation"),
                                      footerText: FOOT_MOTIVATION,
-                                     text: $habitMotivation)
+                                     text: $habit.motivation)
                     SectionTextField(headerText: Text("Målbild"),
                                      footerText: FOOT_GOALS,
-                                     text: $habitGoal)
+                                     text: $habit.goal)
                     Section(header:Text("Frekvens")){
                         NavigationLink { PickWeekDays(weekdays: $habitWeekDays) } label: {
                             Text("Välj dagar då vanan skall upprepas")
@@ -41,60 +44,102 @@ struct AddHabitView: View{
                         }
                     }
                     Section(header:Text("Notifikationer")){
-                        NavigationLink { PickNotificationTime()} label:{
-                            Text("Ställ in tid och få en notifikation")
-                                .foregroundColor(.blue)
-                        }
+                        NavigationLink { PickNotificationTime(
+                            selectedTime: $habit.notificationTime,
+                            habitWeekDays: $habitNotificationWeekDays)} label:{
+                                Text("Ställ in tid och få en notifikation")
+                                    .foregroundColor(.blue)
+                            }
                     }
                     Section(header:Text("Granska")){
-                        NavigationLink { ReviewNewHabit()} label:{
-                            Text("Granska din nya vana")
-                                .foregroundColor(.blue)
-                        }
+                        NavigationLink { ReviewNewHabit(
+                            habit:habit,
+                            weekDaysFrequence: habitWeekDays,
+                            notificationWeekDays: habitNotificationWeekDays)} label:{
+                                Text("Granska din nya vana")
+                                    .foregroundColor(.blue)
+                            }
                     }
                     
-                    Button(action: {}) {
+                    Button(action: { evaluateAndTryToSave() }) {
                         Text("Lägg till")
                     }.frame(maxWidth: .infinity, alignment: .center)
                 }
+                .alert(ALERT_TITLE_SAVE_HABIT, isPresented: $isTryToSave) { Button("OK", role: .cancel) {
+                    if DID_SAVE_NEW_HABIT{ dismiss()}
+                }}
                .modifier(NavigationViewModifier(title: ""))
             }
+        }
+    }
+        
+    func evaluateAndTryToSave(){
+        DID_SAVE_NEW_HABIT = false
+        if habit.title.isEmpty || habitWeekDays.selectedDays.isEmpty{
+            ALERT_TITLE_SAVE_HABIT = "Saknar information (titel,frekvens)"
+            isTryToSave.toggle()
+            return
             
+        }
+        else{
+            firestoreViewModel.doesHabitAlreadyExist(habitName: habit.title.uppercased()){ itDoes in
+                if itDoes{
+                    ALERT_TITLE_SAVE_HABIT = "Det finns redan en vana med liknande titel"
+                }
+                else{
+                    habit.weekDaysFrequence = habitWeekDays.selectedDays
+                    habit.weekDaysNotification = habitNotificationWeekDays.selectedDays
+                    ALERT_TITLE_SAVE_HABIT = "Ny vana tillagd"
+                    habit.printSelf()
+                }
+                isTryToSave.toggle()
+            }
         }
     }
 }
 
 struct ReviewNewHabit:View{
+    let habit:Habit
+    var weekDaysFrequence:WeekDays
+    let notificationWeekDays:WeekDays
+    
     var body: some View{
         NavigationStack {
             Form {
                 Section(header: Text("Title")){
-                    Text("TITEL").foregroundColor(.gray)
+                    if habit.title.isEmpty{
+                        Text("Saknar titel").foregroundColor(.gray)
+                    }
+                    else{
+                        Text(habit.title).foregroundColor(.gray)
+                    }
                 }
                 Section(header: Text("Motivation")){
-                    Text("Motivation").foregroundColor(.gray).lineLimit(nil)
+                    Text(habit.motivation).foregroundColor(.gray).lineLimit(nil)
                 }
                 Section(header: Text("MÅLBILD")){
-                    Text("MÅLBILD").foregroundColor(.gray).lineLimit(nil)
+                    Text(habit.goal).foregroundColor(.gray).lineLimit(nil)
                 }
                 Section(header: Text("FREKVENS")){
-                    Text("MÅNDAG").foregroundColor(.gray)
-                    Text("TISDAG").foregroundColor(.gray)
-                    Text("ONSDAG").foregroundColor(.gray)
-                    Text("TORSDAG").foregroundColor(.gray)
-                    Text("FREDAG").foregroundColor(.gray)
-                    Text("LÖRDAG").foregroundColor(.gray)
-                    Text("SÖNDAG").foregroundColor(.gray)
+                    if weekDaysFrequence.selectedDays.isEmpty{
+                        Text("Saknar valda dagar").foregroundColor(.gray)
+                    }
+                    else{
+                        ForEach(weekDaysFrequence.selectedDays,id: \.id){ weekday in
+                            Text(weekday.name.uppercased()).foregroundColor(.gray)
+                        }
+                    }
                 }
                 Section(header: Text("Notifikationer")){
-                    Text("10:45").foregroundColor(.gray)
-                    Text("MÅNDAG").foregroundColor(.gray)
-                    Text("TISDAG").foregroundColor(.gray)
-                    Text("ONSDAG").foregroundColor(.gray)
-                    Text("TORSDAG").foregroundColor(.gray)
-                    Text("FREDAG").foregroundColor(.gray)
-                    Text("LÖRDAG").foregroundColor(.gray)
-                    Text("SÖNDAG").foregroundColor(.gray)
+                    if !habit.notificationTime.isSet{
+                        Text("Inga notifikationer").foregroundColor(.gray)
+                    }
+                    else{
+                        Text("\(habit.notificationTime.hour ?? 0)" + ":" + "\(habit.notificationTime.minutes ?? 0)").foregroundColor(.gray)
+                        ForEach(notificationWeekDays.selectedDays,id: \.id){ weekday in
+                            Text(weekday.name.uppercased()).foregroundColor(.gray)
+                        }
+                    }
                 }
             }
             .modifier(NavigationViewModifier(title: ""))
@@ -107,18 +152,22 @@ struct PickNotificationTime:View{
     @EnvironmentObject var notificationPermissionHandler: NotificationPermissionHandler
     @State var isPrivacyResult:Bool = false
     @State var isSaved:Bool = false
-    @State var habitWeekDays:[Bool] = Array(repeating: false, count: 7)
+    @State var isNotSaved:Bool = false
     @State var data: [(String, [String])] = [
             ("Hour", Array(0...23).map {$0 < 10 ?  "0\($0)" : "\($0)" }),
             ("Minutes", Array(0...59).map {$0 < 10 ?  "0\($0)" : "\($0)" })
         ]
     @State var selection: [String] = [Date().hourMinuteSeconds().hour,
-                                      Date().hourMinuteSeconds().minutes].map { $0 < 10 ?  "0\($0)" : "\($0)"  }
+                                        Date().hourMinuteSeconds().minutes].map { $0 < 10 ?  "0\($0)" : "\($0)"  }
+    
+    @Binding var selectedTime: NotificationTime
+    @Binding var habitWeekDays:WeekDays
+    
     var body: some View{
         NavigationStack {
             ZStack {
                 List{
-                    Button(action: {isSaved.toggle()}) {
+                    Button(action: { validateInfo() }){
                         Text("Spara")
                     }
                      //Text(verbatim: "Selection: \(Int(selection[0])) \(Int(selection[1]))")
@@ -136,9 +185,12 @@ struct PickNotificationTime:View{
                 actionPrimary: openPrivacySettings,
                 actionSecondary: closeView)
         })
-        .alert("Notifikation sparad\n\(selection[0]) : \(selection[1])", isPresented: $isSaved) {
+        .alert("Notifikation\n\(selection[0]) : \(selection[1])\nAktiveras när vana lägs till", isPresented: $isSaved) {
                     Button("OK", role: .cancel) { closeView() }
                 }
+        .alert("Saknar valda dagar", isPresented: $isNotSaved) {
+                    Button("OK", role: .cancel) { }
+        }
         /*.onAppear(){
             notificationPermissionHandler.checkPermission(){ settings in
                 switch settings.authorizationStatus {
@@ -162,13 +214,36 @@ struct PickNotificationTime:View{
         }*/
     }
     
+    func validateInfo(){
+        if habitWeekDays.selectedDays.isEmpty{
+            removeSavedTime()
+            isNotSaved.toggle()
+        }
+        else{
+            storeSavedTime()
+            isSaved.toggle()
+        }
+    }
+    
+    func removeSavedTime(){
+        selectedTime.isSet = false
+        selectedTime.hour = nil
+        selectedTime.minutes = nil
+    }
+    
+    func storeSavedTime(){
+        selectedTime.isSet = true
+        selectedTime.hour = Int(selection[0])
+        selectedTime.minutes = Int(selection[1])
+    }
+    
     func closeView(){
         dismiss()
     }
 }
 
 struct PickWeekDays:View{
-    @Binding var weekdays:[Bool]
+    @Binding var weekdays:WeekDays
     let weekdaysSymbols = Calendar.current.weekdaySymbols
     var body: some View{
         NavigationStack {
@@ -176,12 +251,15 @@ struct PickWeekDays:View{
                 VStack{
                     List{
                         ForEach(Array(weekdaysSymbols.enumerated()),id:\.element){index,element in
-                            WeekdayCheckBox(title: element,isOn: $weekdays[index])
+                            WeekdayCheckBox(title: element,isOn: $weekdays.days[index])
                         }
                     }
                 }
             }
             .modifier(NavigationViewModifier(title: ""))
+        }
+        .onDisappear{
+            weekdays.storeSelectedDays()
         }
     }
 }
@@ -247,11 +325,11 @@ struct MultiPicker: View  {
                                 .foregroundColor(.primary)
                                 .opacity(0.5)
                 HStack{
-                    ForEach(0..<self.data.count, id: \.self) { column in
-                        Picker(self.data[column].0, selection: self.$selection[column]) {
-                            ForEach(0..<self.data[column].1.count,id: \.self) { row in
-                                Text(verbatim: self.data[column].1[row])
-                                .tag(self.data[column].1[row])
+                    ForEach(0..<self.data.count, id: \.self) { picker in
+                        Picker(self.data[picker].0, selection: self.$selection[picker]) {
+                            ForEach(0..<self.data[picker].1.count,id: \.self) { value in
+                                Text(verbatim: self.data[picker].1[value])
+                                .tag(self.data[picker].1[value])
                             }
                         }
                         .pickerStyle(WheelPickerStyle())

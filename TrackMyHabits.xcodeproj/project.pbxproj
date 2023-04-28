@@ -54,6 +54,7 @@
 		7D47742629F8719A00FD1756 /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742529F8719A00FD1756 /* FirebaseAuth.swift */; };
 		7D47742829F96A6600FD1756 /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742729F96A6600FD1756 /* AddHabitView.swift */; };
 		7D47742A29F9AEFA00FD1756 /* NotificationPermissionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742929F9AEFA00FD1756 /* NotificationPermissionHandler.swift */; };
+		7D47742C29FC0A7A00FD1756 /* WeekDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742B29FC0A7A00FD1756 /* WeekDays.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		7D47742529F8719A00FD1756 /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
 		7D47742729F96A6600FD1756 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
 		7D47742929F9AEFA00FD1756 /* NotificationPermissionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionHandler.swift; sourceTree = "<group>"; };
+		7D47742B29FC0A7A00FD1756 /* WeekDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDays.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 				7D21927329EDC640007FEEA0 /* User.swift */,
 				7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */,
 				7D21928C29F2D130007FEEA0 /* DateTime.swift */,
+				7D47742B29FC0A7A00FD1756 /* WeekDays.swift */,
 			);
 			path = Struct;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				7D47741429F50F2B00FD1756 /* ImagePicker.swift in Sources */,
 				7D47742829F96A6600FD1756 /* AddHabitView.swift in Sources */,
 				7D47741629F539D400FD1756 /* PhotoGalleryPermissionHandler.swift in Sources */,
+				7D47742C29FC0A7A00FD1756 /* WeekDays.swift in Sources */,
 				7D21928B29F2CBE6007FEEA0 /* ItemRow.swift in Sources */,
 				7D21928D29F2D130007FEEA0 /* DateTime.swift in Sources */,
 				7D47741A29F5B04900FD1756 /* SettingsCardView.swift in Sources */,

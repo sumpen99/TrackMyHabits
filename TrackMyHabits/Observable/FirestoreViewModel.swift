@@ -42,6 +42,29 @@ class FirestoreViewModel: ObservableObject{
         }
     }
     
+    func doesHabitAlreadyExist(habitName:String,completion: @escaping ((Bool)->Void)){
+        guard let email = user?.email else { return }
+        repo.getUserHabitDocument(email,habitName: habitName).getDocument(){ (document, error) in
+            completion(document?.exists ?? false)
+        }
+    }
+    
+    func getUserHabits(habitName:String){
+        guard let email = user?.email else { return }
+        repo.getUserHabitDocument(email,habitName: habitName).addSnapshotListener{ [weak self] snapshot, error in
+            guard let strongSelf = self else { return }
+            guard let changes = snapshot else { return }
+            do {
+                let user  = try changes.data(as: User.self)
+                USER_PROFILE_PIC_PATH = user.email
+                strongSelf.user = user
+            }
+            catch {
+                //printAny(error)
+            }
+        }
+    }
+    
     func closeListenerUser(){
         listenerUser?.remove()
     }

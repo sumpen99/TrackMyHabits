@@ -17,4 +17,8 @@ class FirestoreRepository{
     func getUserDocument(_ email:String) -> DocumentReference {
         return firestoreDB.collection(USER_COLLECTION).document(email)
     }
+    
+    func getUserHabitDocument(_ email:String,habitName:String) -> DocumentReference {
+        return getUserDocument(email).collection(USER_HABIT_COLLECTION).document(habitName)
+    }
 }
