@@ -29,10 +29,6 @@ struct ProfileView: View{
                     SettingsCardView(title: "Notifikationer", subTitle: "Ställ in tid och få en påminnelse om utföra dina vanor", imageName: "bell")
                     
                 }
-                Section(header: Text("Inställningar")) {
-                    HabitCardView()
-                    
-                }
                 ZStack {
                   //Create a NavigationLink without the disclosure indicator
                   NavigationLink(destination: Text("Hello, World!")) {

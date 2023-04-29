@@ -7,12 +7,14 @@
 
 import SwiftUI
 struct HabitCardView: View {
-    var title: String = "Läsa en bok"
-    var subTitle: String = "För att hålla hjärna fräsch vore det bra att håll igång läsandet"
-    
+    let habit:Habit
+    /*
+    let title = "habbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbh55555"
+    let motivation = "habbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbhhabbbbbbbh55555"
+     */
     var body: some View {
         ZStack(alignment:.center){
-            NavigationLink(destination: Text("hepp")) {
+            NavigationLink(destination: HabitSettingsView(habit:habit)) {
               EmptyView()
             }
             Color.darkBackground
@@ -22,18 +24,18 @@ struct HabitCardView: View {
                     .foregroundColor(.white)
                     .padding()
                 VStack(alignment: .leading) {
-                    Text(title)
+                    Text(habit.title)
                         .font(.headline)
                         .foregroundColor(.white)
                         .accessibility(addTraits: .isHeader)
                     Spacer()
-                    Text(subTitle)
+                    Text(habit.motivation)
                         .font(.caption)
                         .foregroundColor(.white)
                     HStack(alignment: .bottom){
                         Spacer()
                         .badge(
-                            Text("31 \(Image(systemName: "flame"))")
+                            Text("\(habit.streak) \(Image(systemName: "flame"))")
                                 .foregroundColor(.white)
                                 .font(.headline)
                         )
@@ -45,6 +47,28 @@ struct HabitCardView: View {
                     .frame(width:30)
             }
             
+       }
+        .frame(height:100.0)
+        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .overlay(
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(Color.gray, lineWidth: 1)
+        )
+        .fillSection()
+    }
+    
+}
+
+struct NoHabitsView: View {
+     var body: some View {
+        ZStack(alignment:.center){
+            Color.darkBackground
+            VStack(alignment: .center) {
+                Image("HabitClock")
+                    .resizable()
+                    .frame(width: 100.0,height:100.0)
+                    .padding()
+            }
        }
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .overlay(

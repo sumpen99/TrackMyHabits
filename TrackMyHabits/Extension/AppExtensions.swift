@@ -54,6 +54,13 @@ extension Float{
     }
 }
 
+extension Int?{
+    func zeroString() -> String{
+        guard let value = self else { return "" }
+        return value < 10 ? "0\(value)" : "\(value)"
+    }
+}
+
 extension Date {
     func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)
@@ -73,6 +80,12 @@ extension Date {
         let df = DateFormatter()
         df.setLocalizedDateFormatFromTemplate("EEEE")
         return df.string(from: self)
+    }
+    
+    func year() -> Int {
+        let calendar = Calendar.current
+        return calendar.component(.year, from: self)
+        
     }
     
     func hourMinuteSeconds() -> (hour:Int,minutes:Int,seconds:Int){

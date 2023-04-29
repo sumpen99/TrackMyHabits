@@ -53,8 +53,9 @@
 		7D47742429F842A300FD1756 /* FirestoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742329F842A300FD1756 /* FirestoreViewModel.swift */; };
 		7D47742629F8719A00FD1756 /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742529F8719A00FD1756 /* FirebaseAuth.swift */; };
 		7D47742829F96A6600FD1756 /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742729F96A6600FD1756 /* AddHabitView.swift */; };
-		7D47742A29F9AEFA00FD1756 /* NotificationPermissionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742929F9AEFA00FD1756 /* NotificationPermissionHandler.swift */; };
 		7D47742C29FC0A7A00FD1756 /* WeekDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742B29FC0A7A00FD1756 /* WeekDays.swift */; };
+		7D47743029FCEDE100FD1756 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742F29FCEDE100FD1756 /* NotificationHandler.swift */; };
+		7D47743229FD240800FD1756 /* HabitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743129FD240800FD1756 /* HabitSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,8 +103,9 @@
 		7D47742329F842A300FD1756 /* FirestoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreViewModel.swift; sourceTree = "<group>"; };
 		7D47742529F8719A00FD1756 /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
 		7D47742729F96A6600FD1756 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
-		7D47742929F9AEFA00FD1756 /* NotificationPermissionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionHandler.swift; sourceTree = "<group>"; };
 		7D47742B29FC0A7A00FD1756 /* WeekDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDays.swift; sourceTree = "<group>"; };
+		7D47742F29FCEDE100FD1756 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		7D47743129FD240800FD1756 /* HabitSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +193,7 @@
 				7D47741529F539D400FD1756 /* PhotoGalleryPermissionHandler.swift */,
 				7D47742329F842A300FD1756 /* FirestoreViewModel.swift */,
 				7D47742529F8719A00FD1756 /* FirebaseAuth.swift */,
-				7D47742929F9AEFA00FD1756 /* NotificationPermissionHandler.swift */,
+				7D47742F29FCEDE100FD1756 /* NotificationHandler.swift */,
 			);
 			path = Observable;
 			sourceTree = "<group>";
@@ -271,6 +273,7 @@
 				7D21926329ED97DC007FEEA0 /* LoginView.swift */,
 				7D21926129ED9747007FEEA0 /* SignupView.swift */,
 				7D47742729F96A6600FD1756 /* AddHabitView.swift */,
+				7D47743129FD240800FD1756 /* HabitSettingsView.swift */,
 			);
 			path = PageView;
 			sourceTree = "<group>";
@@ -377,7 +380,6 @@
 				7D21926229ED9747007FEEA0 /* SignupView.swift in Sources */,
 				7D21927029ED9917007FEEA0 /* Dummy.swift in Sources */,
 				7D47740729F2FC7500FD1756 /* SectionHeaderModifier.swift in Sources */,
-				7D47742A29F9AEFA00FD1756 /* NotificationPermissionHandler.swift in Sources */,
 				7D21925529ED9499007FEEA0 /* OptionalView.swift in Sources */,
 				7D21928929F1BE58007FEEA0 /* HabitView.swift in Sources */,
 				7D21925E29ED9683007FEEA0 /* LoginModifier.swift in Sources */,
@@ -392,6 +394,7 @@
 				7D21926029ED9720007FEEA0 /* PasswordStrengthView.swift in Sources */,
 				7D47740329F2FC0E00FD1756 /* FillFormModifier.swift in Sources */,
 				7D21927229ED99B9007FEEA0 /* DeviceRotationModifier.swift in Sources */,
+				7D47743229FD240800FD1756 /* HabitSettingsView.swift in Sources */,
 				7D21927829F04A29007FEEA0 /* FirestoreRepository.swift in Sources */,
 				7D47741429F50F2B00FD1756 /* ImagePicker.swift in Sources */,
 				7D47742829F96A6600FD1756 /* AddHabitView.swift in Sources */,
@@ -410,6 +413,7 @@
 				7D21926429ED97DC007FEEA0 /* LoginView.swift in Sources */,
 				7D21923329ED8EA1007FEEA0 /* TrackMyHabitsApp.swift in Sources */,
 				7D21925929ED9561007FEEA0 /* GeoReaderView.swift in Sources */,
+				7D47743029FCEDE100FD1756 /* NotificationHandler.swift in Sources */,
 				7D47742029F6E27400FD1756 /* HabitCardView.swift in Sources */,
 				7D47740129F2F7DC00FD1756 /* StatusCardView.swift in Sources */,
 				7D21926E29ED98AD007FEEA0 /* AppExtensions.swift in Sources */,

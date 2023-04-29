@@ -10,10 +10,10 @@ import SwiftUI
 struct AddHabitView: View{
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var firestoreViewModel: FirestoreViewModel
-    @EnvironmentObject var notificationPermissionHandler: NotificationPermissionHandler
+    @EnvironmentObject var notificationHandler: NotificationHandler
     @State var habit:Habit = Habit()
-    @State var habitWeekDays:WeekDays = WeekDays()
-    @State var habitNotificationWeekDays:WeekDays = WeekDays()
+    @State var weekDays:WeekDays = WeekDays()
+    @State var notificationWeekDays:WeekDays = WeekDays()
     @State var isTryToSave:Bool = false
     
     
@@ -38,7 +38,7 @@ struct AddHabitView: View{
                                      footerText: FOOT_GOALS,
                                      text: $habit.goal)
                     Section(header:Text("Frekvens")){
-                        NavigationLink { PickWeekDays(weekdays: $habitWeekDays) } label: {
+                        NavigationLink { PickWeekDays(weekdays: $weekDays) } label: {
                             Text("Välj dagar då vanan skall upprepas")
                                 .foregroundColor(.blue)
                         }
@@ -46,7 +46,7 @@ struct AddHabitView: View{
                     Section(header:Text("Notifikationer")){
                         NavigationLink { PickNotificationTime(
                             selectedTime: $habit.notificationTime,
-                            habitWeekDays: $habitNotificationWeekDays)} label:{
+                            habitWeekDays: $notificationWeekDays)} label:{
                                 Text("Ställ in tid och få en notifikation")
                                     .foregroundColor(.blue)
                             }
@@ -54,8 +54,8 @@ struct AddHabitView: View{
                     Section(header:Text("Granska")){
                         NavigationLink { ReviewNewHabit(
                             habit:habit,
-                            weekDaysFrequence: habitWeekDays,
-                            notificationWeekDays: habitNotificationWeekDays)} label:{
+                            weekDaysFrequence: weekDays,
+                            notificationWeekDays: notificationWeekDays)} label:{
                                 Text("Granska din nya vana")
                                     .foregroundColor(.blue)
                             }
@@ -64,6 +64,9 @@ struct AddHabitView: View{
                     Button(action: { evaluateAndTryToSave() }) {
                         Text("Lägg till")
                     }.frame(maxWidth: .infinity, alignment: .center)
+                }
+                .onAppear(){
+                    notificationHandler.getScheduleNotifications()
                 }
                 .alert(ALERT_TITLE_SAVE_HABIT, isPresented: $isTryToSave) { Button("OK", role: .cancel) {
                     if DID_SAVE_NEW_HABIT{ dismiss()}
@@ -74,28 +77,87 @@ struct AddHabitView: View{
     }
         
     func evaluateAndTryToSave(){
-        DID_SAVE_NEW_HABIT = false
-        if habit.title.isEmpty || habitWeekDays.selectedDays.isEmpty{
-            ALERT_TITLE_SAVE_HABIT = "Saknar information (titel,frekvens)"
-            isTryToSave.toggle()
-            return
-            
+        if habit.title.isEmpty || weekDays.selectedDays.isEmpty{
+            fireMissinInformation()
         }
         else{
-            firestoreViewModel.doesHabitAlreadyExist(habitName: habit.title.uppercased()){ itDoes in
+            firestoreViewModel.doesHabitAlreadyExist(title: habit.title.uppercased()){ itDoes in
                 if itDoes{
-                    ALERT_TITLE_SAVE_HABIT = "Det finns redan en vana med liknande titel"
+                    fireAlreadyExist()
                 }
                 else{
-                    habit.weekDaysFrequence = habitWeekDays.selectedDays
-                    habit.weekDaysNotification = habitNotificationWeekDays.selectedDays
-                    ALERT_TITLE_SAVE_HABIT = "Ny vana tillagd"
-                    habit.printSelf()
+                    updateHabitWithWeekdays()
+                    setNotificationIfNeeded()
+                    firestoreViewModel.uploadOrSetHabit(habit: habit){ result in
+                        if result.finishedWithoutError{
+                            fireUploadSuccess()
+                        }
+                        else {
+                            fireUploadNoSuccess(error: result.asString())
+                        }
+                    }
                 }
-                isTryToSave.toggle()
             }
         }
     }
+    
+    func setNotificationIfNeeded(){
+        if habit.notificationTime.isSet{
+            guard let hour = habit.notificationTime.hour,
+                  let minutes = habit.notificationTime.minutes,
+                  let days = habit.weekDaysNotification else{ return }
+            
+            for day in days.makeIterator(){
+                let date = notificationHandler.createNotificationDate(
+                    weekday: day.value, hour: hour, minutes: minutes)
+                guard let date = date else{
+                    continue
+                }
+                notificationHandler.scheduleNotification(date: date, habit: habit)
+            }
+            
+        }
+    }
+    
+    func fireUploadSuccess(){
+        DID_SAVE_NEW_HABIT = true
+        ALERT_TITLE_SAVE_HABIT = "Ny vana tillagd"
+        isTryToSave.toggle()
+    }
+    
+    func fireUploadNoSuccess(error:String){
+        DID_SAVE_NEW_HABIT = false
+        ALERT_TITLE_SAVE_HABIT = error
+        isTryToSave.toggle()
+    }
+    
+    func fireMissinInformation(){
+        var msg:String = ""
+        if habit.title.isEmpty && weekDays.selectedDays.isEmpty{
+            msg = "Saknar Titel och Frekvens (Mån-Sön)"
+        }
+        else if habit.title.isEmpty{
+            msg = "Saknar Titel"
+        }
+        else {
+            msg = "Saknar Frekvens (Mån-Sön)"
+        }
+        DID_SAVE_NEW_HABIT = false
+        ALERT_TITLE_SAVE_HABIT = msg
+        isTryToSave.toggle()
+    }
+    
+    func fireAlreadyExist(){
+        DID_SAVE_NEW_HABIT = false
+        ALERT_TITLE_SAVE_HABIT = "Det finns redan en vana med liknande titel"
+        isTryToSave.toggle()
+    }
+    
+    func updateHabitWithWeekdays(){
+        habit.weekDaysFrequence = weekDays.selectedDays
+        habit.weekDaysNotification = notificationWeekDays.selectedDays
+    }
+    
 }
 
 struct ReviewNewHabit:View{
@@ -111,7 +173,7 @@ struct ReviewNewHabit:View{
                         Text("Saknar titel").foregroundColor(.gray)
                     }
                     else{
-                        Text(habit.title).foregroundColor(.gray)
+                        Text(habit.title).foregroundColor(.gray).lineLimit(nil)
                     }
                 }
                 Section(header: Text("Motivation")){
@@ -135,7 +197,7 @@ struct ReviewNewHabit:View{
                         Text("Inga notifikationer").foregroundColor(.gray)
                     }
                     else{
-                        Text("\(habit.notificationTime.hour ?? 0)" + ":" + "\(habit.notificationTime.minutes ?? 0)").foregroundColor(.gray)
+                        Text("\(habit.notificationTime.hour.zeroString())" + ":" +             "\(habit.notificationTime.minutes.zeroString())").foregroundColor(.gray)
                         ForEach(notificationWeekDays.selectedDays,id: \.id){ weekday in
                             Text(weekday.name.uppercased()).foregroundColor(.gray)
                         }
@@ -149,7 +211,7 @@ struct ReviewNewHabit:View{
 
 struct PickNotificationTime:View{
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var notificationPermissionHandler: NotificationPermissionHandler
+    @EnvironmentObject var notificationHandler: NotificationHandler
     @State var isPrivacyResult:Bool = false
     @State var isSaved:Bool = false
     @State var isNotSaved:Bool = false
@@ -167,10 +229,6 @@ struct PickNotificationTime:View{
         NavigationStack {
             ZStack {
                 List{
-                    Button(action: { validateInfo() }){
-                        Text("Spara")
-                    }
-                     //Text(verbatim: "Selection: \(Int(selection[0])) \(Int(selection[1]))")
                     MultiPicker(data: data, selection: $selection).frame(height: 300)
                     NavigationLink { PickWeekDays(weekdays: $habitWeekDays) } label: {
                         Text("Upprepa")
@@ -178,7 +236,15 @@ struct PickNotificationTime:View{
                     }
                 }
             }
-            .modifier(NavigationViewModifier(title: ""))
+            .modifier(NavigationViewModifier(title: "Ställ in tid"))
+            .toolbar {
+                ToolbarItemGroup(placement: .primaryAction) {
+                    Button("Spara") {
+                        validateInfo()
+                    }
+                }
+            }
+            
         }
         .alert(isPresented: $isPrivacyResult, content: {
             onPrivacyAlert(
@@ -191,11 +257,11 @@ struct PickNotificationTime:View{
         .alert("Saknar valda dagar", isPresented: $isNotSaved) {
                     Button("OK", role: .cancel) { }
         }
-        /*.onAppear(){
-            notificationPermissionHandler.checkPermission(){ settings in
+        .onAppear(){
+            notificationHandler.checkPermission(){ settings in
                 switch settings.authorizationStatus {
                     case .notDetermined:
-                        notificationPermissionHandler.requestPermission(){ (granted, error) in
+                        notificationHandler.requestPermission(){ (granted, error) in
                             //printAny("\(granted) \(error)")
                         }
                     case .denied:
@@ -211,7 +277,7 @@ struct PickNotificationTime:View{
                          fatalError("UNUserNotificationCenter::execute - \"Unknown case\"")
                 }
             }
-        }*/
+        }
     }
     
     func validateInfo(){
@@ -245,6 +311,7 @@ struct PickNotificationTime:View{
 struct PickWeekDays:View{
     @Binding var weekdays:WeekDays
     let weekdaysSymbols = Calendar.current.weekdaySymbols
+    @State var selectAll:Bool = false
     var body: some View{
         NavigationStack {
             ZStack {
@@ -253,15 +320,39 @@ struct PickWeekDays:View{
                         ForEach(Array(weekdaysSymbols.enumerated()),id:\.element){index,element in
                             WeekdayCheckBox(title: element,isOn: $weekdays.days[index])
                         }
+                        Button(action: {
+                            toogleAllDays() }){
+                                Text(selectAll ? "Rensa" : "Markera alla dagar")
+                        }
                     }
                 }
             }
-            .modifier(NavigationViewModifier(title: ""))
-        }
-        .onDisappear{
-            weekdays.storeSelectedDays()
+            .modifier(NavigationViewModifier(title:"Välj dagar"))
+            /*.toolbar {
+                ToolbarItemGroup(placement: .primaryAction) {
+                    Button("Spara") {
+                        storeWeekdays()
+                    }
+                }
+            }*/
+            .onDisappear(){
+                storeWeekdays()
+            }
         }
     }
+    
+    func storeWeekdays(){
+        weekdays.storeSelectedDays()
+    }
+    
+    func toogleAllDays(){
+        selectAll.toggle()
+        weekdays.days.modifyForEach{
+            $1 = selectAll
+        }
+    }
+    
+   
 }
 
 struct SectionTextField:View{

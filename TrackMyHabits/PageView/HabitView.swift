@@ -17,8 +17,13 @@ struct HabitView: View{
                     StatusCardView(habits: 3, habitsDone: 1, viewMoveTo: AnyView(Text("Hepp")))
                 }
                 Section(header:HeaderButton(showingAddNewHabitView: $showingAddNewHabitView)){
-                    ForEach(0..<5, id: \.self){ _ in
-                        HabitCardView()
+                    if firestoreViewModel.habits.isEmpty{
+                        NoHabitsView()
+                    }
+                    else{
+                        ForEach(firestoreViewModel.habits, id: \.id){ habit in
+                            HabitCardView(habit:habit)
+                        }
                     }
                 }
                 NavigationButton(label:"Redigera min dag",
@@ -32,6 +37,7 @@ struct HabitView: View{
         }
         .onAppear(perform:{
             firestoreViewModel.getUserData(email:firebaseAuth.getUserEmail())
+            firestoreViewModel.getUserHabits(email:firebaseAuth.getUserEmail())
         })
     }
 }

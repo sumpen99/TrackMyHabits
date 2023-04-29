@@ -23,8 +23,25 @@ struct Habit: Codable,Identifiable{
     var weekDaysFrequence:[WeekDay] = [WeekDay]()
     var weekDaysNotification:[WeekDay]?
     var notificationTime:NotificationTime = NotificationTime()
+    var notificationId:String = UUID().uuidString
     var streak:Int = 0
     var habitsDone: [HabitDone]?
+    
+    func removeNotifications() -> Habit{
+        return Habit(
+            id:self.id,
+            creation:self.creation,
+            title:self.title,
+            motivation:self.motivation,
+            goal:self.goal,
+            weekDaysFrequence:self.weekDaysFrequence,
+            weekDaysNotification:nil,
+            notificationTime:NotificationTime(),
+            notificationId:self.notificationId,
+            streak: self.streak,
+            habitsDone: self.habitsDone
+        )
+    }
 }
 
 struct HabitDone: Codable{
@@ -38,6 +55,7 @@ struct NotificationTime: Codable{
     var isSet = false
     var hour:Int?
     var minutes:Int?
+    
 }
 
 

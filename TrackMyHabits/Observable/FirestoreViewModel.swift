@@ -10,19 +10,29 @@ import SwiftUI
 class FirestoreViewModel: ObservableObject{
     let repo = FirestoreRepository()
     var listenerUser: ListenerRegistration?
+    var listenerHabit: ListenerRegistration?
     @Published var user:User?
+    @Published var habits = [Habit]()
     
-    func initializeUserData(_ user:User,completion: ((ThrowableResult) -> Void )){
-        var throwableResult = ThrowableResult()
+    func initializeUserData(_ user:User,completion:  @escaping ((ThrowableResult) -> Void )){
         do{
             try repo.getUserDocument(user.email).setData(from:user)
-            throwableResult.finishedWithoutError = true
+            completion(ThrowableResult(finishedWithoutError: true))
         }
         catch {
-            throwableResult.finishedWithoutError = false
-            throwableResult.value = error.localizedDescription
+            completion(ThrowableResult(finishedWithoutError: false,value: error.localizedDescription))
         }
-        completion(throwableResult)
+    }
+    
+    func uploadOrSetHabit(habit:Habit,completion: @escaping ((ThrowableResult) -> Void )){
+        guard let email = user?.email else { return }
+        do{
+            try repo.getUserHabitDocument(email,title:habit.title).setData(from:habit)
+            completion(ThrowableResult(finishedWithoutError: true))
+        }
+        catch {
+            completion(ThrowableResult(finishedWithoutError: false,value: error.localizedDescription))
+        }
     }
     
     func getUserData(email:String?){
@@ -42,34 +52,56 @@ class FirestoreViewModel: ObservableObject{
         }
     }
     
-    func doesHabitAlreadyExist(habitName:String,completion: @escaping ((Bool)->Void)){
+    func doesHabitAlreadyExist(title:String,completion: @escaping ((Bool)->Void)){
         guard let email = user?.email else { return }
-        repo.getUserHabitDocument(email,habitName: habitName).getDocument(){ (document, error) in
+        repo.getUserHabitDocument(email,title: title).getDocument(){ (document, error) in
             completion(document?.exists ?? false)
         }
     }
     
-    func getUserHabits(habitName:String){
+    
+    func removeHabit(title:String,completion: @escaping ((ThrowableResult) -> Void )) {
         guard let email = user?.email else { return }
-        repo.getUserHabitDocument(email,habitName: habitName).addSnapshotListener{ [weak self] snapshot, error in
-            guard let strongSelf = self else { return }
-            guard let changes = snapshot else { return }
-            do {
-                let user  = try changes.data(as: User.self)
-                USER_PROFILE_PIC_PATH = user.email
-                strongSelf.user = user
+        repo.getUserHabitDocument(email,title:title).delete { error in
+            guard let error = error else {
+                completion(ThrowableResult(finishedWithoutError: true))
+                return
             }
-            catch {
-                //printAny(error)
-            }
+            completion(ThrowableResult(finishedWithoutError: false,value: error.localizedDescription))
         }
+    }
+     
+    func getUserHabits(email:String?) {
+        guard let email = email else { return }
+        listenerHabit = repo.getUserHabits(email).addSnapshotListener{ [ weak self ] (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+              printAny("No documents")
+              return
+            }
+            guard let strongSelf = self else { return }
+            strongSelf.habits.removeAll()
+            for doc in documents{
+                do{
+                    let habit  = try doc.data(as: Habit.self)
+                    strongSelf.habits.append(habit)
+                }
+                catch{
+                    
+                }
+            }
+          }
     }
     
     func closeListenerUser(){
         listenerUser?.remove()
     }
     
+    func closeListenerHabit(){
+        listenerHabit?.remove()
+    }
+    
     deinit{
+        closeListenerHabit()
         closeListenerUser()
     }
     

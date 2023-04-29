@@ -7,19 +7,23 @@
 
 import SwiftUI
 import FirebaseCore
+import UserNotifications
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate,UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
+        printAny("hepp")
         return true
     }
+    
 }
 
 @main
 struct TrackMyHabitsApp: App {
     //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @Environment(\.scenePhase) private var phase
-    @StateObject var notificationPermissionHandler = NotificationPermissionHandler()
+    @StateObject var notificationHandler = NotificationHandler()
     @StateObject var firestoreViewModel = FirestoreViewModel()
     @StateObject var firebaseAuth = FirebaseAuth()
   
@@ -27,13 +31,15 @@ struct TrackMyHabitsApp: App {
         FirebaseApp.configure()
     }
     
+   
+    
     var body: some Scene {
         WindowGroup {
           NavigationView {
             ContentView()
             .environmentObject(firebaseAuth)
             .environmentObject(firestoreViewModel)
-            .environmentObject(notificationPermissionHandler)
+            .environmentObject(notificationHandler)
           }
         }
         .onChange(of: phase) { newPhase in
@@ -51,4 +57,5 @@ struct TrackMyHabitsApp: App {
             }
         }
     }
+    
 }
