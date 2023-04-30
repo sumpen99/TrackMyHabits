@@ -9,11 +9,11 @@ struct HabitSettingsView: View{
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var notificationHandler: NotificationHandler
     @EnvironmentObject var firestoreViewModel: FirestoreViewModel
-    var habit: Habit
     @State var showWeekdays:Bool = false
     @State var showNotificationWeekdays:Bool = false
     @State var removeNotifications:Bool = false
     @State var removeHabit:Bool = false
+    var habit: Habit
     var body: some View{
         NavigationStack {
             Form {
@@ -84,7 +84,8 @@ struct HabitSettingsView: View{
     
     func removeHabitFromFirebase(){
         clearNotifications()
-        firestoreViewModel.removeHabit(title: habit.title){ result in
+        guard let docId = habit.id else { return }
+        firestoreViewModel.removeHabit(docId: docId){ result in
             if result.finishedWithoutError{
                 closeView()
             }

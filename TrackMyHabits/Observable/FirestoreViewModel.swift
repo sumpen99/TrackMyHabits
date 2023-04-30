@@ -13,6 +13,9 @@ class FirestoreViewModel: ObservableObject{
     var listenerHabit: ListenerRegistration?
     @Published var user:User?
     @Published var habits = [Habit]()
+    @Published var userStatus = UserStatus()
+    
+    // MAKE PUBLISHED TODAYS TODO STRUCT 
     
     func initializeUserData(_ user:User,completion:  @escaping ((ThrowableResult) -> Void )){
         do{
@@ -25,9 +28,9 @@ class FirestoreViewModel: ObservableObject{
     }
     
     func uploadOrSetHabit(habit:Habit,completion: @escaping ((ThrowableResult) -> Void )){
-        guard let email = user?.email else { return }
+        guard let email = user?.email,let docId = habit.id else { return }
         do{
-            try repo.getUserHabitDocument(email,title:habit.title).setData(from:habit)
+            try repo.getUserHabitDocument(email,docId:docId).setData(from:habit)
             completion(ThrowableResult(finishedWithoutError: true))
         }
         catch {
@@ -54,15 +57,23 @@ class FirestoreViewModel: ObservableObject{
     
     func doesHabitAlreadyExist(title:String,completion: @escaping ((Bool)->Void)){
         guard let email = user?.email else { return }
-        repo.getUserHabitDocument(email,title: title).getDocument(){ (document, error) in
-            completion(document?.exists ?? false)
-        }
+        repo.getUserHabits(email).whereField("title", isEqualTo: title)
+            .limit(to:1)
+            .getDocuments(){ querySnapshot, error in
+                if error != nil {
+                    completion(false)
+                    return
+                }
+
+                guard let docs = querySnapshot?.documents else { completion(false) ; return}
+                completion(!docs.isEmpty)
+            }
     }
     
     
-    func removeHabit(title:String,completion: @escaping ((ThrowableResult) -> Void )) {
+    func removeHabit(docId:String,completion: @escaping ((ThrowableResult) -> Void )) {
         guard let email = user?.email else { return }
-        repo.getUserHabitDocument(email,title:title).delete { error in
+        repo.getUserHabitDocument(email,docId:docId).delete { error in
             guard let error = error else {
                 completion(ThrowableResult(finishedWithoutError: true))
                 return
@@ -80,10 +91,12 @@ class FirestoreViewModel: ObservableObject{
             }
             guard let strongSelf = self else { return }
             strongSelf.habits.removeAll()
+            strongSelf.userStatus.resetValues()
             for doc in documents{
                 do{
                     let habit  = try doc.data(as: Habit.self)
                     strongSelf.habits.append(habit)
+                    strongSelf.userStatus.updateValues(habitTodo:habit.todaysTodo())
                 }
                 catch{
                     
@@ -101,6 +114,7 @@ class FirestoreViewModel: ObservableObject{
     }
     
     deinit{
+        habits.removeAll()
         closeListenerHabit()
         closeListenerUser()
     }
@@ -114,4 +128,28 @@ class FirestoreViewModel: ObservableObject{
      }
      */
     
+    
+    /*
+     guard let email = user?.email else { return }
+     repo.repo.getUserHabits(email).whereField("title", isEqualTo: title)
+         .limit(to:1)
+         .getDocuments(completion: { querySnapshot, error in
+             if let err = error {
+                 print(err.localizedDescription)
+                 return
+             }
+
+             guard let docs = querySnapshot?.documents else { return }
+
+             for doc in docs {
+                 let docId = doc.documentID
+                 let name = doc.get("name")
+                 print(docId, name)
+
+                 let ref = doc.reference
+                 ref.updateData(["age": 20])
+             }
+         })
+     
+     */
 }

@@ -14,16 +14,26 @@ struct HabitView: View{
         NavigationStack {
             List {
                 Section(header:HeaderSubHeaderView(header:"Status",subHeader: Date.now.dayDateMonth())){
-                    StatusCardView(habits: 3, habitsDone: 1, viewMoveTo: AnyView(Text("Hepp")))
+                    StatusCardView(userStatus:$firestoreViewModel.userStatus)
                 }
                 Section(header:HeaderButton(showingAddNewHabitView: $showingAddNewHabitView)){
                     if firestoreViewModel.habits.isEmpty{
-                        NoHabitsView()
+                        //NoHabitsView()
                     }
                     else{
-                        ForEach(firestoreViewModel.habits, id: \.id){ habit in
-                            HabitCardView(habit:habit)
+                        ScrollView{
+                            VStack() {
+                                ForEach(firestoreViewModel.habits, id: \.id){ habit in
+                                    NavigationLink(destination: HabitSettingsView(habit:habit)) {
+                                        HabitCardView(habit:habit)
+                                    }
+                                }
+                                
+                            }
                         }
+                        .listRowBackground(Color(hex: 0xFFFAFA,alpha: 0.1))
+                        .frame(height:HABIT_CARDVIEW_HEIGHT*3)
+                        
                     }
                 }
                 NavigationButton(label:"Redigera min dag",
@@ -35,6 +45,7 @@ struct HabitView: View{
         .sheet(isPresented: $showingAddNewHabitView){
             AddHabitView()
         }
+        //.fullScreenCover(isPresented: $showingAddNewHabitView, content: AddHabitView.init)
         .onAppear(perform:{
             firestoreViewModel.getUserData(email:firebaseAuth.getUserEmail())
             firestoreViewModel.getUserHabits(email:firebaseAuth.getUserEmail())
@@ -49,6 +60,19 @@ struct HeaderButton: View{
             Text("Vanor").sectionHeader()
             Spacer()
             Button(action: {showingAddNewHabitView.toggle()}) {
+                Label("", systemImage: "plus").sectionHeader()
+            }
+        }
+    }
+}
+
+struct HeaderButtonNavigationLink: View{
+    @Binding var showingAddNewHabitView:Bool
+    var body: some View{
+        NavigationLink { AddHabitView() } label: {
+            HStack{
+                Text("Vanor").sectionHeader()
+                Spacer()
                 Label("", systemImage: "plus").sectionHeader()
             }
         }

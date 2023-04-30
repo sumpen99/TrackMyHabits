@@ -33,6 +33,10 @@ class FirebaseAuth: ObservableObject{
         return auth.currentUser?.email
     }
     
+    func getUserID() ->String? {
+        return auth.currentUser?.uid
+    }
+    
     func login(email:String,password:String,completion:((AuthDataResult?,Error?)->Void)?){
         auth.signIn(withEmail: email, password: password,completion:completion)
     }

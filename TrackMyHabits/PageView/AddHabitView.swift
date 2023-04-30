@@ -21,12 +21,6 @@ struct AddHabitView: View{
         GeometryReader { geometry in
             NavigationStack {
                 Form {
-                    ItemRow("Lägg till en vana",
-                            color: .white,
-                            font:.system(
-                                .largeTitle,design: .rounded
-                            ).weight(.bold),
-                            edgeInset: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     SectionTextField(headerText:
                                         Text("\(Image(systemName: "staroflife.fill")) Titel"),
                                      footerText: FOOT_TITLE,
@@ -71,17 +65,17 @@ struct AddHabitView: View{
                 .alert(ALERT_TITLE_SAVE_HABIT, isPresented: $isTryToSave) { Button("OK", role: .cancel) {
                     if DID_SAVE_NEW_HABIT{ dismiss()}
                 }}
-               .modifier(NavigationViewModifier(title: ""))
+               .modifier(NavigationViewModifier(title: "Lägg till en vana"))
             }
         }
     }
         
     func evaluateAndTryToSave(){
         if habit.title.isEmpty || weekDays.selectedDays.isEmpty{
-            fireMissinInformation()
+            fireMissingInformation()
         }
         else{
-            firestoreViewModel.doesHabitAlreadyExist(title: habit.title.uppercased()){ itDoes in
+            firestoreViewModel.doesHabitAlreadyExist(title: habit.title){ itDoes in
                 if itDoes{
                     fireAlreadyExist()
                 }
@@ -107,7 +101,7 @@ struct AddHabitView: View{
                   let minutes = habit.notificationTime.minutes,
                   let days = habit.weekDaysNotification else{ return }
             
-            for day in days.makeIterator(){
+            for day in days{
                 let date = notificationHandler.createNotificationDate(
                     weekday: day.value, hour: hour, minutes: minutes)
                 guard let date = date else{
@@ -131,7 +125,7 @@ struct AddHabitView: View{
         isTryToSave.toggle()
     }
     
-    func fireMissinInformation(){
+    func fireMissingInformation(){
         var msg:String = ""
         if habit.title.isEmpty && weekDays.selectedDays.isEmpty{
             msg = "Saknar Titel och Frekvens (Mån-Sön)"
@@ -204,7 +198,7 @@ struct ReviewNewHabit:View{
                     }
                 }
             }
-            .modifier(NavigationViewModifier(title: ""))
+            .modifier(NavigationViewModifier(title: "Sammanställning"))
         }
     }
 }
@@ -216,11 +210,10 @@ struct PickNotificationTime:View{
     @State var isSaved:Bool = false
     @State var isNotSaved:Bool = false
     @State var data: [(String, [String])] = [
-            ("Hour", Array(0...23).map {$0 < 10 ?  "0\($0)" : "\($0)" }),
-            ("Minutes", Array(0...59).map {$0 < 10 ?  "0\($0)" : "\($0)" })
-        ]
+        ("Hour", Array(0...23).map {$0.zeroString()}),
+        ("Minutes", Array(0...59).map {$0.zeroString()})]
     @State var selection: [String] = [Date().hourMinuteSeconds().hour,
-                                        Date().hourMinuteSeconds().minutes].map { $0 < 10 ?  "0\($0)" : "\($0)"  }
+                                      Date().hourMinuteSeconds().minutes].map { $0.zeroString()  }
     
     @Binding var selectedTime: NotificationTime
     @Binding var habitWeekDays:WeekDays

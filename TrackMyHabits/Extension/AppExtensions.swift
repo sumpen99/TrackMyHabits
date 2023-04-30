@@ -61,6 +61,12 @@ extension Int?{
     }
 }
 
+extension Int{
+    func zeroString() -> String{
+        return self < 10 ? "0\(self)" : "\(self)"
+    }
+}
+
 extension Date {
     func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)
@@ -86,6 +92,39 @@ extension Date {
         let calendar = Calendar.current
         return calendar.component(.year, from: self)
         
+    }
+    
+    func nextWeekDay(weekday:Int) -> Date?{
+        let cal = Calendar.current
+        var comps = DateComponents()
+        comps.weekday = weekday
+        if let weekday = cal.nextDate(after: self, matching: comps, matchingPolicy: .nextTimePreservingSmallerComponents) {
+            return weekday
+        }
+        return nil
+    }
+    
+    func numberOfDaysTo(_ to: Date) -> Int? {
+        let cal = Calendar.current
+        let fromDate = cal.startOfDay(for: self) // <1>
+        let toDate = cal.startOfDay(for: to) // <2>
+        let numberOfDays = cal.dateComponents([.day], from: fromDate, to: toDate) // <3>
+        
+        return numberOfDays.day
+    }
+    
+    func isSameDayAs(_ otherDay:Date) -> Bool{
+        let cal = Calendar.current
+        let order = cal.compare(self, to: otherDay, toGranularity: .day)
+
+        switch order {
+            case .orderedAscending:
+                fallthrough
+            case .orderedDescending:
+                return false
+            default:
+                return true
+        }
     }
     
     func hourMinuteSeconds() -> (hour:Int,minutes:Int,seconds:Int){
@@ -210,6 +249,8 @@ extension UINavigationBar {
 }*/
 
 extension View{
+    
+    
     func formButtonDesign(width:CGFloat,backgroundColor:Color) -> some View{
         modifier(FormButtonModifier(width: width, backgroundColor: backgroundColor))
     }
@@ -393,6 +434,8 @@ extension Color {
         self.init(red: red/255.0,green: green/255.0,blue: blue/255.0)
     }
     
+    static var cardColor:Color { return Color(hex: 0x314058)}
+    static var lightBackground:Color { return Color(hex:0xecfffd) }
     static var darkBackground:Color { return Color(dRed: 36, dGreen: 36, dBlue: 36) }
     static var darkCardBackground:Color { return Color(dRed: 46, dGreen: 46, dBlue: 46) }
 }

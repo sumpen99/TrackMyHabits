@@ -56,6 +56,9 @@
 		7D47742C29FC0A7A00FD1756 /* WeekDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742B29FC0A7A00FD1756 /* WeekDays.swift */; };
 		7D47743029FCEDE100FD1756 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742F29FCEDE100FD1756 /* NotificationHandler.swift */; };
 		7D47743229FD240800FD1756 /* HabitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743129FD240800FD1756 /* HabitSettingsView.swift */; };
+		7D47743429FE56E100FD1756 /* UserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743329FE56E100FD1756 /* UserStatus.swift */; };
+		7D47743C29FE823400FD1756 /* TodaysTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743B29FE823400FD1756 /* TodaysTodoView.swift */; };
+		7D47743E29FE8B3600FD1756 /* CardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743D29FE8B3600FD1756 /* CardModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +109,9 @@
 		7D47742B29FC0A7A00FD1756 /* WeekDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDays.swift; sourceTree = "<group>"; };
 		7D47742F29FCEDE100FD1756 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		7D47743129FD240800FD1756 /* HabitSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSettingsView.swift; sourceTree = "<group>"; };
+		7D47743329FE56E100FD1756 /* UserStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatus.swift; sourceTree = "<group>"; };
+		7D47743B29FE823400FD1756 /* TodaysTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysTodoView.swift; sourceTree = "<group>"; };
+		7D47743D29FE8B3600FD1756 /* CardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +194,7 @@
 		7D21924B29ED932D007FEEA0 /* Observable */ = {
 			isa = PBXGroup;
 			children = (
+				7D47743329FE56E100FD1756 /* UserStatus.swift */,
 				7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */,
 				7D21927729F04A29007FEEA0 /* FirestoreRepository.swift */,
 				7D47741529F539D400FD1756 /* PhotoGalleryPermissionHandler.swift */,
@@ -227,6 +234,7 @@
 				7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */,
 				7D47740629F2FC7500FD1756 /* SectionHeaderModifier.swift */,
 				7D47740E29F5030500FD1756 /* NavigationViewModifier.swift */,
+				7D47743D29FE8B3600FD1756 /* CardModifier.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -274,6 +282,7 @@
 				7D21926129ED9747007FEEA0 /* SignupView.swift */,
 				7D47742729F96A6600FD1756 /* AddHabitView.swift */,
 				7D47743129FD240800FD1756 /* HabitSettingsView.swift */,
+				7D47743B29FE823400FD1756 /* TodaysTodoView.swift */,
 			);
 			path = PageView;
 			sourceTree = "<group>";
@@ -376,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D47743C29FE823400FD1756 /* TodaysTodoView.swift in Sources */,
 				7D47740929F3D52400FD1756 /* NavigationButton.swift in Sources */,
 				7D21926229ED9747007FEEA0 /* SignupView.swift in Sources */,
 				7D21927029ED9917007FEEA0 /* Dummy.swift in Sources */,
@@ -398,8 +408,10 @@
 				7D21927829F04A29007FEEA0 /* FirestoreRepository.swift in Sources */,
 				7D47741429F50F2B00FD1756 /* ImagePicker.swift in Sources */,
 				7D47742829F96A6600FD1756 /* AddHabitView.swift in Sources */,
+				7D47743429FE56E100FD1756 /* UserStatus.swift in Sources */,
 				7D47741629F539D400FD1756 /* PhotoGalleryPermissionHandler.swift in Sources */,
 				7D47742C29FC0A7A00FD1756 /* WeekDays.swift in Sources */,
+				7D47743E29FE8B3600FD1756 /* CardModifier.swift in Sources */,
 				7D21928B29F2CBE6007FEEA0 /* ItemRow.swift in Sources */,
 				7D21928D29F2D130007FEEA0 /* DateTime.swift in Sources */,
 				7D47741A29F5B04900FD1756 /* SettingsCardView.swift in Sources */,
