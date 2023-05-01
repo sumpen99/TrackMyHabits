@@ -20,6 +20,7 @@ var ALERT_PRIVACY_TITLE = "Missing Permission"
 var ALERT_PRIVACY_MESSAGE = "Please go to settings to set permission"
 let USER_COLLECTION = "users"
 let USER_HABIT_COLLECTION = "habits"
+let HABIT_STREAK_COLLECTION = "streaks"
 var USER_PROFILE_PIC_PATH = "profilepic"
 let APP_BACKGROUND_COLOR: Color = .black
 let APP_BACKGROUND_UI_COLOR: UIColor = UIColor(APP_BACKGROUND_COLOR)

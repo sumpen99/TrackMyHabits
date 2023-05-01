@@ -76,6 +76,20 @@ extension Date {
         return calendar.component(component, from: self)
     }
     
+    func yesterDay() -> Date? {
+        let calendar = Calendar.current
+        var dayComponent = DateComponents()
+        dayComponent.day = -1
+        return calendar.date(byAdding: dayComponent, to: self)
+    }
+    
+    func plusThisMuchDays(_ add:Int) -> Date? {
+        let calendar = Calendar.current
+        var dayComponent = DateComponents()
+        dayComponent.day = add
+        return calendar.date(byAdding: dayComponent, to: self)
+    }
+    
     func monthName() -> String{
         let df = DateFormatter()
         df.setLocalizedDateFormatFromTemplate("LLLL")
@@ -125,6 +139,11 @@ extension Date {
             default:
                 return true
         }
+    }
+    
+    func compareTo(_ otherDay:Date) -> ComparisonResult{
+        let cal = Calendar.current
+        return cal.compare(self, to: otherDay, toGranularity: .day)
     }
     
     func hourMinuteSeconds() -> (hour:Int,minutes:Int,seconds:Int){

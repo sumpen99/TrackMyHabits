@@ -38,12 +38,11 @@ class UserStatus{
     }
     
     func getTodayMsg() -> String{
-        if todoToday == 0{
-            return "Inga aktiviteter idag"
-        }
+        if habitsTodo.isEmpty{ return "" }
+        if todoToday == 0 { return "Inga aktiviteter idag" }
         else {
             if todoToday == 1{
-                return "Du har en aktivitet idag (\(todaysDayNames[0])"
+                return "Du har en aktivitet idag"
             }
             return "Du har \(todoToday) aktiviteter idag"
             /*if todoToday == 1{
@@ -59,10 +58,12 @@ class UserStatus{
     }
     
     func getDoneMsg() -> String{
+        if habitsTodo.isEmpty{ return "" }
         return todoToday == 0 ? "" : "\(doneToday)/\(todoToday)"
     }
     
     func getNextMsg() -> String{
+        if habitsTodo.isEmpty{ return "" }
         switch daysUntilNext{
             case 1:
                 return "Imorgon \(nextDayStr)"

@@ -59,6 +59,7 @@
 		7D47743429FE56E100FD1756 /* UserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743329FE56E100FD1756 /* UserStatus.swift */; };
 		7D47743C29FE823400FD1756 /* TodaysTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743B29FE823400FD1756 /* TodaysTodoView.swift */; };
 		7D47743E29FE8B3600FD1756 /* CardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743D29FE8B3600FD1756 /* CardModifier.swift */; };
+		7D47744029FF8C4600FD1756 /* RegisterDoneCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743F29FF8C4600FD1756 /* RegisterDoneCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		7D47743329FE56E100FD1756 /* UserStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatus.swift; sourceTree = "<group>"; };
 		7D47743B29FE823400FD1756 /* TodaysTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysTodoView.swift; sourceTree = "<group>"; };
 		7D47743D29FE8B3600FD1756 /* CardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModifier.swift; sourceTree = "<group>"; };
+		7D47743F29FF8C4600FD1756 /* RegisterDoneCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDoneCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +295,7 @@
 				7D47740029F2F7DC00FD1756 /* StatusCardView.swift */,
 				7D47741929F5B04900FD1756 /* SettingsCardView.swift */,
 				7D47741F29F6E27400FD1756 /* HabitCardView.swift */,
+				7D47743F29FF8C4600FD1756 /* RegisterDoneCardView.swift */,
 			);
 			path = CardView;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				7D47742429F842A300FD1756 /* FirestoreViewModel.swift in Sources */,
 				7D21923529ED8EA1007FEEA0 /* ContentView.swift in Sources */,
 				7D21926B29ED9872007FEEA0 /* PasswordLevel.swift in Sources */,
+				7D47744029FF8C4600FD1756 /* RegisterDoneCardView.swift in Sources */,
 				7D21924F29ED93B1007FEEA0 /* PasswordHelper.swift in Sources */,
 				7D47741C29F6C64F00FD1756 /* FileHandler.swift in Sources */,
 				7D21928329F06F60007FEEA0 /* ProfileView.swift in Sources */,

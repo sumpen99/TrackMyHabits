@@ -20,34 +20,21 @@ struct Habit: Codable,Identifiable{
     var title:String = ""
     var motivation:String = ""
     var goal:String = ""
-    var lastRegistredDate:Date?
+    var lastRegistredDate:Date? = Date().yesterDay()
     var weekDaysFrequence:[WeekDay] = [WeekDay]()
-    var weekDaysNotification:[WeekDay]?
+    var weekDaysNotification:[WeekDay] = [WeekDay]()
     var notificationTime:NotificationTime = NotificationTime()
     var notificationId:String = UUID().uuidString
-    var streak:Int = 0
-    var habitsDone: [HabitDone]?
-    
-    func removeNotifications() -> Habit{
-        return Habit(
-            id:self.id,
-            creation:self.creation,
-            title:self.title,
-            motivation:self.motivation,
-            goal:self.goal,
-            lastRegistredDate: self.lastRegistredDate,
-            weekDaysFrequence:self.weekDaysFrequence,
-            weekDaysNotification:nil,
-            notificationTime:NotificationTime(),
-            notificationId:self.notificationId,
-            streak: self.streak,
-            habitsDone: self.habitsDone
-        )
-    }
+    var streak:HabitStreak?
+    var habitsDone: [HabitDone] = [HabitDone]()
     
     func todaysTodo() -> HabitTodo{
+        let habitsDoneList = habitsDone.sorted(by: {
+            $0.timeOfExecution.compare($1.timeOfExecution) == .orderedDescending
+        })
         let today = Date()
         let todayStr = today.dayName()
+        var nextDate:Date?
         var nextDayRange:Int = 7
         var nextDayStr:String = todayStr
         var todoToday:Bool = false
@@ -55,12 +42,13 @@ struct Habit: Codable,Identifiable{
         for day in weekDaysFrequence{
             if todayStr == day.name{
                 todoToday = true
-                isDone = lastRegistredDate?.isSameDayAs(today) ?? false
+                isDone = habitsDoneList.last?.timeOfExecution.isSameDayAs(today) ?? false
             }
             else{
                 if let nextDay = today.nextWeekDay(weekday: day.value),
                    let daysUntilNext = today.numberOfDaysTo(nextDay){
                     if daysUntilNext < nextDayRange{
+                        nextDate = today.plusThisMuchDays(daysUntilNext)
                         nextDayRange = daysUntilNext
                         nextDayStr = nextDay.dayName()
                     }
@@ -70,6 +58,8 @@ struct Habit: Codable,Identifiable{
         return HabitTodo(title:title,
                          daysUntilNext: nextDayRange,
                          nextDay: nextDayStr,
+                         nextDate: nextDate,
+                         streak: streak ?? HabitStreak(isActive:false,keepStreakGoing: today),
                          todoToday: todoToday,
                          isDone: isDone,
                          docId: id)
@@ -77,16 +67,23 @@ struct Habit: Codable,Identifiable{
 }
 
 struct HabitDone: Codable{
-    let date:Date?
-    let timeOfExecution: String
-    let comments: String
+    var id:String
+    var timeOfExecution: Date
+    var comments: String
+    var rating: Float
     
+    func toMap() -> [String:Any]{
+        return ["id": self.id,
+                "timeOfExecution": self.timeOfExecution,
+                "comments": self.comments,
+                "rating": self.rating]
+    }
 }
 
 struct NotificationTime: Codable{
     var isSet = false
-    var hour:Int?
-    var minutes:Int?
+    var hour:Int = 0
+    var minutes:Int = 0
     
 }
 
@@ -95,9 +92,29 @@ struct HabitTodo: Codable,Identifiable{
     let title:String
     let daysUntilNext:Int
     let nextDay:String
+    let nextDate:Date?
+    let streak:HabitStreak
     let todoToday:Bool
     let isDone:Bool
     let docId:String?
+}
+
+struct HabitStreak: Codable,Identifiable{
+    var id = UUID().uuidString
+    let isActive:Bool
+    var keepStreakGoing:Date
+    var dates:[Date] = [Date]()
+    var streak:Int = 0
+    var rating:Float = 0.0
+    
+    func toMap() -> [String:Any]{
+        return ["id": self.id,
+                "isActive": self.isActive,
+                "keepStreakGoing": self.keepStreakGoing,
+                "dates": self.dates,
+                "streak": self.streak,
+                "rating": self.rating]
+    }
 }
 
 

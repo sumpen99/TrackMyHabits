@@ -82,7 +82,7 @@ struct AddHabitView: View{
                 else{
                     updateHabitWithWeekdays()
                     setNotificationIfNeeded()
-                    firestoreViewModel.uploadOrSetHabit(habit: habit){ result in
+                    firestoreViewModel.uploadHabit(habit: habit){ result in
                         if result.finishedWithoutError{
                             fireUploadSuccess()
                         }
@@ -97,11 +97,10 @@ struct AddHabitView: View{
     
     func setNotificationIfNeeded(){
         if habit.notificationTime.isSet{
-            guard let hour = habit.notificationTime.hour,
-                  let minutes = habit.notificationTime.minutes,
-                  let days = habit.weekDaysNotification else{ return }
-            
-            for day in days{
+            let hour = habit.notificationTime.hour
+            let minutes = habit.notificationTime.minutes
+             
+            for day in habit.weekDaysNotification{
                 let date = notificationHandler.createNotificationDate(
                     weekday: day.value, hour: hour, minutes: minutes)
                 guard let date = date else{
@@ -286,14 +285,14 @@ struct PickNotificationTime:View{
     
     func removeSavedTime(){
         selectedTime.isSet = false
-        selectedTime.hour = nil
-        selectedTime.minutes = nil
+        selectedTime.hour = 0
+        selectedTime.minutes = 0
     }
     
     func storeSavedTime(){
         selectedTime.isSet = true
-        selectedTime.hour = Int(selection[0])
-        selectedTime.minutes = Int(selection[1])
+        selectedTime.hour = Int(selection[0]) ?? 0
+        selectedTime.minutes = Int(selection[1]) ?? 0
     }
     
     func closeView(){

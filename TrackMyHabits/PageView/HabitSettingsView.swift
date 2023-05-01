@@ -49,7 +49,7 @@ struct HabitSettingsView: View{
                             .foregroundColor(.gray)
                         if showNotificationWeekdays {
                             Text("\(habit.notificationTime.hour.zeroString())" + ":" +             "\(habit.notificationTime.minutes.zeroString())").foregroundColor(.gray)
-                            ForEach(habit.weekDaysNotification ?? [],id: \.id){ weekday in
+                            ForEach(habit.weekDaysNotification,id: \.id){ weekday in
                                 Text(weekday.name.uppercased()).foregroundColor(.gray)
                             }
                         }
@@ -93,8 +93,14 @@ struct HabitSettingsView: View{
     }
     
     func updateHabitAndRemoveNotifications(){
+        guard let docId = habit.id else { return }
         clearNotifications()
-        firestoreViewModel.uploadOrSetHabit(habit: habit.removeNotifications()){ result in
+        firestoreViewModel.updateHabitData(docId: docId,data:
+                                            [["weekDaysNotification":[WeekDay]()],
+                                             ["notificationTime":["isSet":false,
+                                                                  "hour": 0,
+                                                                  "minutes":0]],
+                                             ["notificationId":""]]){ result in
             /*if result.finishedWithoutError{
                 printAny(result.finishedWithoutError)
             }

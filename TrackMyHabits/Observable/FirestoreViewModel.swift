@@ -15,7 +15,7 @@ class FirestoreViewModel: ObservableObject{
     @Published var habits = [Habit]()
     @Published var userStatus = UserStatus()
     
-    // MAKE PUBLISHED TODAYS TODO STRUCT 
+   
     
     func initializeUserData(_ user:User,completion:  @escaping ((ThrowableResult) -> Void )){
         do{
@@ -27,7 +27,7 @@ class FirestoreViewModel: ObservableObject{
         }
     }
     
-    func uploadOrSetHabit(habit:Habit,completion: @escaping ((ThrowableResult) -> Void )){
+    func uploadHabit(habit:Habit,completion: @escaping ((ThrowableResult) -> Void )){
         guard let email = user?.email,let docId = habit.id else { return }
         do{
             try repo.getUserHabitDocument(email,docId:docId).setData(from:habit)
@@ -35,6 +35,72 @@ class FirestoreViewModel: ObservableObject{
         }
         catch {
             completion(ThrowableResult(finishedWithoutError: false,value: error.localizedDescription))
+        }
+    }
+    
+    func updateHabitData(docId:String,
+                         data:[[String:Any]],
+                         completion: @escaping ((ThrowableResult) -> Void )){
+        guard let email = user?.email else { return }
+        DispatchQueue.main.async {
+            for field in data{
+                self.repo.getUserHabitDocument(email,docId:docId).updateData(field)
+            }
+        }
+        //completion(ThrowableResult(finishedWithoutError: true))
+    }
+    
+    func appendNewHabitDone(docId:String,
+                            habitDone:Any,
+                            completion: @escaping ((ThrowableResult) -> Void )){
+        guard let email = user?.email else { return }
+        self.repo.getUserHabitDocument(email,docId:docId).updateData(["habitsDone":FieldValue.arrayUnion([habitDone])]){ err in
+            if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
+            completion(ThrowableResult(finishedWithoutError: true))
+        }
+    }
+    
+    func removeHabitDone(docId:String,
+                            habitDone:Any,
+                            completion: @escaping ((ThrowableResult) -> Void )){
+        guard let email = user?.email else { return }
+        self.repo.getUserHabitDocument(email,docId:docId).updateData(["habitsDone":FieldValue.arrayRemove([habitDone])]){ err in
+            if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
+            completion(ThrowableResult(finishedWithoutError: true))
+        }
+    }
+    
+    func storeOldHabitStreak(docId:String,
+                            habitStreak:HabitStreak,
+                            completion: @escaping ((ThrowableResult) -> Void )){
+        guard let email = user?.email else { return }
+        do{
+            try repo.getHabitStreakDocument(email,docId:docId).setData(from:habitStreak){ err in
+                if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
+                completion(ThrowableResult(finishedWithoutError: true))
+            }
+        }
+        catch {
+            completion(ThrowableResult(finishedWithoutError: false,value: error.localizedDescription))
+        }
+    }
+    
+    func updateHabitStreak(docId:String,
+                            habitStreak:Any,
+                            completion: @escaping ((ThrowableResult) -> Void )){
+        guard let email = user?.email else { return }
+        repo.getUserHabitDocument(email,docId:docId).updateData(["streak":habitStreak]){ err in
+            if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
+            completion(ThrowableResult(finishedWithoutError: true))
+        }
+    }
+    
+    func removeHabitStreak(docId:String,
+                           completion: @escaping ((ThrowableResult) -> Void )){
+        guard let email = user?.email else { return }
+        repo.getUserHabitDocument(email,docId:docId).updateData(["streak":FieldValue.delete()]){ err in
+            if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
+            completion(ThrowableResult(finishedWithoutError: true))
         }
     }
     
