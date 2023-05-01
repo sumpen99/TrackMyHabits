@@ -12,4 +12,12 @@ struct ThrowableResult{
     func asString() -> String {
         return value as? String ?? "Unexpected Error"
     }
+    func printSelf(){
+        if !finishedWithoutError{
+            printAny(asString())
+        }
+        else {
+            printAny("success")
+        }
+    }
 }

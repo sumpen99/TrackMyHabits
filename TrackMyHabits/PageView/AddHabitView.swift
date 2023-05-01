@@ -59,9 +59,10 @@ struct AddHabitView: View{
                         Text("Lägg till")
                     }.frame(maxWidth: .infinity, alignment: .center)
                 }
-                .onAppear(){
+                /*.onAppear(){
+                    notificationHandler.removeNotifications()
                     notificationHandler.getScheduleNotifications()
-                }
+                }*/
                 .alert(ALERT_TITLE_SAVE_HABIT, isPresented: $isTryToSave) { Button("OK", role: .cancel) {
                     if DID_SAVE_NEW_HABIT{ dismiss()}
                 }}
@@ -106,6 +107,7 @@ struct AddHabitView: View{
                 guard let date = date else{
                     continue
                 }
+                printAny(date)
                 notificationHandler.scheduleNotification(date: date, habit: habit)
             }
             

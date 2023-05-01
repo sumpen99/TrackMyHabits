@@ -184,38 +184,4 @@ class FirestoreViewModel: ObservableObject{
         closeListenerHabit()
         closeListenerUser()
     }
-    
-    /*
-     func updateName(fullname: String) {
-         guard let uid = user.id else { return }
-         Firestore.firestore().collection("users").document(uid).updateData(["fullname": fullname]) { _ in
-             self.user.fullname = fullname
-         }
-     }
-     */
-    
-    
-    /*
-     guard let email = user?.email else { return }
-     repo.repo.getUserHabits(email).whereField("title", isEqualTo: title)
-         .limit(to:1)
-         .getDocuments(completion: { querySnapshot, error in
-             if let err = error {
-                 print(err.localizedDescription)
-                 return
-             }
-
-             guard let docs = querySnapshot?.documents else { return }
-
-             for doc in docs {
-                 let docId = doc.documentID
-                 let name = doc.get("name")
-                 print(docId, name)
-
-                 let ref = doc.reference
-                 ref.updateData(["age": 20])
-             }
-         })
-     
-     */
 }

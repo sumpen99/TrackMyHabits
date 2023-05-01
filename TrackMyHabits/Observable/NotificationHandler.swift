@@ -25,14 +25,12 @@ class NotificationHandler : NSObject,ObservableObject,UNUserNotificationCenterDe
     }
     
     func createNotificationDate(weekday:Int,hour:Int,minutes:Int) -> Date?{
-        var components = DateComponents()
+        let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        var components = calendar.components([.calendar, .weekday, .weekOfYear, .year, .hour, .minute, .second, .timeZone], from: Date())
         components.hour = hour
         components.minute = minutes
-        components.year = Date().year()
         components.weekday = weekday
-        components.weekdayOrdinal = 10
         components.timeZone = TimeZone(identifier: "UTC")
-        let calendar = Calendar(identifier: .gregorian)
         return calendar.date(from: components)
         
         
@@ -48,15 +46,16 @@ class NotificationHandler : NSObject,ObservableObject,UNUserNotificationCenterDe
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerWeekly, repeats: true)
         
         let content = UNMutableNotificationContent()
+        let id = createID(notificationID:habit.notificationId,weekDay:date.dayName())
         content.title = habit.title
         content.body = habit.motivation.isEmpty ? "Kom ihåg att utföra din vana" : habit.motivation
         content.sound = UNNotificationSound.default
-        content.categoryIdentifier = createID(notificationID:habit.notificationId,weekDay:date.dayName())
+        content.categoryIdentifier = id
         
-        let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
         
         notificationCenter.add(request){ (error) in
-            // TODO show error message
+            //printAny(error)
         }
     }
     
@@ -73,6 +72,10 @@ class NotificationHandler : NSObject,ObservableObject,UNUserNotificationCenterDe
     func removeNotifications(identifiers:[String]){
         notificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
     }
+    
+    func removeNotifications(){
+        notificationCenter.removeAllPendingNotificationRequests()
+   }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         

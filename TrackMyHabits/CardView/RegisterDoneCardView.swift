@@ -102,12 +102,7 @@ struct RegisterDoneCardView: View {
         let habitDone = HabitDone(id: UUID().uuidString, timeOfExecution: Date(), comments: userComment, rating: Float(userRating)).toMap()
         
         firestoreViewModel.appendNewHabitDone(docId: docId,habitDone:habitDone){ result in
-            if !result.finishedWithoutError{
-                printAny(result.asString())
-            }
-            else {
-                printAny("success")
-            }
+            result.printSelf()
         }
     }
     
@@ -126,41 +121,25 @@ struct RegisterDoneCardView: View {
         var updatedDates = streak.dates
         updatedDates.append(streak.keepStreakGoing)
         
-        let newStreak = HabitStreak(id:streak.id,
-                                      isActive:true,
+        let newStreak = HabitStreak(isActive:true,
                                       keepStreakGoing: nextDate,
                                       dates:updatedDates,
                                       streak: streak.streak+1,
                                       rating: streak.rating+Float(userRating)).toMap()
         firestoreViewModel.updateHabitStreak(docId: docId,habitStreak:newStreak){ result in
-            if !result.finishedWithoutError{
-                printAny(result.asString())
-            }
-            else {
-                printAny("success")
-            }
+            result.printSelf()
         }
     }
     
     func storePreviousStreak(docId:String){
         firestoreViewModel.storeOldHabitStreak(docId: docId, habitStreak: streak){result in
-            if !result.finishedWithoutError{
-                printAny(result.asString())
-            }
-            else {
-                printAny("success")
-            }
+            result.printSelf()
         }
     }
     
     func clearCurrentStreak(docId:String){
         firestoreViewModel.removeHabitStreak(docId: docId){ result in
-            if !result.finishedWithoutError{
-                printAny(result.asString())
-            }
-            else {
-                printAny("success")
-            }
+            result.printSelf()
         }
     }
     
