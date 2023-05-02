@@ -30,7 +30,7 @@ class NotificationHandler : NSObject,ObservableObject,UNUserNotificationCenterDe
         components.hour = hour
         components.minute = minutes
         components.weekday = weekday
-        components.timeZone = TimeZone(identifier: "UTC")
+        components.timeZone = TimeZone.current
         return calendar.date(from: components)
         
         
@@ -40,7 +40,7 @@ class NotificationHandler : NSObject,ObservableObject,UNUserNotificationCenterDe
         return "\(notificationID)\(weekDay)"
     }
     
-    func scheduleNotification(date:Date,habit:Habit){
+    func scheduleNotification(date:Date,habit:HabitRaw){
         let triggerWeekly = Calendar.current.dateComponents([.weekday,.hour,.minute,.second], from: date)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerWeekly, repeats: true)
@@ -51,7 +51,6 @@ class NotificationHandler : NSObject,ObservableObject,UNUserNotificationCenterDe
         content.body = habit.motivation.isEmpty ? "Kom ihåg att utföra din vana" : habit.motivation
         content.sound = UNNotificationSound.default
         content.categoryIdentifier = id
-        
         let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
         
         notificationCenter.add(request){ (error) in

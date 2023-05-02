@@ -49,8 +49,7 @@ struct ProfileView: View{
                 }
                 
                 Button("Logga ut") {
-                    firestoreViewModel.closeListenerUser()
-                    firebaseAuth.signOut()
+                    logOut()
                 }
             }
             .onAppear(){
@@ -81,6 +80,11 @@ struct ProfileView: View{
                     return
             }
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    func logOut(){
+        firestoreViewModel.closeListener()
+        firebaseAuth.signOut()
     }
      
 }

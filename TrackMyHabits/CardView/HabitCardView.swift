@@ -21,15 +21,6 @@ struct HabitCardView: View {
                     CardRow(title:"Titel",msg:habit.title)
                     CardRow(title:"Motivation",msg:habit.motivation)
                     CardRow(title:"Mål",msg:habit.goal)
-                    /*HStack(){
-                        Spacer()
-                        .badge(
-                            Text("\(habit.streak) \(Image(systemName: "flame"))")
-                                //.foregroundColor(textColor)
-                                .font(.headline)
-                        )
-                        
-                    }*/
                 }
                 CardGrayTrailing()
             }

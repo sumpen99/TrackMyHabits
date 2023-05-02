@@ -11,7 +11,7 @@ struct SignupView : View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var firebaseAuth: FirebaseAuth
     @EnvironmentObject var firestoreViewModel: FirestoreViewModel
-    @Binding var user: User
+    @Binding var user: UserRaw
     @State private var isSignupResult: Bool = false
     @StateObject private var passwordHelper: PasswordHelper = PasswordHelper()
     
@@ -53,7 +53,7 @@ struct SignupView : View {
             // 2
             guard let error = error else {
                 // 3
-                firestoreViewModel.initializeUserData(user){ result in
+                firestoreViewModel.initializeUserData(user.converted()){ result in
                     // 4
                     if result.finishedWithoutError{
                         // 5
@@ -101,7 +101,7 @@ struct SignupView : View {
 }
 
 struct TextFieldsUser: View{
-    @Binding var user: User
+    @Binding var user: UserRaw
     var body: some View{
         TextField("Name",text: $user.name.max(MAX_TEXTFIELD_LEN))
             .removePredictiveSuggestions()

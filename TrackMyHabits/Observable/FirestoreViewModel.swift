@@ -15,7 +15,21 @@ class FirestoreViewModel: ObservableObject{
     @Published var habits = [Habit]()
     @Published var userStatus = UserStatus()
     
-   
+    func loadData(email:String?){
+        getUserData(email: email)
+        getUserHabits(email: email)
+    }
+    
+    func releaseData(){
+        closeListener()
+        habits.removeAll()
+        userStatus.resetValues()
+    }
+    
+    func closeListener(){
+        listenerUser?.remove()
+        listenerHabit?.remove()
+    }
     
     func initializeUserData(_ user:User,completion:  @escaping ((ThrowableResult) -> Void )){
         do{
@@ -89,7 +103,7 @@ class FirestoreViewModel: ObservableObject{
                             habitStreak:Any,
                             completion: @escaping ((ThrowableResult) -> Void )){
         guard let email = user?.email else { return }
-        repo.getUserHabitDocument(email,docId:docId).updateData(["streak":habitStreak]){ err in
+        repo.getUserHabitDocument(email,docId:docId).updateData(["lastRegistredDate":Date(),"streak":habitStreak]){ err in
             if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
             completion(ThrowableResult(finishedWithoutError: true))
         }
@@ -106,7 +120,6 @@ class FirestoreViewModel: ObservableObject{
     
     func getUserData(email:String?){
         guard let email = email else { return }
-        closeListenerUser()
         listenerUser = repo.getUserDocument(email).addSnapshotListener{ [weak self] snapshot, error in
             guard let strongSelf = self else { return }
             guard let changes = snapshot else { return }
@@ -165,23 +178,16 @@ class FirestoreViewModel: ObservableObject{
                     strongSelf.userStatus.updateValues(habitTodo:habit.todaysTodo())
                 }
                 catch{
-                    
+                    printAny(error)
                 }
             }
           }
     }
     
-    func closeListenerUser(){
-        listenerUser?.remove()
-    }
     
-    func closeListenerHabit(){
-        listenerHabit?.remove()
-    }
     
-    deinit{
+    /*deinit{
         habits.removeAll()
-        closeListenerHabit()
-        closeListenerUser()
-    }
+        closeListener()
+    }*/
 }

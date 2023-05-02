@@ -102,6 +102,10 @@ extension Date {
         return df.string(from: self)
     }
     
+    func dayValue() -> Int?{
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
+    }
+    
     func year() -> Int {
         let calendar = Calendar.current
         return calendar.component(.year, from: self)
@@ -176,6 +180,7 @@ extension Date {
 
         return formatter.string(from: self)
     }
+    
 }
 
 

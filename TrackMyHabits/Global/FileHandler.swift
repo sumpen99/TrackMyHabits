@@ -91,7 +91,13 @@ class FileHandler{
         throwableResult.value = UIImage(contentsOfFile:filePath)
         onFinishWriting?(throwableResult)
     }
-    /*static func removeFilesFromDocumentsWithExt(_ ext:ImageExt,
+    /*
+     enum ImageExt: String{
+         case PNG = ".png"
+         case JPEG = ".jpeg"
+     }
+     
+     static func removeFilesFromDocumentsWithExt(_ ext:ImageExt,
                                                       onFinishWriting : @escaping ((ThrowableResult) -> Void)){
         guard let documentsUrl =  getDocumentsUrl() else { return false }
 

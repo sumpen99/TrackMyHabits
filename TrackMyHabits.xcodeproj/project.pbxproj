@@ -16,7 +16,6 @@
 		7D21924729ED9010007FEEA0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7D21924629ED9010007FEEA0 /* FirebaseStorage */; };
 		7D21924A29ED91A9007FEEA0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D21924929ED91A8007FEEA0 /* GoogleService-Info.plist */; };
 		7D21924F29ED93B1007FEEA0 /* PasswordHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */; };
-		7D21925229ED9418007FEEA0 /* CharChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925129ED9418007FEEA0 /* CharChecker.swift */; };
 		7D21925529ED9499007FEEA0 /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925429ED9499007FEEA0 /* OptionalView.swift */; };
 		7D21925929ED9561007FEEA0 /* GeoReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925829ED9561007FEEA0 /* GeoReaderView.swift */; };
 		7D21925B29ED9628007FEEA0 /* ToggleSecurefieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21925A29ED9628007FEEA0 /* ToggleSecurefieldView.swift */; };
@@ -36,7 +35,6 @@
 		7D21928329F06F60007FEEA0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928229F06F60007FEEA0 /* ProfileView.swift */; };
 		7D21928929F1BE58007FEEA0 /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928829F1BE58007FEEA0 /* HabitView.swift */; };
 		7D21928B29F2CBE6007FEEA0 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928A29F2CBE6007FEEA0 /* ItemRow.swift */; };
-		7D21928D29F2D130007FEEA0 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21928C29F2D130007FEEA0 /* DateTime.swift */; };
 		7D47740129F2F7DC00FD1756 /* StatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740029F2F7DC00FD1756 /* StatusCardView.swift */; };
 		7D47740329F2FC0E00FD1756 /* FillFormModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740229F2FC0E00FD1756 /* FillFormModifier.swift */; };
 		7D47740529F2FC5C00FD1756 /* FormButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */; };
@@ -48,12 +46,10 @@
 		7D47741629F539D400FD1756 /* PhotoGalleryPermissionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741529F539D400FD1756 /* PhotoGalleryPermissionHandler.swift */; };
 		7D47741A29F5B04900FD1756 /* SettingsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741929F5B04900FD1756 /* SettingsCardView.swift */; };
 		7D47741C29F6C64F00FD1756 /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741B29F6C64F00FD1756 /* FileHandler.swift */; };
-		7D47741E29F6CDD900FD1756 /* ImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741D29F6CDD900FD1756 /* ImageExt.swift */; };
 		7D47742029F6E27400FD1756 /* HabitCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47741F29F6E27400FD1756 /* HabitCardView.swift */; };
 		7D47742429F842A300FD1756 /* FirestoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742329F842A300FD1756 /* FirestoreViewModel.swift */; };
 		7D47742629F8719A00FD1756 /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742529F8719A00FD1756 /* FirebaseAuth.swift */; };
 		7D47742829F96A6600FD1756 /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742729F96A6600FD1756 /* AddHabitView.swift */; };
-		7D47742C29FC0A7A00FD1756 /* WeekDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742B29FC0A7A00FD1756 /* WeekDays.swift */; };
 		7D47743029FCEDE100FD1756 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47742F29FCEDE100FD1756 /* NotificationHandler.swift */; };
 		7D47743229FD240800FD1756 /* HabitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743129FD240800FD1756 /* HabitSettingsView.swift */; };
 		7D47743429FE56E100FD1756 /* UserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743329FE56E100FD1756 /* UserStatus.swift */; };
@@ -71,7 +67,6 @@
 		7D21924029ED8ED0007FEEA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7D21924929ED91A8007FEEA0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordHelper.swift; sourceTree = "<group>"; };
-		7D21925129ED9418007FEEA0 /* CharChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharChecker.swift; sourceTree = "<group>"; };
 		7D21925429ED9499007FEEA0 /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
 		7D21925829ED9561007FEEA0 /* GeoReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoReaderView.swift; sourceTree = "<group>"; };
 		7D21925A29ED9628007FEEA0 /* ToggleSecurefieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSecurefieldView.swift; sourceTree = "<group>"; };
@@ -90,7 +85,6 @@
 		7D21928229F06F60007FEEA0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7D21928829F1BE58007FEEA0 /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
 		7D21928A29F2CBE6007FEEA0 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
-		7D21928C29F2D130007FEEA0 /* DateTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
 		7D47740029F2F7DC00FD1756 /* StatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCardView.swift; sourceTree = "<group>"; };
 		7D47740229F2FC0E00FD1756 /* FillFormModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillFormModifier.swift; sourceTree = "<group>"; };
 		7D47740429F2FC5C00FD1756 /* FormButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonModifier.swift; sourceTree = "<group>"; };
@@ -102,12 +96,10 @@
 		7D47741529F539D400FD1756 /* PhotoGalleryPermissionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryPermissionHandler.swift; sourceTree = "<group>"; };
 		7D47741929F5B04900FD1756 /* SettingsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardView.swift; sourceTree = "<group>"; };
 		7D47741B29F6C64F00FD1756 /* FileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
-		7D47741D29F6CDD900FD1756 /* ImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExt.swift; sourceTree = "<group>"; };
 		7D47741F29F6E27400FD1756 /* HabitCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCardView.swift; sourceTree = "<group>"; };
 		7D47742329F842A300FD1756 /* FirestoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreViewModel.swift; sourceTree = "<group>"; };
 		7D47742529F8719A00FD1756 /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
 		7D47742729F96A6600FD1756 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
-		7D47742B29FC0A7A00FD1756 /* WeekDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDays.swift; sourceTree = "<group>"; };
 		7D47742F29FCEDE100FD1756 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		7D47743129FD240800FD1756 /* HabitSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSettingsView.swift; sourceTree = "<group>"; };
 		7D47743329FE56E100FD1756 /* UserStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatus.swift; sourceTree = "<group>"; };
@@ -159,7 +151,6 @@
 				7D21926629ED9833007FEEA0 /* Global */,
 				7D21925C29ED9665007FEEA0 /* ViewModifier */,
 				7D21925329ED9487007FEEA0 /* Protocol */,
-				7D21925029ED93DB007FEEA0 /* Struct */,
 				7D21924B29ED932D007FEEA0 /* Observable */,
 				7D21924829ED9031007FEEA0 /* View */,
 				7D21923229ED8EA1007FEEA0 /* TrackMyHabitsApp.swift */,
@@ -196,6 +187,7 @@
 		7D21924B29ED932D007FEEA0 /* Observable */ = {
 			isa = PBXGroup;
 			children = (
+				7D21927329EDC640007FEEA0 /* User.swift */,
 				7D47743329FE56E100FD1756 /* UserStatus.swift */,
 				7D21924E29ED93B1007FEEA0 /* PasswordHelper.swift */,
 				7D21927729F04A29007FEEA0 /* FirestoreRepository.swift */,
@@ -205,18 +197,6 @@
 				7D47742F29FCEDE100FD1756 /* NotificationHandler.swift */,
 			);
 			path = Observable;
-			sourceTree = "<group>";
-		};
-		7D21925029ED93DB007FEEA0 /* Struct */ = {
-			isa = PBXGroup;
-			children = (
-				7D21925129ED9418007FEEA0 /* CharChecker.swift */,
-				7D21927329EDC640007FEEA0 /* User.swift */,
-				7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */,
-				7D21928C29F2D130007FEEA0 /* DateTime.swift */,
-				7D47742B29FC0A7A00FD1756 /* WeekDays.swift */,
-			);
-			path = Struct;
 			sourceTree = "<group>";
 		};
 		7D21925329ED9487007FEEA0 /* Protocol */ = {
@@ -247,6 +227,7 @@
 				7D21926729ED9842007FEEA0 /* AppGlobal.swift */,
 				7D21926F29ED9917007FEEA0 /* Dummy.swift */,
 				7D47741B29F6C64F00FD1756 /* FileHandler.swift */,
+				7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -255,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				7D21926A29ED9872007FEEA0 /* PasswordLevel.swift */,
-				7D47741D29F6CDD900FD1756 /* ImageExt.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -400,8 +380,6 @@
 				7D21927F29F053DE007FEEA0 /* ThrowableResult.swift in Sources */,
 				7D47740B29F5010000FD1756 /* HeaderSubHeaderView.swift in Sources */,
 				7D47740529F2FC5C00FD1756 /* FormButtonModifier.swift in Sources */,
-				7D47741E29F6CDD900FD1756 /* ImageExt.swift in Sources */,
-				7D21925229ED9418007FEEA0 /* CharChecker.swift in Sources */,
 				7D21925B29ED9628007FEEA0 /* ToggleSecurefieldView.swift in Sources */,
 				7D47742629F8719A00FD1756 /* FirebaseAuth.swift in Sources */,
 				7D21926029ED9720007FEEA0 /* PasswordStrengthView.swift in Sources */,
@@ -413,10 +391,8 @@
 				7D47742829F96A6600FD1756 /* AddHabitView.swift in Sources */,
 				7D47743429FE56E100FD1756 /* UserStatus.swift in Sources */,
 				7D47741629F539D400FD1756 /* PhotoGalleryPermissionHandler.swift in Sources */,
-				7D47742C29FC0A7A00FD1756 /* WeekDays.swift in Sources */,
 				7D47743E29FE8B3600FD1756 /* CardModifier.swift in Sources */,
 				7D21928B29F2CBE6007FEEA0 /* ItemRow.swift in Sources */,
-				7D21928D29F2D130007FEEA0 /* DateTime.swift in Sources */,
 				7D47741A29F5B04900FD1756 /* SettingsCardView.swift in Sources */,
 				7D47742429F842A300FD1756 /* FirestoreViewModel.swift in Sources */,
 				7D21923529ED8EA1007FEEA0 /* ContentView.swift in Sources */,

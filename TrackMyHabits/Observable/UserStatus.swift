@@ -11,8 +11,9 @@ class UserStatus{
     var todoToday:Int = 0
     var doneToday:Int = 0
     var totalHabits:Int = 0
-    var daysUntilNext:Int = 7
+    var daysUntilNext:Int = 100
     var nextDayStr:String = ""
+    @Published var toggle:Bool = false
     
     func resetValues(){
         todaysDayNames.removeAll()
@@ -20,8 +21,9 @@ class UserStatus{
         todoToday = 0
         doneToday = 0
         totalHabits = 0
-        daysUntilNext = 7
+        daysUntilNext = 100
         nextDayStr = ""
+        toggle.toggle()
     }
     
     func updateValues(habitTodo:HabitTodo){
@@ -38,37 +40,27 @@ class UserStatus{
     }
     
     func getTodayMsg() -> String{
-        if habitsTodo.isEmpty{ return "" }
         if todoToday == 0 { return "Inga aktiviteter idag" }
         else {
             if todoToday == 1{
                 return "Du har en aktivitet idag"
             }
             return "Du har \(todoToday) aktiviteter idag"
-            /*if todoToday == 1{
-                return "Du har en aktivitet idag (\(todaysDayNames[0])"
-            }
-            var actv = ""
-            for day in todaysDayNames{
-                actv += "\(day) "
-            }
-            actv = actv.trimmingCharacters(in: .whitespacesAndNewlines)
-            return "Du har \(todoToday) aktiviteter idag \(actv)"*/
         }
     }
     
     func getDoneMsg() -> String{
-        if habitsTodo.isEmpty{ return "" }
         return todoToday == 0 ? "" : "\(doneToday)/\(todoToday)"
     }
     
     func getNextMsg() -> String{
-        if habitsTodo.isEmpty{ return "" }
         switch daysUntilNext{
             case 1:
                 return "Imorgon \(nextDayStr)"
             case 7:
                 return "\(Date().dayName()) om en vecka"
+            case 100:
+                return "Inga planlagda"
             default:
                 return "\(nextDayStr) om \(daysUntilNext) dagar"
         }
@@ -80,4 +72,5 @@ class UserStatus{
         return Float(Float(doneToday)/Float(todoToday))
                 .remapValue(min1: 0.0, max1: 1.0, min2: 0.1, max2: 0.9)
     }
+    
 }

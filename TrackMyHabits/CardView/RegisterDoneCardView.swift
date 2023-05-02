@@ -91,41 +91,33 @@ struct RegisterDoneCardView: View {
     }
     
     func updateHabitIsDone(){
-        guard let docId = docId else { return }
-        updateStreak(docId: docId)
-        uploadNewHabitDone(docId: docId)
+        guard let docId = docId,let nextDate = nextDate else { return }
+        updateStreak(docId: docId,nextDate: nextDate)
         habitIsDone = true
         showSuccesAlert.toggle()
     }
     
-    func uploadNewHabitDone(docId:String){
-        let habitDone = HabitDone(id: UUID().uuidString, timeOfExecution: Date(), comments: userComment, rating: Float(userRating)).toMap()
-        
-        firestoreViewModel.appendNewHabitDone(docId: docId,habitDone:habitDone){ result in
-            result.printSelf()
+    func updateStreak(docId:String,nextDate:Date){
+        let habitDone = HabitDone(id: UUID().uuidString,
+                                  timeOfExecution: Date().toISO8601String(),
+                                  comments: userComment,
+                                  rating: Float(userRating))
+        if streak.isActive(){
+            printAny("1")
+            updateCurrentStreak(docId: docId,habitDone: habitDone,nextDate:nextDate)
         }
-    }
-    
-    func updateStreak(docId:String){
-        let isActive = streak.keepStreakGoing.isSameDayAs(Date())
-        if isActive{ updateCurrentStreak(docId: docId)}
         else{
+            printAny("2")
             storePreviousStreak(docId: docId)
-            clearCurrentStreak(docId: docId)
+            startNewStreak(docId: docId,habitDone: habitDone,nextDate:nextDate)
          }
        
     }
     
-    func updateCurrentStreak(docId:String){
-        guard let nextDate = nextDate else { return }
-        var updatedDates = streak.dates
-        updatedDates.append(streak.keepStreakGoing)
-        
-        let newStreak = HabitStreak(isActive:true,
-                                      keepStreakGoing: nextDate,
-                                      dates:updatedDates,
-                                      streak: streak.streak+1,
-                                      rating: streak.rating+Float(userRating)).toMap()
+    func updateCurrentStreak(docId:String,habitDone:HabitDone,nextDate:Date){
+        let newStreak = streak.toMap(
+            nextDate: nextDate,
+            habitDone: habitDone)
         firestoreViewModel.updateHabitStreak(docId: docId,habitStreak:newStreak){ result in
             result.printSelf()
         }
@@ -137,8 +129,11 @@ struct RegisterDoneCardView: View {
         }
     }
     
-    func clearCurrentStreak(docId:String){
-        firestoreViewModel.removeHabitStreak(docId: docId){ result in
+    func startNewStreak(docId:String,habitDone:HabitDone,nextDate:Date){
+        let newStreak = HabitStreak(keepStreakGoing: nextDate).toMap(
+            nextDate: nextDate,
+            habitDone: habitDone)
+        firestoreViewModel.updateHabitStreak(docId: docId,habitStreak:newStreak){ result in
             result.printSelf()
         }
     }

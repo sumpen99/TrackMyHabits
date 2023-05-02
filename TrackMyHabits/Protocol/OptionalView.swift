@@ -22,9 +22,10 @@ extension OptionalView {
     @ViewBuilder
     var body: some View {
         if isPrimaryView {
-            self.primaryView
+           self.primaryView
         } else {
             self.optionalView
         }
+            
     }
 }

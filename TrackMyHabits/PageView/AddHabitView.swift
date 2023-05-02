@@ -11,11 +11,8 @@ struct AddHabitView: View{
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @EnvironmentObject var notificationHandler: NotificationHandler
-    @State var habit:Habit = Habit()
-    @State var weekDays:WeekDays = WeekDays()
-    @State var notificationWeekDays:WeekDays = WeekDays()
+    @State var habit:HabitRaw = HabitRaw()
     @State var isTryToSave:Bool = false
-    
     
     var body: some View {
         GeometryReader { geometry in
@@ -32,7 +29,7 @@ struct AddHabitView: View{
                                      footerText: FOOT_GOALS,
                                      text: $habit.goal)
                     Section(header:Text("Frekvens")){
-                        NavigationLink { PickWeekDays(weekdays: $weekDays) } label: {
+                        NavigationLink { PickWeekDays(weekdays: $habit.weekDays) } label: {
                             Text("Välj dagar då vanan skall upprepas")
                                 .foregroundColor(.blue)
                         }
@@ -40,16 +37,14 @@ struct AddHabitView: View{
                     Section(header:Text("Notifikationer")){
                         NavigationLink { PickNotificationTime(
                             selectedTime: $habit.notificationTime,
-                            habitWeekDays: $notificationWeekDays)} label:{
+                            habitWeekDays: $habit.notificationWeekDays)} label:{
                                 Text("Ställ in tid och få en notifikation")
                                     .foregroundColor(.blue)
                             }
                     }
                     Section(header:Text("Granska")){
                         NavigationLink { ReviewNewHabit(
-                            habit:habit,
-                            weekDaysFrequence: weekDays,
-                            notificationWeekDays: notificationWeekDays)} label:{
+                            habit:habit) } label:{
                                 Text("Granska din nya vana")
                                     .foregroundColor(.blue)
                             }
@@ -60,8 +55,8 @@ struct AddHabitView: View{
                     }.frame(maxWidth: .infinity, alignment: .center)
                 }
                 /*.onAppear(){
-                    notificationHandler.removeNotifications()
-                    notificationHandler.getScheduleNotifications()
+                    //notificationHandler.removeNotifications()
+                    //notificationHandler.getScheduleNotifications()
                 }*/
                 .alert(ALERT_TITLE_SAVE_HABIT, isPresented: $isTryToSave) { Button("OK", role: .cancel) {
                     if DID_SAVE_NEW_HABIT{ dismiss()}
@@ -72,7 +67,7 @@ struct AddHabitView: View{
     }
         
     func evaluateAndTryToSave(){
-        if habit.title.isEmpty || weekDays.selectedDays.isEmpty{
+        if habit.title.isEmpty || habit.weekDays.selectedDays.isEmpty{
             fireMissingInformation()
         }
         else{
@@ -81,9 +76,8 @@ struct AddHabitView: View{
                     fireAlreadyExist()
                 }
                 else{
-                    updateHabitWithWeekdays()
                     setNotificationIfNeeded()
-                    firestoreViewModel.uploadHabit(habit: habit){ result in
+                    firestoreViewModel.uploadHabit(habit: habit.converted()){ result in
                         if result.finishedWithoutError{
                             fireUploadSuccess()
                         }
@@ -98,10 +92,10 @@ struct AddHabitView: View{
     
     func setNotificationIfNeeded(){
         if habit.notificationTime.isSet{
+            notificationHandler.removeNotifications()
             let hour = habit.notificationTime.hour
             let minutes = habit.notificationTime.minutes
-             
-            for day in habit.weekDaysNotification{
+            for day in habit.notificationWeekDays.selectedDays{
                 let date = notificationHandler.createNotificationDate(
                     weekday: day.value, hour: hour, minutes: minutes)
                 guard let date = date else{
@@ -128,7 +122,7 @@ struct AddHabitView: View{
     
     func fireMissingInformation(){
         var msg:String = ""
-        if habit.title.isEmpty && weekDays.selectedDays.isEmpty{
+        if habit.title.isEmpty && habit.weekDays.selectedDays.isEmpty{
             msg = "Saknar Titel och Frekvens (Mån-Sön)"
         }
         else if habit.title.isEmpty{
@@ -148,17 +142,10 @@ struct AddHabitView: View{
         isTryToSave.toggle()
     }
     
-    func updateHabitWithWeekdays(){
-        habit.weekDaysFrequence = weekDays.selectedDays
-        habit.weekDaysNotification = notificationWeekDays.selectedDays
-    }
-    
 }
 
 struct ReviewNewHabit:View{
-    let habit:Habit
-    var weekDaysFrequence:WeekDays
-    let notificationWeekDays:WeekDays
+    var habit:HabitRaw
     
     var body: some View{
         NavigationStack {
@@ -178,11 +165,11 @@ struct ReviewNewHabit:View{
                     Text(habit.goal).foregroundColor(.gray).lineLimit(nil)
                 }
                 Section(header: Text("FREKVENS")){
-                    if weekDaysFrequence.selectedDays.isEmpty{
+                    if habit.weekDays.selectedDays.isEmpty{
                         Text("Saknar valda dagar").foregroundColor(.gray)
                     }
                     else{
-                        ForEach(weekDaysFrequence.selectedDays,id: \.id){ weekday in
+                        ForEach(habit.weekDays.selectedDays,id: \.id){ weekday in
                             Text(weekday.name.uppercased()).foregroundColor(.gray)
                         }
                     }
@@ -193,7 +180,7 @@ struct ReviewNewHabit:View{
                     }
                     else{
                         Text("\(habit.notificationTime.hour.zeroString())" + ":" +             "\(habit.notificationTime.minutes.zeroString())").foregroundColor(.gray)
-                        ForEach(notificationWeekDays.selectedDays,id: \.id){ weekday in
+                        ForEach(habit.notificationWeekDays.selectedDays,id: \.id){ weekday in
                             Text(weekday.name.uppercased()).foregroundColor(.gray)
                         }
                     }

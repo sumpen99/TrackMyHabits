@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View{
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var firebaseAuth: FirebaseAuth
-    @State var user = User()
+    @State var user = UserRaw()
     @State private var password = ""
     @State private var showingSignUpSheet = false
     @State private var isLoginResult = false

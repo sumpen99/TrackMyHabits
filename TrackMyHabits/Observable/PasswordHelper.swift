@@ -6,7 +6,13 @@
 //
 
 import SwiftUI
-
+struct Constants {
+    static let lower = "abcdefghijklmnopqrstuvwxyz"
+    static let upper = lower.uppercased()
+    static let numbers = "0123456789"
+    static let validChars = Array(lower+upper+numbers)
+    
+}
 class PasswordHelper: ObservableObject {
     @Published public var didChange = false
     @Published var confirmedPassword: String = ""

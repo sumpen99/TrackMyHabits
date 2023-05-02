@@ -45,11 +45,12 @@ struct HabitView: View{
         .sheet(isPresented: $showingAddNewHabitView){
             AddHabitView()
         }
+        .animation(.easeIn)
         //.fullScreenCover(isPresented: $showingAddNewHabitView, content: AddHabitView.init)
-        .onAppear(perform:{
-            firestoreViewModel.getUserData(email:firebaseAuth.getUserEmail())
-            firestoreViewModel.getUserHabits(email:firebaseAuth.getUserEmail())
-        })
+        //.onAppear(perform:{
+            //firestoreViewModel.getUserData(email:firebaseAuth.getUserEmail())
+            //firestoreViewModel.getUserHabits(email:firebaseAuth.getUserEmail())
+        //})
     }
 }
 

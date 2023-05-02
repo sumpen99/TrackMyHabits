@@ -41,7 +41,7 @@ class FirebaseAuth: ObservableObject{
         auth.signIn(withEmail: email, password: password,completion:completion)
     }
     
-    func signup(user:User,password:String,completion:((AuthDataResult?,Error?)->Void)?){
+    func signup(user:UserRaw,password:String,completion:((AuthDataResult?,Error?)->Void)?){
         auth.createUser(withEmail: user.email, password: password,completion: completion)
     }
     

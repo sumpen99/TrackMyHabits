@@ -7,8 +7,8 @@
 
 import SwiftUI
 struct ContentView: OptionalView {
-
     @EnvironmentObject var firebaseAuth: FirebaseAuth
+    @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @State var isMemoryWarning: Bool = false
     private let memoryWarningPublisher = NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification)
     
@@ -44,6 +44,13 @@ struct ContentView: OptionalView {
         .onReceive(memoryWarningPublisher) { _ in
             isMemoryWarning.toggle()
         }
+        .onAppear(){
+            firestoreViewModel.loadData(email: firebaseAuth.getUserEmail())
+        }
+        .onDisappear(){
+            firestoreViewModel.releaseData()
+        }
+        
     }
     
     var optionalView: some View {
