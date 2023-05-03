@@ -168,6 +168,30 @@ extension Date {
         return "\(day.uppercased())  \(month.uppercased())"
     }
     
+    func dateMonthYear() -> String{
+        let components = self.get(.day, .month, .year)
+        let month = self.monthName()
+        let year = self.year()
+        // TISDAG 2 MAJ 2023
+        if let c_date = components.day{
+            return "\(c_date) \(month.uppercased()) \(year)"
+        }
+        return " ? \(month.uppercased()) \(year)"
+    }
+    
+    func dayDateMonthYear() -> (dateformatted:String,weekday:String){
+        let components = self.get(.day, .month, .year)
+        var day = self.dayName()
+        var month = self.monthName()
+        let year = self.year()
+        day.capitalizeFirst()
+        month.capitalizeFirst()
+        if let c_date = components.day{
+            return (dateformatted:"\(c_date) \(month) \(year)",weekday:day)
+        }
+        return (dateformatted:"? \(month) \(year)",weekday:day)
+    }
+    
     static func fromISO8601StringToDate(_ dateToProcess:String) -> Date?{
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate]
@@ -274,6 +298,17 @@ extension UINavigationBar {
 
 extension View{
     
+    func hLeading() -> some View{
+        self.frame(maxWidth: .infinity,alignment: .leading)
+    }
+    
+    func hTrailing() -> some View{
+        self.frame(maxWidth: .infinity,alignment: .trailing)
+    }
+    
+    func hCenter() -> some View{
+        self.frame(maxWidth: .infinity,alignment: .center)
+    }
     
     func formButtonDesign(width:CGFloat,backgroundColor:Color) -> some View{
         modifier(FormButtonModifier(width: width, backgroundColor: backgroundColor))
@@ -298,6 +333,14 @@ extension View{
                 message: Text(ALERT_PRIVACY_MESSAGE),
                 primaryButton: .destructive(Text("OK"), action: { actionPrimary() }),
                 secondaryButton: .cancel(Text("AVBRYT"), action: { actionSecondary() } )
+        )
+    }
+    func onAlertWithOkAction(title:String,message:String,actionPrimary:@escaping (()-> Void)) -> Alert{
+        return Alert(
+                title: Text(title),
+                message: Text(message),
+                primaryButton: .destructive(Text("OK"), action: { actionPrimary() }),
+                secondaryButton: .cancel(Text("AVBRYT"), action: { })
         )
     }
     func removePredictiveSuggestions() -> some View {
@@ -343,6 +386,15 @@ extension String {
         let startIndex = index(from: r.lowerBound)
         let endIndex = index(from: r.upperBound)
         return String(self[startIndex..<endIndex])
+    }
+    
+    func capitalizingFirstLetter() -> String {
+          return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
+
+    mutating func capitalizeFirst() {
+        if self.isEmpty { return }
+        self = self.capitalizingFirstLetter()
     }
 }
 

@@ -10,10 +10,11 @@ import SwiftUI
 struct CardRow: View{
     let title:String
     let msg:String
+    var msgColor:Color = Color.gray
     var body: some View{
         VStack(alignment:.leading){
             Text(title).font(.caption).bold().foregroundColor(.black)
-            Text(msg).font(.caption).foregroundColor(.gray)
+            Text(msg).font(.caption).foregroundColor(msgColor)
         }
     }
 }
@@ -29,9 +30,15 @@ struct StatusCardView: View{
             Color.lightBackground
             HStack{
                 VStack(alignment:.leading,spacing: 10.0){
-                    CardRow(title:"Din dag",msg:userStatus.getTodayMsg())
-                    CardRow(title:"Avklarade",msg:userStatus.getDoneMsg())
-                    CardRow(title:"Nästa Aktivitet",msg:userStatus.getNextMsg())
+                    CardRow(title:"Din dag",
+                            msg:userStatus.getTodayMsg(),
+                            msgColor: userStatus.getTodayColor())
+                    CardRow(title:"Avklarade",
+                            msg:userStatus.getDoneMsg(),
+                            msgColor: userStatus.getDoneColor())
+                    CardRow(title:"Nästa Aktivitet",
+                            msg:userStatus.getNextMsg(),
+                            msgColor: .gray)
                 }.padding()
                 Spacer()
                 ZStack(){

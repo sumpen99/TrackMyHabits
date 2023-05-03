@@ -6,13 +6,13 @@
 //
 import SwiftUI
 struct HabitSettingsView: View{
-    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var notificationHandler: NotificationHandler
     @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @State var showWeekdays:Bool = false
     @State var showNotificationWeekdays:Bool = false
     @State var removeNotifications:Bool = false
     @State var removeHabit:Bool = false
+    @Binding var habitDeleted:Bool
     var habit: Habit
     var body: some View{
         NavigationStack {
@@ -101,12 +101,7 @@ struct HabitSettingsView: View{
                                                                   "hour": 0,
                                                                   "minutes":0]],
                                              ["notificationId":""]]){ result in
-            /*if result.finishedWithoutError{
-                printAny(result.finishedWithoutError)
-            }
-            else{
-                printAny(result.value)
-            }*/
+            //result.printSelf()
             
         }
     }
@@ -121,6 +116,7 @@ struct HabitSettingsView: View{
     }
     
     func closeView(){
-        dismiss()
+        habitDeleted.toggle()
+       
     }
 }

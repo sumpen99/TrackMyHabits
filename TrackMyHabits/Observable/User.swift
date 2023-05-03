@@ -158,12 +158,29 @@ struct HabitStreak: Codable,Identifiable{
         
     }
     
+    func getHabitsDone() -> [HabitDone]?{
+        let values = habitsDone.map{$0.value}
+        return values.sorted(by: {$0.compareTo($1)})
+    }
 }
-struct HabitDone: Codable{
+struct HabitDone: Codable,Identifiable{
     var id:String
     var timeOfExecution: String
     var comments: String
     var rating: Float
+    
+    func compareTo(_ habit:HabitDone) -> Bool{
+        let d1 = Date.fromISO8601StringToDate(timeOfExecution)
+        let d2 = Date.fromISO8601StringToDate(habit.timeOfExecution)
+        guard let d1 = d1,let d2 = d2 else{
+            return false
+        }
+        return d1.compare(d2) == .orderedAscending
+    }
+    
+    func getTimeFormatted() -> (dateformatted:String,weekday:String){
+        return Date.fromISO8601StringToDate(timeOfExecution)?.dayDateMonthYear() ?? (dateformatted:timeOfExecution,weekday:"?")
+    }
     
     func toMap() -> [String:Any]{
         return ["id": self.id,

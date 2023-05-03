@@ -300,11 +300,13 @@ struct PickWeekDays:View{
                     List{
                         ForEach(Array(weekdaysSymbols.enumerated()),id:\.element){index,element in
                             WeekdayCheckBox(title: element,isOn: $weekdays.days[index])
-                        }
+                        }.listRowBackground(Color.clear)
+                        Spacer().listRowBackground(Color.clear)
                         Button(action: {
                             toogleAllDays() }){
-                                Text(selectAll ? "Rensa" : "Markera alla dagar")
-                        }
+                                Text(selectAll ? "Rensa markerade dagar" : "Markera alla dagar")
+                            }
+                            .listRowBackground(Color.lightBackground)
                     }
                 }
             }
@@ -358,7 +360,7 @@ struct WeekdayCheckBox:View{
     var body: some View{
         Toggle(isOn: $isOn) {
             Text("Varje " + title)
-            .foregroundColor(.gray)
+            .foregroundColor(.white)
         }
         .toggleStyle(CheckboxStyle())
     }

@@ -53,6 +53,14 @@ class UserStatus{
         return todoToday == 0 ? "" : "\(doneToday)/\(todoToday)"
     }
     
+    func getTodayColor() ->Color{
+        return todoToday == 0 ? Color.gray : Color.indigo
+    }
+    
+    func getDoneColor() ->Color{
+        return doneToday ==  todoToday ? Color.green : Color.red
+    }
+    
     func getNextMsg() -> String{
         switch daysUntilNext{
             case 1:

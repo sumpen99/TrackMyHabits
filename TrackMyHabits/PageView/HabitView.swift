@@ -21,23 +21,25 @@ struct HabitView: View{
                         //NoHabitsView()
                     }
                     else{
-                        ScrollView{
+                        ScrollView(.vertical,showsIndicators: false){
                             VStack() {
                                 ForEach(firestoreViewModel.habits, id: \.id){ habit in
-                                    NavigationLink(destination: HabitSettingsView(habit:habit)) {
-                                        HabitCardView(habit:habit)
+                                    NavigationLink(destination: HabitStreakView(habit:habit)) {
+                                        HabitCardView(title: habit.title,
+                                                      motivation: habit.motivation,
+                                                      goal: habit.goal)
                                     }
+                                    .padding(.top)
                                 }
                                 
                             }
                         }
                         .listRowBackground(Color(hex: 0xFFFAFA,alpha: 0.1))
-                        .frame(height:HABIT_CARDVIEW_HEIGHT*3)
+                        //.frame(height:HABIT_CARDVIEW_HEIGHT*3)
                         
                     }
                 }
-                NavigationButton(label:"Redigera min dag",
-                                 viewMoveTo: AnyView(Text("aaa")))
+           
                
            }
             .modifier(NavigationViewModifier(title: "Översikt"))
@@ -45,7 +47,6 @@ struct HabitView: View{
         .sheet(isPresented: $showingAddNewHabitView){
             AddHabitView()
         }
-        .animation(.easeIn)
         //.fullScreenCover(isPresented: $showingAddNewHabitView, content: AddHabitView.init)
         //.onAppear(perform:{
             //firestoreViewModel.getUserData(email:firebaseAuth.getUserEmail())

@@ -7,7 +7,9 @@
 
 import SwiftUI
 struct HabitCardView: View {
-    let habit:Habit
+    let title:String
+    let motivation:String
+    let goal:String
     let textColor:Color = Color.cardColor
     var body: some View {
         ZStack(alignment:.center){
@@ -18,13 +20,12 @@ struct HabitCardView: View {
                     .foregroundColor(textColor)
                     .padding()
                 VStack(alignment: .leading,spacing: 5.0) {
-                    CardRow(title:"Titel",msg:habit.title)
-                    CardRow(title:"Motivation",msg:habit.motivation)
-                    CardRow(title:"Mål",msg:habit.goal)
+                    CardRow(title:"Titel",msg:title)
+                    CardRow(title:"Motivation",msg:motivation)
+                    CardRow(title:"Mål",msg:goal)
                 }
                 CardGrayTrailing()
             }
-            
        }
         .modifier(CardModifier(size: HABIT_CARDVIEW_HEIGHT))
     }

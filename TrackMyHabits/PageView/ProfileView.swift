@@ -9,11 +9,13 @@ import SwiftUI
 import Photos
 
 struct ProfileView: View{
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @EnvironmentObject var firebaseAuth: FirebaseAuth
     @State var isShowPicker: Bool = false
     @State var image: Image? = Image(systemName:"photo.fill")
     @State private var isPrivacyResult = false
+    @State var islogoutResult: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -29,36 +31,9 @@ struct ProfileView: View{
                     SettingsCardView(title: "Notifikationer", subTitle: "Ställ in tid och få en påminnelse om utföra dina vanor", imageName: "bell")
                     
                 }
-                ZStack {
-                  //Create a NavigationLink without the disclosure indicator
-                  NavigationLink(destination: Text("Hello, World!")) {
-                    EmptyView()
-                  }
-
-                  //Replicate the default cell
-                  HStack {
-                    Text("Custom UI")
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                      .resizable()
-                      .aspectRatio(contentMode: .fit)
-                      .frame(width: 7)
-                      .foregroundColor(.red) //Apply color for arrow only
-                  }
-                  .foregroundColor(.purple) //Optional: Apply color on all inner elements
-                }
                 
                 Button("Logga ut") {
-                    logOut()
-                }
-            }
-            .onAppear(){
-                FileHandler.getSavedImage(USER_PROFILE_PIC_PATH){ result in
-                    if result.finishedWithoutError{
-                        guard let uimage = result.value as? UIImage else { return }
-                        self.image = Image(uiImage: uimage)
-                    }
-                    
+                    islogoutResult.toggle()
                 }
             }
             .sheet(isPresented: $isShowPicker) {
@@ -71,6 +46,21 @@ struct ProfileView: View{
             })
             .modifier(NavigationViewModifier(title: firestoreViewModel.user?.name ?? ""))
         }
+        .onAppear(){
+            FileHandler.getSavedImage(USER_PROFILE_PIC_PATH){ result in
+                if result.finishedWithoutError{
+                    guard let uimage = result.value as? UIImage else { return }
+                    self.image = Image(uiImage: uimage)
+                }
+                
+            }
+        }
+        .alert(isPresented: $islogoutResult, content: {
+            onAlertWithOkAction(title: "Verifiera utloggning", message: ""){
+                logOut()
+            }
+             
+        })
     }
     
     func openPrivacySettings(){
@@ -85,6 +75,7 @@ struct ProfileView: View{
     func logOut(){
         firestoreViewModel.closeListener()
         firebaseAuth.signOut()
+        dismiss()
     }
      
 }
