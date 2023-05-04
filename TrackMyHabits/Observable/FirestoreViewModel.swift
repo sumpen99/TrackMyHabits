@@ -53,22 +53,21 @@ class FirestoreViewModel: ObservableObject{
     }
     
     func updateHabitData(docId:String,
-                         data:[[String:Any]],
+                         data:[String:Any],
                          completion: @escaping ((ThrowableResult) -> Void )){
         guard let email = user?.email else { return }
-        DispatchQueue.main.async {
-            for field in data{
-                self.repo.getUserHabitDocument(email,docId:docId).updateData(field)
-            }
+        self.repo.getUserHabitDocument(email,docId:docId).updateData(data){ err in
+            if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
+            completion(ThrowableResult(finishedWithoutError: true))
         }
-        //completion(ThrowableResult(finishedWithoutError: true))
+        
     }
     
     func appendNewHabitDone(docId:String,
                             habitDone:Any,
                             completion: @escaping ((ThrowableResult) -> Void )){
         guard let email = user?.email else { return }
-        self.repo.getUserHabitDocument(email,docId:docId).updateData(["habitsDone":FieldValue.arrayUnion([habitDone])]){ err in
+        self.repo.getUserHabitDocument(email,docId:docId).updateData([HABITS_DONE:FieldValue.arrayUnion([habitDone])]){ err in
             if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
             completion(ThrowableResult(finishedWithoutError: true))
         }
@@ -78,7 +77,7 @@ class FirestoreViewModel: ObservableObject{
                             habitDone:Any,
                             completion: @escaping ((ThrowableResult) -> Void )){
         guard let email = user?.email else { return }
-        self.repo.getUserHabitDocument(email,docId:docId).updateData(["habitsDone":FieldValue.arrayRemove([habitDone])]){ err in
+        self.repo.getUserHabitDocument(email,docId:docId).updateData([HABITS_DONE:FieldValue.arrayRemove([habitDone])]){ err in
             if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
             completion(ThrowableResult(finishedWithoutError: true))
         }
@@ -103,7 +102,8 @@ class FirestoreViewModel: ObservableObject{
                             habitStreak:Any,
                             completion: @escaping ((ThrowableResult) -> Void )){
         guard let email = user?.email else { return }
-        repo.getUserHabitDocument(email,docId:docId).updateData(["lastRegistredDate":Date(),"streak":habitStreak]){ err in
+        repo.getUserHabitDocument(email,docId:docId).updateData([FIELD_LAST_REGISTRED_DATE:Date(),
+                                                                FIELD_STREAK:habitStreak]){ err in
             if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
             completion(ThrowableResult(finishedWithoutError: true))
         }
@@ -112,7 +112,7 @@ class FirestoreViewModel: ObservableObject{
     func removeHabitStreak(docId:String,
                            completion: @escaping ((ThrowableResult) -> Void )){
         guard let email = user?.email else { return }
-        repo.getUserHabitDocument(email,docId:docId).updateData(["streak":FieldValue.delete()]){ err in
+        repo.getUserHabitDocument(email,docId:docId).updateData([FIELD_STREAK:FieldValue.delete()]){ err in
             if err != nil{ completion(ThrowableResult(finishedWithoutError: false,value: err)); return}
             completion(ThrowableResult(finishedWithoutError: true))
         }
@@ -136,7 +136,7 @@ class FirestoreViewModel: ObservableObject{
     
     func doesHabitAlreadyExist(title:String,completion: @escaping ((Bool)->Void)){
         guard let email = user?.email else { return }
-        repo.getUserHabits(email).whereField("title", isEqualTo: title)
+        repo.getUserHabits(email).whereField(FIELD_TITLE, isEqualTo: title)
             .limit(to:1)
             .getDocuments(){ querySnapshot, error in
                 if error != nil {

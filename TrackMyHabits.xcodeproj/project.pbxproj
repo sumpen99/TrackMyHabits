@@ -56,8 +56,9 @@
 		7D47743C29FE823400FD1756 /* TodaysTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743B29FE823400FD1756 /* TodaysTodoView.swift */; };
 		7D47743E29FE8B3600FD1756 /* CardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743D29FE8B3600FD1756 /* CardModifier.swift */; };
 		7D47744029FF8C4600FD1756 /* RegisterDoneCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47743F29FF8C4600FD1756 /* RegisterDoneCardView.swift */; };
-		7D5302562A02988D005EAAD0 /* HabitStreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5302552A02988D005EAAD0 /* HabitStreak.swift */; };
 		7D5302582A02B3C0005EAAD0 /* StreakCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5302572A02B3C0005EAAD0 /* StreakCardView.swift */; };
+		7D53025A2A03F0AD005EAAD0 /* HabitStreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5302592A03F0AD005EAAD0 /* HabitStreakView.swift */; };
+		7D53025C2A0410B6005EAAD0 /* StarRatingFilled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D53025B2A0410B6005EAAD0 /* StarRatingFilled.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,8 +109,9 @@
 		7D47743B29FE823400FD1756 /* TodaysTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysTodoView.swift; sourceTree = "<group>"; };
 		7D47743D29FE8B3600FD1756 /* CardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModifier.swift; sourceTree = "<group>"; };
 		7D47743F29FF8C4600FD1756 /* RegisterDoneCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDoneCardView.swift; sourceTree = "<group>"; };
-		7D5302552A02988D005EAAD0 /* HabitStreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStreak.swift; sourceTree = "<group>"; };
 		7D5302572A02B3C0005EAAD0 /* StreakCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCardView.swift; sourceTree = "<group>"; };
+		7D5302592A03F0AD005EAAD0 /* HabitStreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStreakView.swift; sourceTree = "<group>"; };
+		7D53025B2A0410B6005EAAD0 /* StarRatingFilled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingFilled.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 				7D47740629F2FC7500FD1756 /* SectionHeaderModifier.swift */,
 				7D47740E29F5030500FD1756 /* NavigationViewModifier.swift */,
 				7D47743D29FE8B3600FD1756 /* CardModifier.swift */,
+				7D53025B2A0410B6005EAAD0 /* StarRatingFilled.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -269,7 +272,7 @@
 				7D47742729F96A6600FD1756 /* AddHabitView.swift */,
 				7D47743129FD240800FD1756 /* HabitSettingsView.swift */,
 				7D47743B29FE823400FD1756 /* TodaysTodoView.swift */,
-				7D5302552A02988D005EAAD0 /* HabitStreak.swift */,
+				7D5302592A03F0AD005EAAD0 /* HabitStreakView.swift */,
 			);
 			path = PageView;
 			sourceTree = "<group>";
@@ -386,12 +389,14 @@
 				7D21927F29F053DE007FEEA0 /* ThrowableResult.swift in Sources */,
 				7D47740B29F5010000FD1756 /* HeaderSubHeaderView.swift in Sources */,
 				7D47740529F2FC5C00FD1756 /* FormButtonModifier.swift in Sources */,
+				7D53025C2A0410B6005EAAD0 /* StarRatingFilled.swift in Sources */,
 				7D21925B29ED9628007FEEA0 /* ToggleSecurefieldView.swift in Sources */,
 				7D47742629F8719A00FD1756 /* FirebaseAuth.swift in Sources */,
 				7D5302582A02B3C0005EAAD0 /* StreakCardView.swift in Sources */,
 				7D21926029ED9720007FEEA0 /* PasswordStrengthView.swift in Sources */,
 				7D47740329F2FC0E00FD1756 /* FillFormModifier.swift in Sources */,
 				7D21927229ED99B9007FEEA0 /* DeviceRotationModifier.swift in Sources */,
+				7D53025A2A03F0AD005EAAD0 /* HabitStreakView.swift in Sources */,
 				7D47743229FD240800FD1756 /* HabitSettingsView.swift in Sources */,
 				7D21927829F04A29007FEEA0 /* FirestoreRepository.swift in Sources */,
 				7D47741429F50F2B00FD1756 /* ImagePicker.swift in Sources */,
@@ -400,7 +405,6 @@
 				7D47741629F539D400FD1756 /* PhotoGalleryPermissionHandler.swift in Sources */,
 				7D47743E29FE8B3600FD1756 /* CardModifier.swift in Sources */,
 				7D21928B29F2CBE6007FEEA0 /* ItemRow.swift in Sources */,
-				7D5302562A02988D005EAAD0 /* HabitStreak.swift in Sources */,
 				7D47741A29F5B04900FD1756 /* SettingsCardView.swift in Sources */,
 				7D47742429F842A300FD1756 /* FirestoreViewModel.swift in Sources */,
 				7D21923529ED8EA1007FEEA0 /* ContentView.swift in Sources */,

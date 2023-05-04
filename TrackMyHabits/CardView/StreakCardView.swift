@@ -11,8 +11,8 @@ struct StreakCardView: View{
     
     let timeOfExecution:(dateformatted:String,weekday:String)
     let comments:String
-    let rating:Float
-    
+    let rating:Int
+    let star = Image(systemName: "star.fill")
     var body: some View{
         HStack(alignment: .top,spacing:30.0){
             VStack(spacing:10.0){
@@ -36,12 +36,20 @@ struct StreakCardView: View{
                     VStack(alignment: .leading,spacing:12){
                         Text(timeOfExecution.weekday)
                             .font(.title2.bold())
-                        Text(comments)
-                            .font(.callout)
+                        Text("Kommentar").lightCaption()
+                        Text("\"\(comments)\"")
+                            .lightCaption()
                             .foregroundStyle(.secondary)
+                            .lineLimit(1)
                     }
                     .hLeading()
-                    Text(timeOfExecution.dateformatted)
+                    VStack(alignment: .trailing,spacing:12.0){
+                        Text(timeOfExecution.dateformatted)
+                        Text("Rating").lightCaption()
+                        star.modifier(StarRatingFilled(rating: CGFloat(rating), maxRating: 5.0))
+                    }
+                    .padding(.top,5)
+                    .hTrailing()
                 }
             }
             .foregroundColor(.white)

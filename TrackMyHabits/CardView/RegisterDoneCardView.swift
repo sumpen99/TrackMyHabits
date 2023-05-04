@@ -103,11 +103,9 @@ struct RegisterDoneCardView: View {
                                   comments: userComment,
                                   rating: Float(userRating))
         if streak.isActive(){
-            printAny("1")
             updateCurrentStreak(docId: docId,habitDone: habitDone,nextDate:nextDate)
         }
         else{
-            printAny("2")
             storePreviousStreak(docId: docId)
             startNewStreak(docId: docId,habitDone: habitDone,nextDate:nextDate)
          }

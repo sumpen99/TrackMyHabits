@@ -24,12 +24,12 @@ class NotificationHandler : NSObject,ObservableObject,UNUserNotificationCenterDe
                                                 completionHandler:completion)
     }
     
-    func createNotificationDate(weekday:Int,hour:Int,minutes:Int) -> Date?{
+    func createNotificationDate(weekday:Date,hour:Int,minutes:Int) -> Date?{
         let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        var components = calendar.components([.calendar, .weekday, .weekOfYear, .year, .hour, .minute, .second, .timeZone], from: Date())
+        var components = calendar.components([.calendar, .weekday, .weekOfYear, .year, .hour, .minute, .second, .timeZone], from: weekday)
         components.hour = hour
         components.minute = minutes
-        components.weekday = weekday
+        //components.weekday = weekday
         components.timeZone = TimeZone.current
         return calendar.date(from: components)
         

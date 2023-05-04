@@ -76,6 +76,13 @@ extension Date {
         return calendar.component(component, from: self)
     }
     
+    func adding(days: Int) -> Date? {
+        var dateComponents = DateComponents()
+        dateComponents.day = days
+
+        return NSCalendar.current.date(byAdding: dateComponents, to: self)
+    }
+    
     func yesterDay() -> Date? {
         let calendar = Calendar.current
         var dayComponent = DateComponents()
@@ -212,8 +219,8 @@ extension Date {
 extension UITabBar{
     static func changeAppearance(){
         let tabBarAppearance = UITabBarAppearance()
-        //tabBarAppearance.configureWithOpaqueBackground()
-        tabBarAppearance.backgroundColor = APP_BACKGROUND_UI_COLOR
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = APP_TAB_BACKGROUND_UI_COLOR
         tabBarAppearance.shadowColor = .white
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
@@ -252,16 +259,16 @@ extension UINavigationBar {
         ]
         let attrsSmall: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white,
-            .font: UIFont.monospacedSystemFont(ofSize: 15, weight: .black)
+            .font: UIFont.monospacedSystemFont(ofSize: 20, weight: .black)
         ]
         appearance.titleTextAttributes = attrsSmall
         appearance.largeTitleTextAttributes = attrsLarge
-        //appearance.shadowColor = APP_BACKGROUND_UI_COLOR
+        appearance.shadowColor = .white
         //UINavigationBar.appearance().prefersLargeTitles = false
         
-        //UINavigationBar.appearance().standardAppearance = appearance
-        //UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        //UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
         
         UINavigationBar.appearance().titleTextAttributes = attrsLarge
         UINavigationBar.appearance().largeTitleTextAttributes = attrsLarge
@@ -295,6 +302,12 @@ extension UINavigationBar {
         circleView.layer.addSublayer(gradient)
     }
 }*/
+
+extension Text{
+    func lightCaption() -> some View{
+        self.font(.caption).fontWeight(.light)
+    }
+}
 
 extension View{
     

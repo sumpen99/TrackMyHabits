@@ -9,13 +9,13 @@ import SwiftUI
 import Photos
 
 struct ProfileView: View{
-    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var firestoreViewModel: FirestoreViewModel
     @EnvironmentObject var firebaseAuth: FirebaseAuth
     @State var isShowPicker: Bool = false
     @State var image: Image? = Image(systemName:"photo.fill")
     @State private var isPrivacyResult = false
     @State var islogoutResult: Bool = false
+    @State var animateOpacity: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -31,11 +31,14 @@ struct ProfileView: View{
                     SettingsCardView(title: "Notifikationer", subTitle: "Ställ in tid och få en påminnelse om utföra dina vanor", imageName: "bell")
                     
                 }
-                
-                Button("Logga ut") {
-                    islogoutResult.toggle()
+                Section(header: Text("Logga ut")) {
+                    Button("Logga ut") {
+                        islogoutResult.toggle()
+                    }
+                    
                 }
             }
+            .opacity(animateOpacity ? 0.0 : 1.0)
             .sheet(isPresented: $isShowPicker) {
                 ImagePicker(image: self.$image,sourceType: .photoLibrary)
             }
@@ -57,7 +60,7 @@ struct ProfileView: View{
         }
         .alert(isPresented: $islogoutResult, content: {
             onAlertWithOkAction(title: "Verifiera utloggning", message: ""){
-                logOut()
+                releaseData()
             }
              
         })
@@ -72,10 +75,19 @@ struct ProfileView: View{
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    func logOut(){
-        firestoreViewModel.closeListener()
-        firebaseAuth.signOut()
-        dismiss()
+    func releaseData(){
+        firestoreViewModel.releaseData()
+        animateViewOut()
+    }
+    
+    func animateViewOut(){
+        withAnimation(Animation.spring()) {
+            animateOpacity.toggle()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
+            image = nil
+            firebaseAuth.signOut()
+        }
     }
      
 }

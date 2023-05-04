@@ -18,7 +18,7 @@ struct ContentView: OptionalView {
     
     
     init(){
-        //UITabBar.changeAppearance()
+        UITabBar.changeAppearance()
         UINavigationBar.changeAppearance()
     }
     
@@ -29,14 +29,13 @@ struct ContentView: OptionalView {
             TabView {
                 HabitView()
                     .tabItem {
-                        Label("Översikt", systemImage: "circle.dashed")
+                        Label("Översikt", systemImage: "house.fill")
                     }
                 ProfileView()
                     .tabItem {
                         Label("Profil", systemImage: "person.fill")
                     }
             }
-            //.accentColor(.green)
         }
         .alert("App Recieved Memory Warning", isPresented: $isMemoryWarning) {
             Button("OK", role: .cancel) { }

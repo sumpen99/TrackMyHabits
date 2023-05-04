@@ -35,12 +35,8 @@ struct HabitView: View{
                             }
                         }
                         .listRowBackground(Color(hex: 0xFFFAFA,alpha: 0.1))
-                        //.frame(height:HABIT_CARDVIEW_HEIGHT*3)
-                        
                     }
                 }
-           
-               
            }
             .modifier(NavigationViewModifier(title: "Översikt"))
         }

@@ -1,8 +1,8 @@
 //
-//  HabitStreak.swift
+//  HabitStreakView.swift
 //  TrackMyHabits
 //
-//  Created by fredrik sundström on 2023-05-03.
+//  Created by fredrik sundström on 2023-05-04.
 //
 
 import SwiftUI
@@ -21,7 +21,7 @@ struct HabitStreakView: View{
                             ForEach(habit.streak.getHabitsDone() ?? [],id:\.id){ done in
                                 StreakCardView(timeOfExecution: done.getTimeFormatted(),
                                                comments: done.comments,
-                                               rating: done.rating)
+                                               rating: Int(done.rating))
                             }
                         }
                         .padding()
@@ -57,8 +57,5 @@ struct HabitStreakView: View{
     func fillSectionWithEmpy() -> some View{
         return ZStack{ Spacer() }
     }
-    
-    func closeView(){
-        dismiss()
-    }
+  
 }

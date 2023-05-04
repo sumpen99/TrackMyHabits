@@ -93,16 +93,19 @@ struct AddHabitView: View{
     func setNotificationIfNeeded(){
         if habit.notificationTime.isSet{
             notificationHandler.removeNotifications()
+            let today = Date()
+            let todayValue:Int = today.dayValue() ?? 0
+            let daysLeft:Int = 7 - todayValue
             let hour = habit.notificationTime.hour
             let minutes = habit.notificationTime.minutes
             for day in habit.notificationWeekDays.selectedDays{
-                let date = notificationHandler.createNotificationDate(
-                    weekday: day.value, hour: hour, minutes: minutes)
-                guard let date = date else{
-                    continue
+                let newDayValue = day.value < todayValue ?
+                                  day.value + daysLeft :
+                                  day.value - todayValue
+                if let nextDate = today.adding(days: newDayValue),let date = notificationHandler.createNotificationDate(
+                    weekday: nextDate, hour: hour, minutes: minutes){
+                    notificationHandler.scheduleNotification(date: date, habit: habit)
                 }
-                printAny(date)
-                notificationHandler.scheduleNotification(date: date, habit: habit)
             }
             
         }
@@ -208,24 +211,22 @@ struct PickNotificationTime:View{
     
     var body: some View{
         NavigationStack {
-            ZStack {
+            VStack{
                 List{
                     MultiPicker(data: data, selection: $selection).frame(height: 300)
                     NavigationLink { PickWeekDays(weekdays: $habitWeekDays) } label: {
                         Text("Upprepa")
                             .foregroundColor(.blue)
                     }
-                }
-            }
-            .modifier(NavigationViewModifier(title: "Ställ in tid"))
-            .toolbar {
-                ToolbarItemGroup(placement: .primaryAction) {
-                    Button("Spara") {
-                        validateInfo()
+                    Section{
+                        Button("Spara") {
+                            validateInfo()
+                        }
+                        .hCenter()
                     }
                 }
             }
-            
+            .modifier(NavigationViewModifier(title: "Ställ in tid"))
         }
         .alert(isPresented: $isPrivacyResult, content: {
             onPrivacyAlert(
@@ -295,29 +296,20 @@ struct PickWeekDays:View{
     @State var selectAll:Bool = false
     var body: some View{
         NavigationStack {
-            ZStack {
-                VStack{
-                    List{
-                        ForEach(Array(weekdaysSymbols.enumerated()),id:\.element){index,element in
-                            WeekdayCheckBox(title: element,isOn: $weekdays.days[index])
-                        }.listRowBackground(Color.clear)
-                        Spacer().listRowBackground(Color.clear)
+            VStack{
+                List{
+                    ForEach(Array(weekdaysSymbols.enumerated()),id:\.element){index,element in
+                        WeekdayCheckBox(title: element,isOn: $weekdays.days[index])
+                    }
+                    Section{
                         Button(action: {
-                            toogleAllDays() }){
-                                Text(selectAll ? "Rensa markerade dagar" : "Markera alla dagar")
-                            }
-                            .listRowBackground(Color.lightBackground)
+                           toogleAllDays() }){
+                               Text(selectAll ? "Rensa markerade dagar" : "Markera alla dagar")
+                           }
                     }
                 }
             }
             .modifier(NavigationViewModifier(title:"Välj dagar"))
-            /*.toolbar {
-                ToolbarItemGroup(placement: .primaryAction) {
-                    Button("Spara") {
-                        storeWeekdays()
-                    }
-                }
-            }*/
             .onDisappear(){
                 storeWeekdays()
             }
@@ -360,7 +352,7 @@ struct WeekdayCheckBox:View{
     var body: some View{
         Toggle(isOn: $isOn) {
             Text("Varje " + title)
-            .foregroundColor(.white)
+            .foregroundColor(.gray)
         }
         .toggleStyle(CheckboxStyle())
     }

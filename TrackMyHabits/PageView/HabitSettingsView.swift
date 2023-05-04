@@ -57,7 +57,7 @@ struct HabitSettingsView: View{
                 }
                 if habit.notificationTime.isSet{
                     Section(header: Text("Ta bort notifikationer")){
-                        Toggle("Avsluta", isOn: $removeNotifications.animation())
+                        Toggle("Ta bort", isOn: $removeNotifications.animation())
                             .foregroundColor(.gray)
                         if removeNotifications {
                             Button("Spara"){
@@ -96,11 +96,11 @@ struct HabitSettingsView: View{
         guard let docId = habit.id else { return }
         clearNotifications()
         firestoreViewModel.updateHabitData(docId: docId,data:
-                                            [["weekDaysNotification":[WeekDay]()],
-                                             ["notificationTime":["isSet":false,
+                                            ["weekDaysNotification":[WeekDay](),
+                                             "notificationTime":["isSet":false,
                                                                   "hour": 0,
-                                                                  "minutes":0]],
-                                             ["notificationId":""]]){ result in
+                                                                  "minutes":0],
+                                             "notificationId":""]){ result in
             //result.printSelf()
             
         }

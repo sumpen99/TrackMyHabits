@@ -21,9 +21,19 @@ var ALERT_PRIVACY_MESSAGE = "Please go to settings to set permission"
 let USER_COLLECTION = "users"
 let USER_HABIT_COLLECTION = "habits"
 let HABIT_STREAK_COLLECTION = "streaks"
+let HABITS_DONE = "habitsDone"
+let FIELD_TITLE = "title"
+let FIELD_STREAK = "streak"
+let FIELD_LAST_REGISTRED_DATE = "lastRegistredDate"
 var USER_PROFILE_PIC_PATH = "profilepic"
-let APP_BACKGROUND_COLOR: Color = .black
+let APP_BACKGROUND_COLOR: Color = Color(dRed: Double(76),
+                                        dGreen: Double(88),
+                                        dBlue: Double(83)) //hex  0x768883
+let APP_TAB_BACKGROUND_COLOR: Color = Color(dRed: Double(198),
+                                            dGreen: Double(184),
+                                            dBlue: Double(148)) //hex: 0xDECBA4
 let APP_BACKGROUND_UI_COLOR: UIColor = UIColor(APP_BACKGROUND_COLOR)
+let APP_TAB_BACKGROUND_UI_COLOR: UIColor = UIColor(APP_TAB_BACKGROUND_COLOR)
 
 let FOOT_TITLE = "Ändra din hjärnas vanemönster genom att börja med ett nytt beteende, hellre än att försöka sluta med en dålig vana. Det är i allmänhet lättare att lägga till en god vana"
 let FOOT_MOTIVATION = "Skriv ner en enkel och tydlig mening om varför det är viktigt för dig att skapa en ny vana. Se till att läsa formuleringen varje dag så att du påminns om din inre motivation"
