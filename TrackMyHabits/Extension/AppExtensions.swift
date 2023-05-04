@@ -119,6 +119,18 @@ extension Date {
         
     }
     
+    func month() -> Int {
+        let calendar = Calendar.current
+        return calendar.component(.month, from: self)
+        
+    }
+    
+    func day() -> Int {
+        let calendar = Calendar.current
+        return calendar.component(.day, from: self)
+        
+    }
+    
     func nextWeekDay(weekday:Int) -> Date?{
         let cal = Calendar.current
         var comps = DateComponents()

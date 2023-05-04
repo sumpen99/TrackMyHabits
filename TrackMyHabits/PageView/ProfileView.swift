@@ -27,10 +27,6 @@ struct ProfileView: View{
                     Text(firestoreViewModel.user?.name ?? "").foregroundColor(.gray)
                     Text(firestoreViewModel.user?.email ?? "").foregroundColor(.gray)
                 }
-                Section(header: Text("Inställningar")) {
-                    SettingsCardView(title: "Notifikationer", subTitle: "Ställ in tid och få en påminnelse om utföra dina vanor", imageName: "bell")
-                    
-                }
                 Section(header: Text("Logga ut")) {
                     Button("Logga ut") {
                         islogoutResult.toggle()

@@ -98,10 +98,21 @@ struct RegisterDoneCardView: View {
     }
     
     func updateStreak(docId:String,nextDate:Date){
+        let today = Date()
+        let year = today.year()
+        let monthInt = today.month()
+        let monthStr = today.monthName()
+        let dayInt = today.day()
+        let dayStr = today.dayName()
         let habitDone = HabitDone(id: UUID().uuidString,
                                   timeOfExecution: Date().toISO8601String(),
                                   comments: userComment,
-                                  rating: Float(userRating))
+                                  rating: Float(userRating),
+                                  year:year,
+                                  monthInt:monthInt,
+                                  monthStr:monthStr,
+                                  dayInt:dayInt,
+                                  dayStr:dayStr)
         if streak.isActive(){
             updateCurrentStreak(docId: docId,habitDone: habitDone,nextDate:nextDate)
         }
