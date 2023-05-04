@@ -158,6 +158,10 @@ struct HabitStreak: Codable,Identifiable{
         
     }
     
+    func getHabitListItems() -> [HabitListItem]{
+        return sortByMonth(habitsDone:Array(habitsDone.values))
+    }
+    
     func getHabitsDone() -> [HabitDone]?{
         let values = habitsDone.map{$0.value}
         return values.sorted(by: {$0.compareTo($1)})
