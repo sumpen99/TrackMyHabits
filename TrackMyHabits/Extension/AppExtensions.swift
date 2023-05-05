@@ -67,6 +67,16 @@ extension Int{
     }
 }
 
+extension Calendar{
+    static func monthFromInt(_ month: Int) -> String {
+        let monthSymbols = Calendar.current.monthSymbols
+        let max = monthSymbols.count
+        let monthInt = month-1
+        if monthInt < 0 || monthInt >= max { return ""}
+        return monthSymbols[monthInt].capitalizingFirstLetter()
+    }
+}
+
 extension Date {
     func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)
@@ -317,7 +327,7 @@ extension UINavigationBar {
 
 extension Text{
     func lightCaption() -> some View{
-        self.font(.caption).fontWeight(.light)
+        self.font(.caption).fontWeight(.light).foregroundColor(.gray)
     }
 }
 

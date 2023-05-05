@@ -94,7 +94,7 @@ struct RegisterDoneCardView: View {
         guard let docId = docId,let nextDate = nextDate else { return }
         updateStreak(docId: docId,nextDate: nextDate)
         habitIsDone = true
-        showSuccesAlert.toggle()
+        
     }
     
     func updateStreak(docId:String,nextDate:Date){
@@ -115,10 +115,12 @@ struct RegisterDoneCardView: View {
                                   dayStr:dayStr)
         if streak.isActive(){
             updateCurrentStreak(docId: docId,habitDone: habitDone,nextDate:nextDate)
+            activateStreakKeepgoingAlert()
         }
         else{
             storePreviousStreak(docId: docId)
             startNewStreak(docId: docId,habitDone: habitDone,nextDate:nextDate)
+            activateStreakBrokenAlert()
          }
        
     }
@@ -145,6 +147,18 @@ struct RegisterDoneCardView: View {
         firestoreViewModel.updateHabitStreak(docId: docId,habitStreak:newStreak){ result in
             result.printSelf()
         }
+    }
+    
+    func activateStreakKeepgoingAlert(){
+        ALERT_TITLE = "Vana registrerad som klar"
+        ALERT_MESSAGE = "Streaken fortsätter"
+        showSuccesAlert.toggle()
+    }
+    
+    func activateStreakBrokenAlert(){
+        ALERT_TITLE = "Vana registrerad som klar"
+        ALERT_MESSAGE = "Tyvärr bröts streaken men en ny påbörjad"
+        showSuccesAlert.toggle()
     }
     
 }

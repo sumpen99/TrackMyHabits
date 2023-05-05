@@ -33,7 +33,7 @@ struct StreakCardView: View{
             VStack{
                 HStack(alignment: .top,spacing: 10.0){
                     VStack(alignment: .leading,spacing:12){
-                        Text(timeOfExecution.weekday)
+                        Text(timeOfExecution.weekday).foregroundColor(.black)
                             .font(.title2.bold())
                         Text("\"\(comments)\"")
                             .lightCaption()
@@ -42,7 +42,7 @@ struct StreakCardView: View{
                     }
                     .hLeading()
                     VStack(alignment: .trailing,spacing:12.0){
-                        Text(timeOfExecution.dateformatted)
+                        Text(timeOfExecution.dateformatted).foregroundColor(.black)
                         HStack{
                             if rating == 0{
                             Image(systemName: "star.slash")
@@ -63,7 +63,7 @@ struct StreakCardView: View{
             .foregroundColor(.white)
             .padding()
             .hLeading()
-            .background(Color.darkCardBackground)
+            .background(Color.lightBackground)
             .cornerRadius(25.0)
         }
         .padding(.top)

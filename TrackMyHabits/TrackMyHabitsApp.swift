@@ -13,7 +13,6 @@ class AppDelegate: NSObject, UIApplicationDelegate,UNUserNotificationCenterDeleg
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().delegate = self
-        printAny("hepp")
         return true
     }
     
@@ -46,10 +45,8 @@ struct TrackMyHabitsApp: App {
             switch newPhase {
                 case .active:
                     firebaseAuth.isUserLoggedIn()
-                    printAny("Active")
                 case .inactive:
                     firebaseAuth.isUserLoggedIn()
-                    printAny("InActive")
                 case .background:
                     printAny("Background")
                 @unknown default:

@@ -14,7 +14,6 @@ struct LoginView: View{
     @State private var password = ""
     @State private var showingSignUpSheet = false
     @State private var isLoginResult = false
-    let dummy = Dummy(name:"LoginView",printOnDestroy: true)
     
     var body: some View {
         GeometryReader { geometry in

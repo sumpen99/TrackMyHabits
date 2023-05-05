@@ -26,7 +26,6 @@
 		7D21926829ED9842007FEEA0 /* AppGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926729ED9842007FEEA0 /* AppGlobal.swift */; };
 		7D21926B29ED9872007FEEA0 /* PasswordLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926A29ED9872007FEEA0 /* PasswordLevel.swift */; };
 		7D21926E29ED98AD007FEEA0 /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926D29ED98AD007FEEA0 /* AppExtensions.swift */; };
-		7D21927029ED9917007FEEA0 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21926F29ED9917007FEEA0 /* Dummy.swift */; };
 		7D21927229ED99B9007FEEA0 /* DeviceRotationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927129ED99B9007FEEA0 /* DeviceRotationModifier.swift */; };
 		7D21927429EDC640007FEEA0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927329EDC640007FEEA0 /* User.swift */; };
 		7D21927829F04A29007FEEA0 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21927729F04A29007FEEA0 /* FirestoreRepository.swift */; };
@@ -80,7 +79,6 @@
 		7D21926729ED9842007FEEA0 /* AppGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGlobal.swift; sourceTree = "<group>"; };
 		7D21926A29ED9872007FEEA0 /* PasswordLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordLevel.swift; sourceTree = "<group>"; };
 		7D21926D29ED98AD007FEEA0 /* AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExtensions.swift; sourceTree = "<group>"; };
-		7D21926F29ED9917007FEEA0 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		7D21927129ED99B9007FEEA0 /* DeviceRotationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationModifier.swift; sourceTree = "<group>"; };
 		7D21927329EDC640007FEEA0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7D21927729F04A29007FEEA0 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				7D21926729ED9842007FEEA0 /* AppGlobal.swift */,
-				7D21926F29ED9917007FEEA0 /* Dummy.swift */,
 				7D47741B29F6C64F00FD1756 /* FileHandler.swift */,
 				7D21927E29F053DE007FEEA0 /* ThrowableResult.swift */,
 			);
@@ -380,7 +377,6 @@
 				7D47743C29FE823400FD1756 /* TodaysTodoView.swift in Sources */,
 				7D47740929F3D52400FD1756 /* NavigationButton.swift in Sources */,
 				7D21926229ED9747007FEEA0 /* SignupView.swift in Sources */,
-				7D21927029ED9917007FEEA0 /* Dummy.swift in Sources */,
 				7D47740729F2FC7500FD1756 /* SectionHeaderModifier.swift in Sources */,
 				7D21925529ED9499007FEEA0 /* OptionalView.swift in Sources */,
 				7D21928929F1BE58007FEEA0 /* HabitView.swift in Sources */,

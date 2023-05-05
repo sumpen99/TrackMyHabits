@@ -184,10 +184,4 @@ class FirestoreViewModel: ObservableObject{
           }
     }
     
-    
-    
-    /*deinit{
-        habits.removeAll()
-        closeListener()
-    }*/
 }

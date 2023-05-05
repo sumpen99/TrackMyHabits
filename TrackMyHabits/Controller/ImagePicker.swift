@@ -38,14 +38,9 @@ struct ImagePicker: UIViewControllerRepresentable {
             _image = image
         }
         
-        deinit{
-            printAny("deinit coordinator")
-        }
-
         func imagePickerController(_ picker: UIImagePickerController,
                                    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             guard let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
-                printAny("we have not image")
                 presentationMode.dismiss()
                 return
             }

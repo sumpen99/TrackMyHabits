@@ -47,27 +47,20 @@ struct SignupView : View {
     }
     
     func signUserUp(){
-        // 0
         if user.name.isEmpty { activateMissingFieldsAlert(); return }
         firebaseAuth.signup(user: user, password: passwordHelper.password){ (result,error) in
-            // 2
             guard let error = error else {
-                // 3
                 firestoreViewModel.initializeUserData(user.converted()){ result in
-                    // 4
                     if result.finishedWithoutError{
-                        // 5
                         activateSuccessAlert()
                         return
                     }
                     activateFailedCreationOfUserAlert(error:result.asString())
                 }
-                // 6
                 return
             }
             activateFailedSignupAlert(error:error)
         }
-        // 1
     }
     
     func activateMissingFieldsAlert(){

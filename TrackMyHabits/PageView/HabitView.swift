@@ -38,7 +38,7 @@ struct HabitView: View{
                     }
                 }
            }
-            .modifier(NavigationViewModifier(title: "Översikt"))
+            .modifier(NavigationViewModifier(title: "Dina Vanor"))
         }
         .sheet(isPresented: $showingAddNewHabitView){
             AddHabitView()

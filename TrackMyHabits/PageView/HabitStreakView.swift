@@ -15,49 +15,11 @@ struct HabitStreakView: View{
     var body: some View{
         NavigationStack {
             Section{
-                if !habit.streak.habitsDone.isEmpty{
-                    ScrollView(.vertical,showsIndicators: false){
-                        LazyVStack(alignment: .leading,spacing: 10.0){
-                            ForEach(habit.streak.getHabitListItems(),id:\.id){ monthlyList in
-                                Section(header: Text(monthlyList.month)
-                                    .font(.largeTitle)
-                                    .foregroundColor(.white)
-                                ){
-                                    ForEach(monthlyList.habitDone,id:\.id){ done in
-                                        StreakCardView(timeOfExecution: done.getTimeFormatted(),
-                                                       comments: done.comments,
-                                                       rating: Int(done.rating))
-                                    }
-                                }
-                             }
-                            /*ForEach(habit.streak.getHabitsDone() ?? [],id:\.id){ done in
-                                StreakCardView(timeOfExecution: done.getTimeFormatted(),
-                                               comments: done.comments,
-                                               rating: Int(done.rating))
-                            }*/
-                        }
-                        .padding()
-                    }
+                if habit.streak.habitsDone.isEmpty{
+                    fillSectionWithEmpy()
                 }
                 else{
-                    ScrollView(.vertical,showsIndicators: false){
-                        LazyVStack(alignment: .leading,spacing: 10.0){
-                            ForEach(habit.streak.getTestData(),id:\.id){ monthlyList in
-                                Section(header: Text(monthlyList.month)
-                                    .font(.largeTitle)
-                                    .foregroundColor(.white)
-                                ){
-                                    ForEach(monthlyList.habitDone,id:\.id){ done in
-                                        StreakCardView(timeOfExecution: done.getTimeFormatted(),
-                                                       comments: done.comments,
-                                                       rating: Int(done.rating))
-                                    }
-                                }
-                             }
-                        }
-                        .padding()
-                    }
-                    //fillSectionWithEmpy()
+                    fillSectionWithData()
                 }
             }
             .toolbar {
@@ -83,8 +45,30 @@ struct HabitStreakView: View{
         .modifier(NavigationViewModifier(title: "Historik"))
     }
     
+    
+    
     func fillSectionWithEmpy() -> some View{
         return ZStack{ Spacer() }
+    }
+    
+    func fillSectionWithData() -> some View{
+        return ScrollView(.vertical,showsIndicators: false){
+            LazyVStack(alignment: .leading,spacing: 10.0){
+                ForEach(habit.streak.getHabitListItems(),id:\.id){ monthlyList in
+                    Section(header: Text(monthlyList.month)
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                    ){
+                        ForEach(monthlyList.habitDone ?? [],id:\.id){ done in
+                            StreakCardView(timeOfExecution: done.getTimeFormatted(),
+                                           comments: done.comments,
+                                           rating: Int(done.rating))
+                        }
+                    }
+                 }
+            }
+            .padding()
+        }
     }
   
 }

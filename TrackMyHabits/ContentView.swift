@@ -14,9 +14,6 @@ struct ContentView: OptionalView {
     
     var isPrimaryView: Bool { firebaseAuth.isLoggedIn }
     
-    let dummy = Dummy(name:"ContentView",printOnDestroy: true)
-    
-    
     init(){
         UITabBar.changeAppearance()
         UINavigationBar.changeAppearance()

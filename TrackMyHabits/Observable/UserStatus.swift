@@ -54,7 +54,7 @@ class UserStatus{
     }
     
     func getTodayColor() ->Color{
-        return todoToday == 0 ? Color.gray : Color.indigo
+        return todoToday == 0 ? Color.gray : Color.gray
     }
     
     func getDoneColor() ->Color{

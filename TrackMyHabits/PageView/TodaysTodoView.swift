@@ -31,7 +31,9 @@ struct TodaysTodoView: OptionalView{
             }
             .listRowBackground(Color(hex: 0xFFFAFA,alpha: 0.1))
         }
-        .alert("Vana registrerad som klar", isPresented: $showSuccesAlert) { Button("OK", role: .cancel) {}}
+        .alert(isPresented: $showSuccesAlert, content: {
+            onResultAlert {}
+        })
         .modifier(NavigationViewModifier(title: "Dagens Utmaningar"))
     }
     
